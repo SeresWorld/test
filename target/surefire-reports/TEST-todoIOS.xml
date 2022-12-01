@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="todoAndroid" time="12.442" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="todoIOS" time="210.432" tests="1" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,10 +13,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="KZ"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/19.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/kashinsergei/IdeaProjects/test/target/surefire/surefirebooter-20221201111501376_3.jar /Users/kashinsergei/IdeaProjects/test/target/surefire 2022-12-01T11-15-01_264-jvmRun1 surefire-20221201111501376_1tmp surefire_0-20221201111501376_2tmp"/>
+    <property name="sun.java.command" value="/Users/kashinsergei/IdeaProjects/test/target/surefire/surefirebooter-20221201171115284_3.jar /Users/kashinsergei/IdeaProjects/test/target/surefire 2022-12-01T17-11-15_082-jvmRun1 surefire-20221201171115284_1tmp surefire_0-20221201171115284_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="todoAndroid"/>
+    <property name="test" value="todoIOS"/>
     <property name="surefire.test.class.path" value="/Users/kashinsergei/IdeaProjects/test/target/test-classes:/Users/kashinsergei/IdeaProjects/test/target/classes:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure-testng/2.6.0/allure-testng-2.6.0.jar:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure-descriptions-javadoc/2.6.0/allure-descriptions-javadoc-2.6.0.jar:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure-java-commons/2.6.0/allure-java-commons-2.6.0.jar:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure2-model-api/1.0-BETA6/allure2-model-api-1.0-BETA6.jar:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure2-model-pojo/1.0-BETA6/allure2-model-pojo-1.0-BETA6.jar:/Users/kashinsergei/.m2/repository/org/apache/tika/tika-core/1.14/tika-core-1.14.jar:/Users/kashinsergei/.m2/repository/io/qameta/allure/allure2-model-jackson/1.0-BETA6/allure2-model-jackson-1.0-BETA6.jar:/Users/kashinsergei/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.7.0/jackson-databind-2.7.0.jar:/Users/kashinsergei/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.7.0/jackson-annotations-2.7.0.jar:/Users/kashinsergei/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.7.0/jackson-core-2.7.0.jar:/Users/kashinsergei/.m2/repository/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.7.0/jackson-module-jaxb-annotations-2.7.0.jar:/Users/kashinsergei/.m2/repository/org/aspectj/aspectjrt/1.8.10/aspectjrt-1.8.10.jar:/Users/kashinsergei/.m2/repository/org/jooq/joor/0.9.6/joor-0.9.6.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/3.8.1/maven-compiler-plugin-3.8.1.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-plugin-api/3.0/maven-plugin-api-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-model/3.0/maven-model-3.0.jar:/Users/kashinsergei/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/1.4.2/sisu-inject-plexus-1.4.2.jar:/Users/kashinsergei/.m2/repository/org/sonatype/sisu/sisu-inject-bean/1.4.2/sisu-inject-bean-1.4.2.jar:/Users/kashinsergei/.m2/repository/org/sonatype/sisu/sisu-guice/2.1.7/sisu-guice-2.1.7-noaop.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-artifact/3.0/maven-artifact-3.0.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.4/plexus-utils-2.0.4.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-core/3.0/maven-core-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-settings-builder/3.0/maven-settings-builder-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-repository-metadata/3.0/maven-repository-metadata-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-model-builder/3.0/maven-model-builder-3.0.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/maven-aether-provider/3.0/maven-aether-provider-3.0.jar:/Users/kashinsergei/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar:/Users/kashinsergei/.m2/repository/org/sonatype/aether/aether-spi/1.7/aether-spi-1.7.jar:/Users/kashinsergei/.m2/repository/org/sonatype/aether/aether-api/1.7/aether-api-1.7.jar:/Users/kashinsergei/.m2/repository/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.2.3/plexus-classworlds-2.2.3.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar:/Users/kashinsergei/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar:/Users/kashinsergei/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.2.1/maven-shared-utils-3.2.1.jar:/Users/kashinsergei/.m2/repository/org/apache/maven/shared/maven-shared-incremental/1.1/maven-shared-incremental-1.1.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-java/0.9.10/plexus-java-0.9.10.jar:/Users/kashinsergei/.m2/repository/org/ow2/asm/asm/6.2/asm-6.2.jar:/Users/kashinsergei/.m2/repository/com/thoughtworks/qdox/qdox/2.0-M8/qdox-2.0-M8.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-compiler-api/2.8.4/plexus-compiler-api-2.8.4.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-compiler-manager/2.8.4/plexus-compiler-manager-2.8.4.jar:/Users/kashinsergei/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/2.8.4/plexus-compiler-javac-2.8.4.jar:/Users/kashinsergei/.m2/repository/io/appium/java-client/7.4.1/java-client-7.4.1.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-support/3.141.59/selenium-support-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-api/3.141.59/selenium-api-3.141.59.jar:/Users/kashinsergei/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/Users/kashinsergei/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/kashinsergei/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/kashinsergei/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/kashinsergei/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/kashinsergei/.m2/repository/cglib/cglib/3.3.0/cglib-3.3.0.jar:/Users/kashinsergei/.m2/repository/commons-validator/commons-validator/1.7/commons-validator-1.7.jar:/Users/kashinsergei/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar:/Users/kashinsergei/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar:/Users/kashinsergei/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/kashinsergei/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/kashinsergei/.m2/repository/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-context/5.3.1/spring-context-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-aop/5.3.1/spring-aop-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-beans/5.3.1/spring-beans-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-core/5.3.1/spring-core-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-jcl/5.3.1/spring-jcl-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/springframework/spring-expression/5.3.1/spring-expression-5.3.1.jar:/Users/kashinsergei/.m2/repository/org/aspectj/aspectjweaver/1.9.6/aspectjweaver-1.9.6.jar:/Users/kashinsergei/.m2/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar:/Users/kashinsergei/.m2/repository/javax/xml/bind/jaxb-api/2.3.0/jaxb-api-2.3.0.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-java/3.141.59/selenium-java-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-chrome-driver/3.141.59/selenium-chrome-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-edge-driver/3.141.59/selenium-edge-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-firefox-driver/3.141.59/selenium-firefox-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-ie-driver/3.141.59/selenium-ie-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-opera-driver/3.141.59/selenium-opera-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/3.141.59/selenium-remote-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/org/seleniumhq/selenium/selenium-safari-driver/3.141.59/selenium-safari-driver-3.141.59.jar:/Users/kashinsergei/.m2/repository/net/bytebuddy/byte-buddy/1.8.15/byte-buddy-1.8.15.jar:/Users/kashinsergei/.m2/repository/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar:/Users/kashinsergei/.m2/repository/com/google/guava/guava/25.0-jre/guava-25.0-jre.jar:/Users/kashinsergei/.m2/repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar:/Users/kashinsergei/.m2/repository/org/checkerframework/checker-compat-qual/2.0.0/checker-compat-qual-2.0.0.jar:/Users/kashinsergei/.m2/repository/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.jar:/Users/kashinsergei/.m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar:/Users/kashinsergei/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar:/Users/kashinsergei/.m2/repository/com/squareup/okhttp3/okhttp/3.11.0/okhttp-3.11.0.jar:/Users/kashinsergei/.m2/repository/com/squareup/okio/okio/1.14.0/okio-1.14.0.jar:/Users/kashinsergei/.m2/repository/org/testng/testng/6.14.3/testng-6.14.3.jar:/Users/kashinsergei/.m2/repository/com/beust/jcommander/1.72/jcommander-1.72.jar:/Users/kashinsergei/.m2/repository/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar:/Users/kashinsergei/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/Users/kashinsergei/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/kashinsergei/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-java/6.10.2/cucumber-java-6.10.2.jar:/Users/kashinsergei/.m2/repository/org/apiguardian/apiguardian-api/1.1.1/apiguardian-api-1.1.1.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-core/6.10.2/cucumber-core-6.10.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-gherkin/6.10.2/cucumber-gherkin-6.10.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-gherkin-messages/6.10.2/cucumber-gherkin-messages-6.10.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/messages/14.0.1/messages-14.0.1.jar:/Users/kashinsergei/.m2/repository/io/cucumber/tag-expressions/3.0.0/tag-expressions-3.0.0.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-expressions/10.3.0/cucumber-expressions-10.3.0.jar:/Users/kashinsergei/.m2/repository/io/cucumber/datatable/3.5.0/datatable-3.5.0.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-plugin/6.10.2/cucumber-plugin-6.10.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/docstring/6.10.2/docstring-6.10.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/html-formatter/12.0.0/html-formatter-12.0.0.jar:/Users/kashinsergei/.m2/repository/io/cucumber/create-meta/3.0.0/create-meta-3.0.0.jar:/Users/kashinsergei/.m2/repository/io/cucumber/gherkin/17.0.2/gherkin-17.0.2.jar:/Users/kashinsergei/.m2/repository/io/cucumber/cucumber-testng/6.10.2/cucumber-testng-6.10.2.jar:"/>
     <property name="allure.results.directory" value="/Users/kashinsergei/IdeaProjects/test/target/allure-results"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/kashinsergei/IdeaProjects/test/target/surefire/surefirebooter-20221201111501376_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/kashinsergei/IdeaProjects/test/target/surefire/surefirebooter-20221201171115284_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="19.0.1"/>
@@ -61,14 +61,96 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="auth" classname="todoAndroid" time="5.989">
-    <system-out><![CDATA[я родился
-]]></system-out>
+  <testcase name="auth" classname="todoIOS" time="209.723">
+    <failure message="Unable to create a new remote session. Please check the server log for more details. Original error: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100&#10;Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;&#10;System info: host: &apos;MacBook-Air-Kasin.local&apos;, ip: &apos;fe80:0:0:0:10aa:8fd4:5e68:1256%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;aarch64&apos;, os.version: &apos;12.0.1&apos;, java.version: &apos;19.0.1&apos;&#10;Driver info: driver.version: IOSDriver&#10;remote stacktrace: UnknownError: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100&#10;    at getResponseForW3CError (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/errors.js:804:9)&#10;    at asyncHandler (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/protocol.js:380:37)&#10;Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;&#10;System info: host: &apos;MacBook-Air-Kasin.local&apos;, ip: &apos;fe80:0:0:0:10aa:8fd4:5e68:1256%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;aarch64&apos;, os.version: &apos;12.0.1&apos;, java.version: &apos;19.0.1&apos;&#10;Driver info: driver.version: IOSDriver" type="org.openqa.selenium.SessionNotCreatedException"><![CDATA[org.openqa.selenium.SessionNotCreatedException: 
+Unable to create a new remote session. Please check the server log for more details. Original error: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'MacBook-Air-Kasin.local', ip: 'fe80:0:0:0:10aa:8fd4:5e68:1256%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '12.0.1', java.version: '19.0.1'
+Driver info: driver.version: IOSDriver
+remote stacktrace: UnknownError: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100
+    at getResponseForW3CError (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/errors.js:804:9)
+    at asyncHandler (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/protocol.js:380:37)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'MacBook-Air-Kasin.local', ip: 'fe80:0:0:0:10aa:8fd4:5e68:1256%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '12.0.1', java.version: '19.0.1'
+Driver info: driver.version: IOSDriver
+	at io.appium.java_client.remote.AppiumCommandExecutor$1.createSession(AppiumCommandExecutor.java:216)
+	at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:225)
+	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:247)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:41)
+	at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+	at io.appium.java_client.ios.IOSDriver.execute(IOSDriver.java:1)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:213)
+	at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:338)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:131)
+	at io.appium.java_client.DefaultGenericMobileDriver.<init>(DefaultGenericMobileDriver.java:37)
+	at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:89)
+	at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:99)
+	at io.appium.java_client.ios.IOSDriver.<init>(IOSDriver.java:90)
+	at TestBase.setUpIOS(TestBase.java:39)
+	at todoIOS.auth(todoIOS.java:10)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:151)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeSingleClass(TestNGDirectoryTestSuite.java:111)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:98)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:456)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:169)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:595)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:581)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:119)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at io.appium.java_client.remote.AppiumCommandExecutor$1.createSession(AppiumCommandExecutor.java:193)
+	... 43 more
+Caused by: org.openqa.selenium.WebDriverException: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'MacBook-Air-Kasin.local', ip: 'fe80:0:0:0:10aa:8fd4:5e68:1256%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '12.0.1', java.version: '19.0.1'
+Driver info: driver.version: IOSDriver
+remote stacktrace: UnknownError: An unknown server-side error occurred while processing the command. Original error: Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: connect ECONNREFUSED 127.0.0.1:8100
+    at getResponseForW3CError (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/errors.js:804:9)
+    at asyncHandler (/Applications/Appium Server GUI.app/Contents/Resources/app/node_modules/appium/node_modules/appium-base-driver/lib/protocol/protocol.js:380:37)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484)
+	at org.openqa.selenium.remote.W3CHandshakeResponse.lambda$errorHandler$0(W3CHandshakeResponse.java:62)
+	at org.openqa.selenium.remote.HandshakeResponse.lambda$getResponseFunction$0(HandshakeResponse.java:30)
+	at org.openqa.selenium.remote.ProtocolHandshake.lambda$createSession$0(ProtocolHandshake.java:126)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Spliterators$ArraySpliterator.tryAdvance(Spliterators.java:1016)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:647)
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	... 45 more
+]]></failure>
     <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-дек. 01, 2022 11:15:07 AM io.appium.java_client.remote.AppiumCommandExecutor$1 lambda$0
-INFO: Detected dialect: W3C
 ]]></system-err>
   </testcase>
 </testsuite>

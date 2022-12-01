@@ -26,6 +26,12 @@ public class PageBase {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void containsmessageAssert (MobileElement element, String text) {
+        waitForVisability(element);
+        String text_element = element.getText();
+        text_element.contains(text);
+    }
+
     public void clear (MobileElement element) {
         waitForVisability(element);
         element.clear();
@@ -41,9 +47,10 @@ public class PageBase {
         element.sendKeys(text);
     }
 
-    public void getAttribute (MobileElement element, String attribute) {
+    public String getAttribute (MobileElement element, String attribute) {
         waitForVisability(element);
-        element.getAttribute(attribute);
+        String elem_atr = element.getAttribute(attribute);
+        return elem_atr;
     }
 
     public void scrollDown (int endPoint, int durationSec) {
