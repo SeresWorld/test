@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-12-01T05:15:02Z" name="Surefire suite" finished-at="2022-12-01T05:15:14Z" duration-ms="11978">
+    <groups>
+    </groups>
+    <test started-at="2022-12-01T05:15:02Z" name="Surefire test" finished-at="2022-12-01T05:15:14Z" duration-ms="11978">
+      <class name="todoAndroid">
+        <test-method is-config="true" signature="setUpAndroid()[pri:0, instance:todoAndroid@38f2e97e]" started-at="2022-12-01T05:15:02Z" name="setUpAndroid" finished-at="2022-12-01T05:15:07Z" duration-ms="5632" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpAndroid -->
+        <test-method signature="auth()[pri:0, instance:todoAndroid@38f2e97e]" started-at="2022-12-01T05:15:07Z" name="auth" finished-at="2022-12-01T05:15:13Z" duration-ms="5922" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- auth -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:todoAndroid@38f2e97e]" started-at="2022-12-01T05:15:13Z" name="tearDown" finished-at="2022-12-01T05:15:14Z" duration-ms="324" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- todoAndroid -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
