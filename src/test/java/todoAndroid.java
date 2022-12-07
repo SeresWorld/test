@@ -22,12 +22,7 @@ public class todoAndroid extends TestBase {
     AuthListPage authListPage;
 
 
-    @DataProvider (name = "test data")
-    public Object[][] passData() throws IOException, ParseException {
-        return JsonReader.getJSONData(System.getProperty("user.dir") + "/data/TestData.json",
-                "Users", 2);
 
-    }
     @Story("Авторизация с валидными данными")
     @Test (groups = {"Auth screen"})
     public void auth_valid() throws MalformedURLException {
@@ -129,6 +124,19 @@ public class todoAndroid extends TestBase {
         authListPage.swipeToRefreshBill();
         int current_2 = authListPage.getTextFromCurrentBill();
         authListPage.comparsionBills(current_2, current_1 - 1000);
+    }
+
+    @Test
+    public void closeModalAbout() throws MalformedURLException, InterruptedException {
+        auth_complete();
+        authListPage = new AuthListPage(driver);
+        authListPage.investbannerClick();
+        authListPage.waitforloadInvest();
+        authListPage.skipInstruction();
+        authListPage.questionButtonClick();
+        authListPage.questionCloseButtonClick();
+        authListPage.transitBetweenButtonClick();
+
     }
 
 }

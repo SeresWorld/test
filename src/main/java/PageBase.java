@@ -21,20 +21,18 @@ public class PageBase {
     AppiumDriver driver;
 
     public PageBase(AppiumDriver appiumDriver) {
-        PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
         driver = appiumDriver;
+        PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
     }
     public AndroidTouchAction actions;
-    public TouchAction touchAction;
+
     public static final long WAIT = 10;
     @Step ("Ожидание видимости элемента {element}")
     public void waitForVisability (MobileElement element) {
-        boolean isVisability = false;
         for (int i = 0; i < 3; i++) {
             try {
                 WebDriverWait wait = new WebDriverWait(driver, WAIT);
                 wait.until(ExpectedConditions.visibilityOf(element));
-                isVisability = true;
             } catch (Exception e) {
             }
         }

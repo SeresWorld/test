@@ -19,8 +19,9 @@ public class JsonReader {
         Object[][] arr = new String[js.size()][JSON_attribute];
         for (int i = 0; i < js.size(); i++) {
             JSONObject obj1 = (JSONObject) js.get(i);
-            arr[i][0] = String.valueOf(obj1.get("login"));
-            arr[i][1] = String.valueOf(obj1.get("pass"));
+            arr[i][0] = String.valueOf(obj1.get("hours"));
+            arr[i][1] = String.valueOf(obj1.get("minutes"));
+            arr[i][2] = String.valueOf(obj1.get("setting"));
         }
         return arr;
     }

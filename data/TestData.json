@@ -1,16 +1,14 @@
 {
   "Users": [
     {
-      "login": "7756655544",
-      "pass" : "orapas123"
+      "hours": "11",
+      "minutes" : "00",
+      "setting": "PM"
     },
     {
-      "login": "7478488956",
-      "pass": "qwer1234"
-    },
-    {
-      "login": "0123456789",
-      "pass": "1234"
+      "hours": "10",
+      "minutes" : "30",
+      "setting": "AM"
     }
   ]
 }

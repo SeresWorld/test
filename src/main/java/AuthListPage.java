@@ -1,48 +1,53 @@
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.lang.management.MemoryPoolMXBean;
-import java.security.PublicKey;
+import java.time.Duration;
 import java.util.List;
 
 public class AuthListPage extends PageBase {
     public AuthListPage(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
-    private By sign_button = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
-    private By input_login = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
-    private By input_pass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
-    private By button_login = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
-    private By button_permission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-    private By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
-    private By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
-    private By codeFirstRepeat = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
-    private By android_message = By.id("android:id/message");
-    private By paidButton = By.xpath("//android.view.ViewGroup[@bounds='[521,1833][982,1965]']");
-    private By transitBetweenButton = By.xpath("//android.view.View[@text='Перевести']");
-    private By transitBetweenToBill = By.xpath("//android.widget.TextView[@text='Выберите']");
-    private By bannerInvest = By.id("kz.bcc.starbanking.stage:id/banner_invest");
-    private By currenttengeBill = By.xpath("//android.view.View[@bounds='[78,392][301,480]']");
-    private By topUpButton = By.xpath("//android.view.View[@text='Пополнить']");
-    private By fromBill = By.xpath("//android.widget.TextView[@text='Выберите']");
-    private By firstBill = By.xpath("//android.widget.RelativeLayout[1][@clickable='true']");
-    private By sumInsert = By.id("kz.bcc.starbanking.stage:id/exchange_view_amount");
-    private By transferButton = By.id("kz.bcc.starbanking.stage:id/transfer");
-    private By billBlock = By.xpath("//android.view.View[@text='Мой портфель']");
-    private By investInstructionSkipButton = By.xpath("//android.view.View[@text='Пропустить']");
-    private By investConfirmationTransaction = By.id("kz.bcc.starbanking.stage:id/bottom_sheet_next_button");
-    private By closeResultButton = By.id("kz.bcc.starbanking.stage:id/result_view_close");
-    private By currentBillFrom = By.xpath("//android.widget.TextView[@resource-id='kz.bcc.starbanking.stage:id/include_account_picker_name']");
-    private By statusResultTransaction = By.xpath("//android.widget.TextView[@bounds='[473,757][996,816]']");
+
+    private final By sign_button = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
+    private final By input_login = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
+    private final By input_pass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
+    private final By button_login = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
+    private final By button_permission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+    private final By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
+    private final By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
+    private final By codeFirstRepeat = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
+    private final By android_message = By.id("android:id/message");
+    private final By paidButton = By.xpath("//android.view.ViewGroup[@bounds='[521,1833][982,1965]']");
+    private final By transitBetweenButton = By.xpath("//android.view.View[@text='Перевести']");
+    private final By transitBetweenToBill = By.xpath("//android.widget.TextView[@text='Выберите']");
+    private final By bannerInvest = By.id("kz.bcc.starbanking.stage:id/banner_invest");
+    private final By currenttengeBill = By.xpath("//android.view.View[@bounds='[78,392][339,480]']");
+    private final By topUpButton = By.xpath("//android.view.View[@text='Пополнить']");
+    private final By fromBill = By.xpath("//android.widget.TextView[@text='Выберите']");
+    private final By firstBill = By.xpath("//android.widget.RelativeLayout[1][@clickable='true']");
+    private final By sumInsert = By.id("kz.bcc.starbanking.stage:id/exchange_view_amount");
+    private final By transferButton = By.id("kz.bcc.starbanking.stage:id/transfer");
+    private final By billBlock = By.xpath("//android.view.View[@text='Мой портфель']");
+    private final By investInstructionSkipButton = By.xpath("//android.view.View[@text='Пропустить']");
+    private final By investConfirmationTransaction = By.id("kz.bcc.starbanking.stage:id/bottom_sheet_next_button");
+    private final By closeResultButton = By.id("kz.bcc.starbanking.stage:id/result_view_close");
+    private final By currentBillFrom = By.xpath("//android.widget.TextView[@resource-id='kz.bcc.starbanking.stage:id/include_account_picker_name']");
+    private final By statusResultTransaction = By.xpath("//android.widget.TextView[@bounds='[473,757][996,816]']");
+    private final By questionOpenButton = By.xpath("//android.view.View[3]/android.widget.Button");
+    private final By questionBanner = By.xpath("//android.widget.ImageView[@bounds='[0,247][1080,1258]']");
 
     private By sign_button_ios = By.name("Войти");
     private By input_login_ios = By.xpath
@@ -50,9 +55,9 @@ public class AuthListPage extends PageBase {
     private By input_pass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
     private By button_permission_ios = By.name("Однократно");
 
-        @Step ("Клик по кнопке Войти на экране сплеша")
+    @Step ("Клик по кнопке Войти на экране сплеша")
     public void sign_main_button_click() {
-        click((MobileElement) driver.findElement(sign_button));
+        sign_button.click();
     }
 
     public void sign_main_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
@@ -231,7 +236,7 @@ public class AuthListPage extends PageBase {
     }
 
     @Step ("Пропуск гайда")
-    public void skipInstruction() throws InterruptedException {
+    public void skipInstruction() {
         MobileElement skipButton = (MobileElement) driver.findElement(investInstructionSkipButton);
         click(skipButton);
     }
@@ -243,7 +248,7 @@ public class AuthListPage extends PageBase {
         Thread.sleep(5000);
     }
 
-    @Step ("Проверка на минимальную сумму текушего счета")
+    @Step ("Проверка на минимальную сумму текущего счета")
     public void checkCurrentBillIsNotEmpty () {
         List<MobileElement> info = driver.findElements(currentBillFrom);
         for (MobileElement el : info) {
@@ -266,5 +271,51 @@ public class AuthListPage extends PageBase {
         MobileElement text = (MobileElement) driver.findElement(statusResultTransaction);
         String status = text.getText();
         textsComparsion(status, "Перевод успешно принят", "Actual: " + status + "; Expected: " + "Перевод успешно принят");
+    }
+
+    @Step
+    public void questionButtonClick() {
+        MobileElement obj = (MobileElement) driver.findElement(questionOpenButton);
+        click(obj);
+    }
+    @Step
+    public void longPress() throws InterruptedException {
+
+        final int ANIMATION_TIME = 200;
+        PointOption pointOptionStart, pointOptionEnd;
+        int edgeBorder;
+        final int PRESS_TIME = 2000;
+        Thread.sleep(2000);
+        MobileElement el = (MobileElement) driver.findElement(By.xpath(""));
+        el.click();
+        Rectangle rect = el.getRect();
+        edgeBorder = 0;
+        pointOptionStart = PointOption.point(rect.x,
+                rect.y);
+        pointOptionEnd = PointOption.point(rect.x,
+                rect.y+ 100);
+
+        try {
+            new TouchAction(driver)
+                    .press(pointOptionStart)
+                    // a bit more reliable when we add small wait
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
+                    .moveTo(pointOptionEnd)
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
+                    .release().perform();
+        } catch (Exception e) {
+            System.err.println("swipeElement(): TouchAction FAILED\n" + e.getMessage());
+            return;
+        }
+        try {
+            Thread.sleep(ANIMATION_TIME);
+        } catch (InterruptedException e) {
+            // игнорирование
+        }
+    }
+    @Step
+    public void questionCloseButtonClick() {
+        MobileElement el = (MobileElement) driver.findElement(questionBanner);
+        swipeElementAndroid(el, Direction.DOWN);
     }
 }
