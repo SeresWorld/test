@@ -3,14 +3,19 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 
 public class todoIOS extends TestBase {
-    AuthListPage authListPage;
+    DailyCheck dailyCheck;
 
     @Test
-    public void auth () throws MalformedURLException, InterruptedException {
+    public void swipeCalendar() throws MalformedURLException, InterruptedException {
         setUpIOS();
-        authListPage = new AuthListPage(driver);
-        authListPage.open_calendar();
-        authListPage.swipe_calendar();
+        dailyCheck = new DailyCheck(driver);
+        dailyCheck.open_calendar();
+        dailyCheck.swipe_calendar();
         Thread.sleep(10000);
+    }
+
+    @Test
+    public void createTestTask() throws MalformedURLException, InterruptedException {
+        setUpIOS();
     }
 }

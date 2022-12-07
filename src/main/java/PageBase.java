@@ -196,7 +196,7 @@ public class PageBase {
         pointOptionStart = PointOption.point(rect.x + rect.width / 2,
                 rect.y + edgeBorder);
         pointOptionEnd = PointOption.point(rect.x + rect.width / 2,
-                (rect.y + rect.height - edgeBorder) + 300);
+                (rect.y + rect.height - edgeBorder) + 500);
 
         try {
             new TouchAction(driver)

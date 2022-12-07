@@ -20,40 +20,37 @@ public class AuthListPage extends PageBase {
     }
     private By sign_button = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
     private By input_login = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
-    private By input_pass = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.ScrollView/androidx.appcompat.widget.LinearLayoutCompat/androidx.cardview.widget.CardView[2]/android.view.ViewGroup/androidx.appcompat.widget.LinearLayoutCompat/android.widget.EditText");
+    private By input_pass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
     private By button_login = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
     private By button_permission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
     private By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
-    private By codeFirst = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout");
-    private By codeFirstRepeat = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout");
+    private By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
+    private By codeFirstRepeat = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
     private By android_message = By.id("android:id/message");
-    private By accountObj = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout");
-    private By paidButton = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.HorizontalScrollView/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.view.ViewGroup");
-    private By transitBetweenButton = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[4]/android.view.View[1]/android.view.View[4]");
-    private By transitBetweenToBill = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout");
+    private By paidButton = By.xpath("//android.view.ViewGroup[@bounds='[521,1833][982,1965]']");
+    private By transitBetweenButton = By.xpath("//android.view.View[@text='Перевести']");
+    private By transitBetweenToBill = By.xpath("//android.widget.TextView[@text='Выберите']");
     private By bannerInvest = By.id("kz.bcc.starbanking.stage:id/banner_invest");
-    private By mybriefcaseButton = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[4]/android.view.View[3]");
-    private By currentengeBill = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[4]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]");
-    private By topUpButton = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[4]/android.view.View[1]/android.view.View[3]");
-    private By fromBill = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout");
-    private By firstBill = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.TextView[1]");
+    private By currenttengeBill = By.xpath("//android.view.View[@bounds='[78,392][301,480]']");
+    private By topUpButton = By.xpath("//android.view.View[@text='Пополнить']");
+    private By fromBill = By.xpath("//android.widget.TextView[@text='Выберите']");
+    private By firstBill = By.xpath("//android.widget.RelativeLayout[1][@clickable='true']");
     private By sumInsert = By.id("kz.bcc.starbanking.stage:id/exchange_view_amount");
     private By transferButton = By.id("kz.bcc.starbanking.stage:id/transfer");
-    private By billBlock = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[4]/android.view.View[1]");
-    private By investInstructionSkipButton = By.xpath("/hierarchy/android.view.ViewGroup/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button");
+    private By billBlock = By.xpath("//android.view.View[@text='Мой портфель']");
+    private By investInstructionSkipButton = By.xpath("//android.view.View[@text='Пропустить']");
     private By investConfirmationTransaction = By.id("kz.bcc.starbanking.stage:id/bottom_sheet_next_button");
     private By closeResultButton = By.id("kz.bcc.starbanking.stage:id/result_view_close");
-    private By currentBillFrom = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView[2]");
-    private By statusResultTransaction = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView");
+    private By currentBillFrom = By.xpath("//android.widget.TextView[@resource-id='kz.bcc.starbanking.stage:id/include_account_picker_name']");
+    private By statusResultTransaction = By.xpath("//android.widget.TextView[@bounds='[473,757][996,816]']");
 
     private By sign_button_ios = By.name("Войти");
     private By input_login_ios = By.xpath
             ("//XCUIElementTypeApplication[@name='BCC.KZ']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField");
     private By input_pass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
     private By button_permission_ios = By.name("Однократно");
-    private String calendarButton = "calendar";
-    private By calendar = By.xpath("//XCUIElementTypeApplication[@name=\"DailyCheck\"]/XCUIElementTypeWindow/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther");
-    @Step ("Клик по кнопке Войти на экране сплеша")
+
+        @Step ("Клик по кнопке Войти на экране сплеша")
     public void sign_main_button_click() {
         click((MobileElement) driver.findElement(sign_button));
     }
@@ -100,19 +97,6 @@ public class AuthListPage extends PageBase {
         click(btn);
     }
 
-    @Step
-    public void open_calendar() {
-        MobileElement calendar = (MobileElement) driver.findElementByAccessibilityId(calendarButton);
-        waitForVisability(calendar);
-        click(calendar);
-    }
-    @Step
-    public void swipe_calendar() {
-        MobileElement obj = (MobileElement) driver.findElement(calendar);
-        waitForVisability(obj);
-        swipeElementIOS(obj, Direction.LEFT);
-    }
-
     @Step ("Проверка наличия текста '{text}' на модалке")
     public void check_text_android_message(String text) {
         containsmessageAssert((MobileElement) driver.findElement(android_message), text);
@@ -148,7 +132,7 @@ public class AuthListPage extends PageBase {
 
     @Step ("Ожидание загрузки счетов")
     public void waitforloadaccountList() {
-        MobileElement obj = (MobileElement) driver.findElement(accountObj);
+        MobileElement obj = (MobileElement) driver.findElement(bannerInvest);
         waitForVisability(obj);
     }
 
@@ -179,7 +163,7 @@ public class AuthListPage extends PageBase {
 
     @Step ("Получение текущего количества средств на счету в тенге")
     public int getTextFromCurrentBill() {
-        MobileElement currentBill = (MobileElement) driver.findElement(currentengeBill);
+        MobileElement currentBill = (MobileElement) driver.findElement(currenttengeBill);
         String text = getText(currentBill);
         int bill = Integer.parseInt(text.replaceAll("[^0-9.]", ""));
         return bill;
@@ -206,7 +190,7 @@ public class AuthListPage extends PageBase {
         click(firstBillButton);
     }
 
-    @Step ("Установка вторго счета в поле 'Куда'в разделе переводов")
+    @Step ("Установка вторго счета в поле 'Куда' в разделе переводов")
     public void setToBill() {
         MobileElement toBillButton = (MobileElement) driver.findElement(transitBetweenToBill);
         click(toBillButton);
@@ -247,7 +231,7 @@ public class AuthListPage extends PageBase {
     }
 
     @Step ("Пропуск гайда")
-    public void skipInstruction() {
+    public void skipInstruction() throws InterruptedException {
         MobileElement skipButton = (MobileElement) driver.findElement(investInstructionSkipButton);
         click(skipButton);
     }
@@ -261,11 +245,15 @@ public class AuthListPage extends PageBase {
 
     @Step ("Проверка на минимальную сумму текушего счета")
     public void checkCurrentBillIsNotEmpty () {
-        MobileElement info = (MobileElement) driver.findElement(currentBillFrom);
-        String text = info.getText();
-        String currentMoney = text.replaceAll("[^0-9.]", "");
-        System.out.println(currentMoney);
-        Assert.assertTrue("Сумма текущего счета меньше 1000: " + Integer.parseInt(currentMoney), Integer.parseInt(currentMoney) >= 1000);
+        List<MobileElement> info = driver.findElements(currentBillFrom);
+        for (MobileElement el : info) {
+            String elText = el.getText();
+            if (elText.contains("Текущий счет для инвестиционной деятельности")) {
+                String currentMoney = elText.replaceAll("[^0-9.]", "");
+                System.out.println(currentMoney);
+                Assert.assertTrue("Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney), Integer.parseInt(currentMoney) >= 1001);
+            }
+        }
     }
 
     @Step ("Сравнение текущей суммы счета с ожидаемой")

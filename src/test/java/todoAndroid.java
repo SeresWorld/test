@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 
 
 @Epic("Android tests")
-@Listeners({TestAllureListener.class})
+@Listeners(TestAllureListener.class)
 public class todoAndroid extends TestBase {
 
     AuthListPage authListPage;
