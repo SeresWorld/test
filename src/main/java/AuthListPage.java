@@ -57,7 +57,8 @@ public class AuthListPage extends PageBase {
 
     @Step ("Клик по кнопке Войти на экране сплеша")
     public void sign_main_button_click() {
-        sign_button.click();
+        MobileElement button = (MobileElement) driver.findElement(sign_button);
+        click(button);
     }
 
     public void sign_main_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
