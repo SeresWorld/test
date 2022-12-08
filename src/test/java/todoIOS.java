@@ -8,7 +8,7 @@ import utils.JsonReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-@Listeners(TestAllureListener.class)
+
 public class todoIOS extends TestBase {
     DailyCheck dailyCheck;
 

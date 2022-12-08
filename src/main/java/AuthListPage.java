@@ -81,6 +81,7 @@ public class AuthListPage extends PageBase {
     public void setInput_pass(String pass) {
         MobileElement input = (MobileElement) driver.findElement(input_pass);
         sendText(input, pass);
+        org.testng.Assert.assertEquals(10, 11);
     }
     @Step
     public void setInput_pass_ios(String pass) {

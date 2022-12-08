@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -9,6 +10,7 @@ import org.testng.ITest;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +61,10 @@ public class TestBase {
     @AfterMethod
     public static void tearDown(ITestResult tr) {
         if (null != driver) {
+            if (tr.getStatus() == ITestResult.FAILURE) {
+                Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+                System.out.println("Test " + tr.getMethod().getMethodName() + "has been failed...");
+            }
             driver.quit();
         }
     }

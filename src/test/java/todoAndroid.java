@@ -16,11 +16,9 @@ import java.net.MalformedURLException;
 
 
 @Epic("Android tests")
-@Listeners(TestAllureListener.class)
 public class todoAndroid extends TestBase {
 
     AuthListPage authListPage;
-
 
 
     @Story("Авторизация с валидными данными")
@@ -32,6 +30,7 @@ public class todoAndroid extends TestBase {
         authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");
         authListPage.setInput_pass("orapas123");
+
         authListPage.sign_complete_button_click();
         authListPage.try_button_permission_click();
 
