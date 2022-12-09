@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.mn.Харин;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -48,6 +49,11 @@ public class AuthListPage extends PageBase {
     private final By statusResultTransaction = By.xpath("//android.widget.TextView[@bounds='[473,757][996,816]']");
     private final By questionOpenButton = By.xpath("//android.view.View[3]/android.widget.Button");
     private final By questionBanner = By.xpath("//android.widget.ImageView[@bounds='[0,247][1080,1258]']");
+    private final By errorSumBiggerThanBill = By.xpath("//android.widget.TextView[@text='Сумма перевода превышает остаток на счете']");
+    private final By investToggleCurrencyDollar = By.xpath("//android.view.View[@text='$']");
+    private final By investToggleCurrencyTenge = By.xpath("//android.view.View[@text='₸']");
+    private final By myBriefcase = By.xpath("//android.view.View[@bounds='[77,878][302,966]']");
+
 
     private By sign_button_ios = By.name("Войти");
     private By input_login_ios = By.xpath
@@ -173,7 +179,7 @@ public class AuthListPage extends PageBase {
         for (MobileElement el:currentBill) {
             String textEl = el.getText();
             if (textEl.contains("₸")) {
-                int bill = Integer.parseInt(textEl.replaceAll("[^-0-9]+", ""));
+                int bill = Integer.parseInt(textEl.replaceAll("[^-0-9,.]+", ""));
                 return bill;
             }
         }
@@ -211,10 +217,10 @@ public class AuthListPage extends PageBase {
     }
 
     @Step ("Установка суммы перевода '1000'")
-    public void setSumInsert() {
+    public void setSumInsert(double sum) {
         MobileElement sumInsertField = (MobileElement) driver.findElement(sumInsert);
         click(sumInsertField);
-        sendText(sumInsertField, "1000");
+        sendText(sumInsertField, String.valueOf(sum));
     }
 
     @Step ("Нажатие кнопки 'Перевести'")
@@ -256,7 +262,7 @@ public class AuthListPage extends PageBase {
     }
 
     @Step ("Проверка на минимальную сумму текущего счета")
-    public void checkCurrentBillIsNotEmpty () {
+    public void checkCurrentInvestBillIsNotEmpty () {
         List<MobileElement> info = driver.findElements(currentBillFrom);
         for (MobileElement el : info) {
             String elText = el.getText();
@@ -265,6 +271,33 @@ public class AuthListPage extends PageBase {
                 Assert.assertTrue("Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney), Integer.parseInt(currentMoney) >= 1001);
             }
         }
+    }
+
+    @Step ("Проверка на минимальную сумму текущего счета")
+    public void checkCurrentPersonalBillIsNotEmpty () {
+        List<MobileElement> info = driver.findElements(currentBillFrom);
+        for (MobileElement el : info) {
+            String elText = el.getText();
+            if (elText.contains("Visa")) {
+                String currentMoney = elText.replaceAll("[^-0-9.]+", "");
+                Assert.assertTrue("Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney), Integer.parseInt(currentMoney) >= 1001);
+            }
+        }
+    }
+
+    @Step
+    public Double getCurrentPersonalBill() {
+        List<MobileElement> info = driver.findElements(currentBillFrom);
+        for (MobileElement el : info) {
+            String elText = el.getText();
+            if (elText.contains("Visa")) {
+                String currentMoney = elText.replaceAll("[^-0-9,]+", "");
+                String currentMoney2 = currentMoney.replace(",", ".");
+                double currentMoneyInt = Double.parseDouble(currentMoney2);
+                return currentMoneyInt;
+            }
+        }
+        return null;
     }
 
     @Step ("Сравнение текущей суммы счета с ожидаемой")
@@ -283,6 +316,12 @@ public class AuthListPage extends PageBase {
     public void questionButtonClick() {
         MobileElement obj = (MobileElement) driver.findElement(questionOpenButton);
         click(obj);
+    }
+
+    @Step
+    public void checkErrorSumBiggerThanBill() {
+        MobileElement obj = (MobileElement) driver.findElement(errorSumBiggerThanBill);
+        waitForVisability(obj);
     }
     @Step
     public void longPress() throws InterruptedException {
@@ -324,4 +363,33 @@ public class AuthListPage extends PageBase {
         MobileElement el = (MobileElement) driver.findElement(questionBanner);
         swipeElementAndroid(el, Direction.DOWN);
     }
+
+    @Step
+    public void investSwitchToggleDollar() {
+        MobileElement obj = (MobileElement) driver.findElement(investToggleCurrencyDollar);
+        click(obj);
+    }
+
+    @Step
+    public void investSwitchToggleTenge() {
+        MobileElement obj = (MobileElement) driver.findElement(investToggleCurrencyTenge);
+        click(obj);
+    }
+
+    @Step
+    public void checkInvestCurrency(String currency) {
+        MobileElement obj = (MobileElement) driver.findElement(myBriefcase);
+        String objText = obj.getText();
+        switch (currency) {
+            case "dollar":
+                Assert.assertEquals("Currency is not in " + currency, objText.contains("$"), true);
+                break;
+            case "tenge":
+                Assert.assertEquals("Currency is not in " + currency, objText.contains("₸"), true);
+                break;
+            default:
+                Assert.assertEquals("Currency is unknown!", 0 , 1);
+        }
+    }
+
 }

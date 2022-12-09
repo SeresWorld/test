@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ import utils.JsonReader;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-
+import java.util.Set;
 
 
 @Epic("Android tests")
@@ -90,8 +91,8 @@ public class todoAndroid extends TestBase {
         int current_1 = authListPage.getTextFromCurrentBill();
         authListPage.topUpButtonClick();
         authListPage.setFromBill();
-        authListPage.checkCurrentBillIsNotEmpty();
-        authListPage.setSumInsert();
+        authListPage.checkCurrentPersonalBillIsNotEmpty();
+        authListPage.setSumInsert(1000);
         authListPage.transferButtonClick();
         authListPage.investConfirmTrnasaction();
         authListPage.checkResultStatusTransition();
@@ -114,8 +115,8 @@ public class todoAndroid extends TestBase {
         int current_1 = authListPage.getTextFromCurrentBill();
         authListPage.transitBetweenButtonClick();
         authListPage.setToBill();
-        authListPage.checkCurrentBillIsNotEmpty();
-        authListPage.setSumInsert();
+        authListPage.checkCurrentInvestBillIsNotEmpty();
+        authListPage.setSumInsert(1000);
         authListPage.transferButtonClick();
         authListPage.investConfirmTrnasaction();
         authListPage.checkResultStatusTransition();
@@ -138,4 +139,30 @@ public class todoAndroid extends TestBase {
 
     }
 
+    @Test
+    public void addMoreMoneyThanYouHave() throws MalformedURLException, InterruptedException {
+        auth_complete();
+        authListPage = new AuthListPage(driver);
+        authListPage.investbannerClick();
+        authListPage.waitforloadInvest();
+        authListPage.skipInstruction();
+        authListPage.swipeScreenDown();
+        authListPage.topUpButtonClick();
+        authListPage.setFromBill();
+        double currentMoney = authListPage.getCurrentPersonalBill();
+        authListPage.setSumInsert(currentMoney + 1.0);
+        authListPage.checkErrorSumBiggerThanBill();
+    }
+
+    @Test
+    public void investSwitchToggleCurrency() throws MalformedURLException, InterruptedException {
+        auth_complete();
+        authListPage = new AuthListPage(driver);
+        authListPage.investbannerClick();
+        authListPage.waitforloadInvest();
+        authListPage.skipInstruction();
+        authListPage.swipeScreenDown();
+        authListPage.investSwitchToggleDollar();
+        authListPage.checkInvestCurrency("dollar");
+    }
 }

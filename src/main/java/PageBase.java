@@ -7,6 +7,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -29,13 +30,8 @@ public class PageBase {
     public static final long WAIT = 10;
     @Step ("Ожидание видимости элемента {element}")
     public void waitForVisability (MobileElement element) {
-        for (int i = 0; i < 3; i++) {
-            try {
-                WebDriverWait wait = new WebDriverWait(driver, WAIT);
-                wait.until(ExpectedConditions.visibilityOf(element));
-            } catch (Exception e) {
-            }
-        }
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
     @Step ("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
     public void containsmessageAssert (MobileElement element, String text) {
