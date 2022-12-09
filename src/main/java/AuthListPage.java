@@ -34,7 +34,7 @@ public class AuthListPage extends PageBase {
     private final By transitBetweenButton = By.xpath("//android.view.View[@text='Перевести']");
     private final By transitBetweenToBill = By.xpath("//android.widget.TextView[@text='Выберите']");
     private final By bannerInvest = By.id("kz.bcc.starbanking.stage:id/banner_invest");
-    private final By currenttengeBill = By.xpath("//android.view.View[@bounds='[78,392][339,480]']");
+    private final By currenttengeBill = By.xpath("//android.view.View[1]/android.view.View[2]");
     private final By topUpButton = By.xpath("//android.view.View[@text='Пополнить']");
     private final By fromBill = By.xpath("//android.widget.TextView[@text='Выберите']");
     private final By firstBill = By.xpath("//android.widget.RelativeLayout[1][@clickable='true']");
@@ -169,10 +169,16 @@ public class AuthListPage extends PageBase {
 
     @Step ("Получение текущего количества средств на счету в тенге")
     public int getTextFromCurrentBill() {
-        MobileElement currentBill = (MobileElement) driver.findElement(currenttengeBill);
-        String text = getText(currentBill);
-        int bill = Integer.parseInt(text.replaceAll("[^0-9.]", ""));
-        return bill;
+        List<MobileElement> currentBill = driver.findElements(currenttengeBill);
+        for (MobileElement el:currentBill) {
+            String textEl = el.getText();
+            if (textEl.contains("₸")) {
+                int bill = Integer.parseInt(textEl.replaceAll("[^-0-9]+", ""));
+                return bill;
+            }
+        }
+        System.out.println("Не удалось прочитать сумму");
+        return 0;
     }
 
     @Step ("Нажатие на кнопку 'Перевести' в разделе инвестиций")
@@ -255,8 +261,7 @@ public class AuthListPage extends PageBase {
         for (MobileElement el : info) {
             String elText = el.getText();
             if (elText.contains("Текущий счет для инвестиционной деятельности")) {
-                String currentMoney = elText.replaceAll("[^0-9.]", "");
-                System.out.println(currentMoney);
+                String currentMoney = elText.replaceAll("[^-0-9.]+", "");
                 Assert.assertTrue("Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney), Integer.parseInt(currentMoney) >= 1001);
             }
         }
