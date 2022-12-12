@@ -155,7 +155,7 @@ public class todoAndroid extends TestBase {
     }
 
     @Test
-    public void investSwitchToggleCurrency() throws MalformedURLException, InterruptedException {
+    public void investSwitchToggleCurrencyDollar() throws MalformedURLException, InterruptedException {
         auth_complete();
         authListPage = new AuthListPage(driver);
         authListPage.investbannerClick();
@@ -164,5 +164,18 @@ public class todoAndroid extends TestBase {
         authListPage.swipeScreenDown();
         authListPage.investSwitchToggleDollar();
         authListPage.checkInvestCurrency("dollar");
+    }
+
+    @Test
+    public void investSwitchToggleCurrencyTenge() throws MalformedURLException, InterruptedException {
+        auth_complete();
+        authListPage = new AuthListPage(driver);
+        authListPage.investbannerClick();
+        authListPage.waitforloadInvest();
+        authListPage.skipInstruction();
+        authListPage.swipeScreenDown();
+        authListPage.investSwitchToggleDollar();
+        authListPage.investSwitchToggleTenge();
+        authListPage.checkInvestCurrency("tenge");
     }
 }

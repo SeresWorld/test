@@ -52,7 +52,8 @@ public class AuthListPage extends PageBase {
     private final By errorSumBiggerThanBill = By.xpath("//android.widget.TextView[@text='Сумма перевода превышает остаток на счете']");
     private final By investToggleCurrencyDollar = By.xpath("//android.view.View[@text='$']");
     private final By investToggleCurrencyTenge = By.xpath("//android.view.View[@text='₸']");
-    private final By myBriefcase = By.xpath("//android.view.View[@bounds='[77,878][302,966]']");
+    private final By myBriefcaseTenge = By.xpath("//android.view.View[@bounds='[77,878][304,966]']");
+    private final By myBriefcaseDollar = By.xpath("//android.view.View[@bounds='[77,878][302,966]']");
 
 
     private By sign_button_ios = By.name("Войти");
@@ -365,9 +366,10 @@ public class AuthListPage extends PageBase {
     }
 
     @Step
-    public void investSwitchToggleDollar() {
+    public void investSwitchToggleDollar() throws InterruptedException {
         MobileElement obj = (MobileElement) driver.findElement(investToggleCurrencyDollar);
         click(obj);
+        Thread.sleep(1000);
     }
 
     @Step
@@ -378,14 +380,16 @@ public class AuthListPage extends PageBase {
 
     @Step
     public void checkInvestCurrency(String currency) {
-        MobileElement obj = (MobileElement) driver.findElement(myBriefcase);
-        String objText = obj.getText();
         switch (currency) {
             case "dollar":
+                MobileElement obj = (MobileElement) driver.findElement(myBriefcaseDollar);
+                String objText = obj.getText();
                 Assert.assertEquals("Currency is not in " + currency, objText.contains("$"), true);
                 break;
             case "tenge":
-                Assert.assertEquals("Currency is not in " + currency, objText.contains("₸"), true);
+                MobileElement obj1 = (MobileElement) driver.findElement(myBriefcaseTenge);
+                String objText1 = obj1.getText();
+                Assert.assertEquals("Currency is not in " + currency, objText1.contains("₸"), true);
                 break;
             default:
                 Assert.assertEquals("Currency is unknown!", 0 , 1);
