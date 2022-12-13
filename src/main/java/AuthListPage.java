@@ -5,7 +5,6 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import io.cucumber.java.mn.Харин;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -52,8 +51,8 @@ public class AuthListPage extends PageBase {
     private final By errorSumBiggerThanBill = By.xpath("//android.widget.TextView[@text='Сумма перевода превышает остаток на счете']");
     private final By investToggleCurrencyDollar = By.xpath("//android.view.View[@text='$']");
     private final By investToggleCurrencyTenge = By.xpath("//android.view.View[@text='₸']");
-    private final By myBriefcaseTenge = By.xpath("//android.view.View[@bounds='[77,878][304,966]']");
-    private final By myBriefcaseDollar = By.xpath("//android.view.View[@bounds='[77,878][302,966]']");
+    private final By myBriefcaseTenge = By.xpath("//android.view.View[@bounds='[790,1037][881,1169]']");
+    private final By myBriefcaseDollar = By.xpath("//android.view.View[@bounds='[881,1037][1013,1169]']");
 
 
     private By sign_button_ios = By.name("Войти");
