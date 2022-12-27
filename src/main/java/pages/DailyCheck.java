@@ -1,3 +1,5 @@
+package pages;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -6,7 +8,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Rectangle;
-import pages.PageBase;
+import base.PageBase;
 
 import java.time.Duration;
 

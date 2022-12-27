@@ -1,7 +1,10 @@
+package com.test;
+
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.TestBase;
+import base.TestBase;
+import pages.DailyCheck;
 import utils.JsonReader;
 
 import java.io.IOException;

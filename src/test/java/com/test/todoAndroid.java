@@ -5,7 +5,7 @@ import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import pages.AuthListPage;
-import pages.TestBase;
+import base.TestBase;
 
 import java.net.MalformedURLException;
 
@@ -25,7 +25,6 @@ public class todoAndroid extends TestBase {
         authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");
         authListPage.setInput_pass("orapas123");
-
         authListPage.sign_complete_button_click();
         authListPage.try_button_permission_click();
 
