@@ -1,5 +1,6 @@
 package pages;
 
+import base.Capabilities;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -23,15 +24,9 @@ public class TestBase {
 
     public static void setUpAndroid() throws MalformedURLException {
 
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "Redmi Note 10S");
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "11.0");
-        caps.setCapability("appActivity", "kz.bcc.starbanking.ui.screens.splash.SplashActivity");
-        caps.setCapability("appPackage", "kz.bcc.starbanking.stage");
-        caps.setCapability("automationName", "UiAutomator2");
+        Capabilities caps = new Capabilities();
         // caps.setCapability("app", System.getProperty("user.dir") + "/apps/release-3.4.28-test.apk");
-        driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);
+        driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps.localAndroid());
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
@@ -49,14 +44,9 @@ public class TestBase {
 
 
     public static void setUpIOS() throws MalformedURLException, InterruptedException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "iPhone 11");
-        caps.setCapability("platformName", "iOS");
-        caps.setCapability("platformVersion", "15.5");
-        caps.setCapability("automationName", "XCUITest");
-        caps.setCapability("app", System.getProperty("user.dir") + "/apps/DailyCheck.app");
+        Capabilities caps = new Capabilities();
         /*caps.setCapability("bundleId", "kz.bcc.starbanking");*/
-        driver = new IOSDriver(new URL("http://localhost:4723/wd/hub"), caps);
+        driver = new IOSDriver(new URL("http://localhost:4723/wd/hub"), caps.localIOS());
     }
 
 
