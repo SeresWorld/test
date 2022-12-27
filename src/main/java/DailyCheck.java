@@ -36,7 +36,6 @@ public class DailyCheck extends PageBase {
     public void open_calendar() {
         MobileElement calendar = (MobileElement) driver.findElementByAccessibilityId(calendarButton);
         waitForVisability(calendar);
-        click(calendar);
     }
     @Step
     public void swipe_calendar() {

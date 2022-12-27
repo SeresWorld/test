@@ -25,6 +25,7 @@ public class Capabilities {
         caps.setCapability("platformVersion", "15.5");
         caps.setCapability("automationName", "XCUITest");
         caps.setCapability("app", System.getProperty("user.dir") + "/apps/DailyCheck.app");
+        /*caps.setCapability("bundleId", "kz.bcc.starbanking");*/ // Бандл для эмулятора
 
         return caps;
     }

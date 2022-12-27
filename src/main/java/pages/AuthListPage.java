@@ -68,16 +68,15 @@ public class AuthListPage extends PageBase {
     private By button_permission_ios = By.name("Однократно");
 
     @Step ("Клик по кнопке Войти на экране сплеша")
-    public void sign_main_button_click() {
-        MobileElement button = (MobileElement) driver.findElement(sign_button);
-        click(button);
+    public void  sign_main_button_click() {
+        click(sign_button);
     }
 
     public void sign_main_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
     @Step ("Ввод телефона {login} в поле телефона")
     public void setInput_login(String login) {
-        MobileElement input = (MobileElement) driver.findElement(input_login);
-        sendText(input, login);
+        explicitWaitToClickable(input_login, 10);
+        sendText(input_login, login);
     }
     @Step
     public void setInput_login_ios(String login) {
@@ -85,14 +84,13 @@ public class AuthListPage extends PageBase {
         sendText(input, login);
     }
     @Step ("Клик по кнопке 'Войти' на экране авторизации")
-    public void sign_complete_button_click() {click((MobileElement) driver.findElement(button_login));}
+    public void sign_complete_button_click() {click(button_login);}
     @Step
     public void sign_complete_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
 
     @Step ("Ввод пароля '{pass}' в поле пароля")
     public void setInput_pass(String pass) {
-        MobileElement input = (MobileElement) driver.findElement(input_pass);
-        sendText(input, pass);
+        sendText(input_pass, pass);
     }
     @Step
     public void setInput_pass_ios(String pass) {
@@ -101,8 +99,9 @@ public class AuthListPage extends PageBase {
     }
     @Step ("Попытка клика по кнопке разрешения на получение геолокации")
     public void try_button_permission_click() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         try {
-            click((MobileElement) driver.findElement(button_permission));
+            wait.until(ExpectedConditions.elementToBeClickable(button_permission)).click();
         } catch (NoSuchElementException noSuchElementException) {
             System.out.println("Permission has not found");
         }
@@ -110,14 +109,12 @@ public class AuthListPage extends PageBase {
     }
     @Step
     public void try_button_permission_click_ios() {
-        MobileElement btn = (MobileElement) driver.findElement(button_permission_ios);
-        waitForVisability(btn);
-        click(btn);
+        click(button_permission_ios);
     }
 
     @Step ("Проверка наличия текста '{text}' на модалке")
     public void check_text_android_message(String text) {
-        containsmessageAssert((MobileElement) driver.findElement(android_message), text);
+        containsmessageAssert(android_message, text);
     }
     @Step ("Проверка неактивности кнопки Войти на экране авторизации")
     public void check_active_sign_button_is_not_clickable() {
@@ -128,42 +125,24 @@ public class AuthListPage extends PageBase {
 
     @Step ("Ввод четырехзначного кода")
     public void setButtonsCode () {
-        MobileElement codeSubText = (MobileElement) driver.findElement(codeText);
-        boolean is_visability = false;
-        while (!is_visability) {
-            try {
-                waitForVisability(codeSubText);
-                is_visability = true;
-            } catch (Exception e) {
-                System.out.println("Не прогрузилось");
-            }
-        }
-        for (int i = 0; i < 4; i++) {
-            MobileElement el = (MobileElement) driver.findElement(codeFirst);
-            click(el);
-        }
-        for (int i = 0; i < 4; i++) {
-            MobileElement el = (MobileElement) driver.findElement(codeFirstRepeat);
-            click(el);
-        }
+        explicitWaitToClickable(codeFirst, 30);
+        for (int i = 0; i < 4; i++) {click(codeFirst);}
+        for (int i = 0; i < 4; i++) {click(codeFirstRepeat);}
     }
 
     @Step ("Ожидание загрузки счетов")
     public void waitforloadaccountList() {
-        MobileElement obj = (MobileElement) driver.findElement(bannerInvest);
-        waitForVisability(obj);
+        waitForVisability(bannerInvest, 30);
     }
 
     @Step
     public void main_screen_swipe_horizontal_list() {
-        MobileElement paidBtn = (MobileElement) driver.findElement(paidButton);
-        swipeElementAndroid(paidBtn, Direction.LEFT);
+        swipeElementAndroid(paidButton, Direction.LEFT);
     }
 
     @Step ("Клик на баннер инвестиций")
     public void investbannerClick() {
-        MobileElement investBtn = (MobileElement) driver.findElement(bannerInvest);
-        click(investBtn);
+        click(bannerInvest);
     }
     @Step ("Ожидание прогрузки страницы инвестиций")
     public void waitforloadInvest() {
@@ -195,81 +174,65 @@ public class AuthListPage extends PageBase {
 
     @Step ("Нажатие на кнопку 'Перевести' в разделе инвестиций")
     public void transitBetweenButtonClick() {
-        MobileElement transitBetweenBtn = (MobileElement) driver.findElement(transitBetweenButton);
-        click(transitBetweenBtn);
+        click(transitBetweenButton);
     }
 
     @Step ("Нажатие кнопки 'Пополнить'")
     public void topUpButtonClick() {
-        MobileElement topUpBtn = (MobileElement) driver.findElement(topUpButton);
-        click(topUpBtn);
+        click(topUpButton);
     }
 
     @Step ("Установка первого счета в поле 'Откуда'")
     public void setFromBill() {
-        MobileElement fromBillButton = (MobileElement) driver.findElement(fromBill);
-        click(fromBillButton);
+        click(fromBill);
 
-        MobileElement firstBillButton = (MobileElement) driver.findElement(firstBill);
-        click(firstBillButton);
+        click(firstBill);
     }
 
     @Step ("Установка вторго счета в поле 'Куда' в разделе переводов")
     public void setToBill() {
-        MobileElement toBillButton = (MobileElement) driver.findElement(transitBetweenToBill);
-        click(toBillButton);
-        MobileElement firstBillButton = (MobileElement) driver.findElement(firstBill);
-        click(firstBillButton);
+        click(transitBetweenToBill);
+
+        click(firstBill);
     }
 
     @Step ("Установка суммы перевода '1000'")
     public void setSumInsert(double sum) {
-        MobileElement sumInsertField = (MobileElement) driver.findElement(sumInsert);
-        click(sumInsertField);
-        sendText(sumInsertField, String.valueOf(sum));
+        click(sumInsert);
+
+        sendText(sumInsert, String.valueOf(sum));
     }
 
     @Step ("Нажатие кнопки 'Перевести'")
     public void transferButtonClick() {
-        MobileElement transferBtn = (MobileElement) driver.findElement(transferButton);
-        click(transferBtn);
+        click(transferButton);
     }
 
     @Step ("Свайп экрана вниз")
     public void swipeScreenDown() {
-        MobileElement billsBlock = (MobileElement) driver.findElement(billBlock);
-        swipeElementAndroid(billsBlock, Direction.DOWN);
+        swipeElementAndroid(billBlock, Direction.DOWN);
     }
 
     @Step
     public void swipeScreenUp() {
-        MobileElement billsBlock = (MobileElement) driver.findElement(billBlock);
-        swipeElementAndroid(billsBlock, Direction.UP);
+        swipeElementAndroid(billBlock, Direction.UP);
     }
 
     @Step ("Обновление счета")
     public void swipeToRefreshBill() throws InterruptedException {
-        MobileElement billsBlock = (MobileElement) driver.findElement(billBlock);
-        swipeToRefreshAndroid(billsBlock);
+        swipeToRefreshAndroid(billBlock);
         Thread.sleep(5000);
     }
 
     @Step ("Закрытие модалки перевода")
-    public void closeResultTransition() {
-        MobileElement closeBtn = (MobileElement) driver.findElement(closeResultButton);
-        click(closeBtn);
-    }
+    public void closeResultTransition() {click(closeResultButton);}
 
     @Step ("Пропуск гайда")
-    public void skipInstruction() {
-        MobileElement skipButton = (MobileElement) driver.findElement(investInstructionSkipButton);
-        click(skipButton);
-    }
+    public void skipInstruction() {click(investInstructionSkipButton);}
 
     @Step ("Подтверждение перевода")
     public void investConfirmTrnasaction() throws InterruptedException {
-        MobileElement confBtn = (MobileElement) driver.findElement(investConfirmationTransaction);
-        click(confBtn);
+        click(investConfirmationTransaction);
         Thread.sleep(5000);
     }
 
@@ -280,7 +243,9 @@ public class AuthListPage extends PageBase {
             String elText = el.getText();
             if (elText.contains("Текущий счет для инвестиционной деятельности")) {
                 String currentMoney = elText.replaceAll("[^-0-9.]+", "");
-                Assert.assertTrue(Integer.parseInt(currentMoney) >= 1001, "Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney));
+                Assert.assertTrue(
+                        Integer.parseInt(currentMoney) >= 1001,
+                        "Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney));
             }
         }
     }
@@ -292,7 +257,9 @@ public class AuthListPage extends PageBase {
             String elText = el.getText();
             if (elText.contains("Visa")) {
                 String currentMoney = elText.replaceAll("[^-0-9.]+", "");
-                Assert.assertTrue(Integer.parseInt(currentMoney) >= 1001, "Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney));
+                Assert.assertTrue(
+                        Integer.parseInt(currentMoney) >= 1001,
+                        "Сумма текущего счета меньше 1001: " + Integer.parseInt(currentMoney));
             }
         }
     }
@@ -321,31 +288,30 @@ public class AuthListPage extends PageBase {
     public void checkResultStatusTransition() {
         MobileElement text = (MobileElement) driver.findElement(statusResultTransaction);
         String status = text.getText();
-        textsComparsion(status, "Перевод успешно принят", "Actual: " + status + "; Expected: " + "Перевод успешно принят");
+        textsComparsion(
+                status,
+                "Перевод успешно принят",
+                "Actual: " + status + "; Expected: " + "Перевод успешно принят");
     }
 
     @Step
     public void questionButtonClick() {
-        MobileElement obj = (MobileElement) driver.findElement(questionOpenButton);
-        click(obj);
+        click(questionOpenButton);
     }
 
     @Step
     public void checkErrorSumBiggerThanBill() {
-        MobileElement obj = (MobileElement) driver.findElement(errorSumBiggerThanBill);
-        waitForVisability(obj);
+        waitForVisability(errorSumBiggerThanBill);
     }
 
     @Step
     public void firstPopularShareClick() {
-        MobileElement obj = (MobileElement) driver.findElement(firstPopularShare);
-        click(obj);
+        click(firstPopularShare);
     }
 
     @Step
     public void buyShareButtonClick() {
-        MobileElement obj = (MobileElement) driver.findElement(buyShareButton);
-        click(obj);
+        click(buyShareButton);
     }
 
     @Step
@@ -384,10 +350,7 @@ public class AuthListPage extends PageBase {
         }
     }
     @Step
-    public void questionCloseButtonClick() {
-        MobileElement el = (MobileElement) driver.findElement(questionBanner);
-        swipeElementAndroid(el, Direction.DOWN);
-    }
+    public void questionCloseButtonClick() {swipeElementAndroid(questionBanner, Direction.DOWN);}
 
     @Step
     public void investSwitchToggleDollar() throws InterruptedException {
@@ -409,40 +372,40 @@ public class AuthListPage extends PageBase {
     }
     @Step
     public int getCountCharsDescribeText() {
-        MobileElement obj = (MobileElement) driver.findElement(shareDescribeText);
-        int textCount = getText(obj).length();
+        int textCount = driver.findElement(shareDescribeText).getText().length();
         return textCount;
     }
     @Step
     public String getPricePerShare() {
-        MobileElement price = (MobileElement) driver.findElement(pricePerShare);
-        String textPrice = getText(price);
+        String textPrice = driver.findElement(pricePerShare).getText();
         return textPrice;
     }
 
     @Step
     public void setSharesCount (String count) {
-        MobileElement sharesCountInput = (MobileElement) driver.findElement(sharesCount);
-        sendText(sharesCountInput, count);
+        sendText(sharesCount, count);
     }
 
     @Step
     public String getSumShares () {
-        MobileElement sumSharesObj = (MobileElement) driver.findElement(sumShares);
-        String sum = getText(sumSharesObj);
-        String sum1 = sum.replaceAll("[^-0-9,]+", "");
-        return sum1;
+        String sum = driver.findElement(sumShares).getText();
+        return sum.replaceAll("[^-0-9,]+", "");
     }
 
     @Step
     public void checkSumShares(String pricePer, String shareCount, String sum) {
         double expectedPrice = Double.parseDouble(pricePer) * Double.parseDouble(shareCount);
-        Assert.assertEquals(Integer.parseInt(sum), expectedPrice, "Actual: " + Integer.parseInt(sum) + ", Expected: " + expectedPrice);
+        Assert.assertEquals(
+                Integer.parseInt(sum),
+                expectedPrice, "Actual: " + Integer.parseInt(sum) + ", Expected: " + expectedPrice);
     }
 
     @Step
     public void comparsionCharsShareDescribeText(int beforeMax, int afterMax) {
-        Assert.assertNotEquals(beforeMax, afterMax, "Число символов до расширения описания и после одинаковое: " + beforeMax + " == " + afterMax);
+        Assert.assertNotEquals(
+                beforeMax,
+                afterMax,
+                "Число символов до расширения описания и после одинаковое: " + beforeMax + " == " + afterMax);
     }
 
     @Step
@@ -451,12 +414,12 @@ public class AuthListPage extends PageBase {
             case "dollar":
                 MobileElement obj = (MobileElement) driver.findElement(myBriefcaseDollar);
                 String objText = obj.getText();
-                Assert.assertEquals(objText.contains("$"), true, "Currency is not in " + currency);
+                Assert.assertTrue(objText.contains("$"), "Currency is not in " + currency);
                 break;
             case "tenge":
                 MobileElement obj1 = (MobileElement) driver.findElement(myBriefcaseTenge);
                 String objText1 = obj1.getText();
-                Assert.assertEquals(objText1.contains("₸"), true, "Currency is not in " + currency);;
+                Assert.assertTrue(objText1.contains("₸"), "Currency is not in " + currency);;
                 break;
             default:
                 Assert.assertEquals(0 , 1, "Currency is unknown!");

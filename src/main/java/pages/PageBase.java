@@ -31,21 +31,32 @@ public class PageBase extends TestBase {
     public AndroidTouchAction actions;
 
     public static final long WAIT = 10;
+    @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
+    public void waitForVisability (By element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
+
+    @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
+    public void waitForVisability (By element, long WAIT) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
     @Step ("Ожидание видимости элемента {element}")
     public void waitForVisability (MobileElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        try {
-            wait.until(ExpectedConditions.visibilityOf(element));
-        } catch (NoSuchElementException ex) {
-            System.out.println("Object not found");
-            throw ex;
-        }
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
+    @Step ()
+    public void explicitWaitToClickable(By element, int timer) {
+        WebDriverWait wait = new WebDriverWait(driver, timer);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
     @Step ("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
-    public void containsmessageAssert (MobileElement element, String text) {
+    public void containsmessageAssert (By element, String text) {
         waitForVisability(element);
-        String text_element = element.getText();
+        String text_element = driver.findElement(element).getText();
         text_element.contains(text);
     }
 
@@ -53,9 +64,14 @@ public class PageBase extends TestBase {
         waitForVisability(element);
         element.clear();
     }
+    public void click (By element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
     public void click (MobileElement element) {
-        waitForVisability(element);
-        element.click();
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     public String getText (MobileElement element) {
@@ -69,6 +85,10 @@ public class PageBase extends TestBase {
         element.sendKeys(text);
     }
 
+    public void sendText (By element, String text) {
+        explicitWaitToClickable(element, 10);
+        driver.findElement(element).sendKeys(text);
+    }
     public String getAttribute (MobileElement element, String attribute) {
         waitForVisability(element);
         String elem_atr = element.getAttribute(attribute);
@@ -185,7 +205,8 @@ public class PageBase extends TestBase {
             // ignore
         }
     }
-    public void swipeToRefreshAndroid(MobileElement el) {
+    public void swipeToRefreshAndroid(By elem) {
+        MobileElement el = (MobileElement) driver.findElement(elem);
         final int ANIMATION_TIME = 200;
         int edgeBorder;
         PointOption pointOptionStart, pointOptionEnd;
@@ -219,7 +240,8 @@ public class PageBase extends TestBase {
             // игнорирование
         }
     }
-    public void swipeElementAndroid(MobileElement el, Direction dir) {
+    public void swipeElementAndroid(By elem, Direction dir) {
+        MobileElement el = (MobileElement) driver.findElement(elem);
         System.out.println("swipeElementAndroid(): dir: '" + dir + "'"); // always log your actions
 
         // Animation default time:

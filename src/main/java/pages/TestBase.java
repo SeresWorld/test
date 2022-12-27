@@ -7,10 +7,8 @@ import io.appium.java_client.ios.IOSDriver;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.AuthListPage;
 
 import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
@@ -27,7 +25,7 @@ public class TestBase {
         Capabilities caps = new Capabilities();
         // caps.setCapability("app", System.getProperty("user.dir") + "/apps/release-3.4.28-test.apk");
         driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps.localAndroid());
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
@@ -45,7 +43,7 @@ public class TestBase {
 
     public static void setUpIOS() throws MalformedURLException, InterruptedException {
         Capabilities caps = new Capabilities();
-        /*caps.setCapability("bundleId", "kz.bcc.starbanking");*/
+
         driver = new IOSDriver(new URL("http://localhost:4723/wd/hub"), caps.localIOS());
     }
 
@@ -55,7 +53,7 @@ public class TestBase {
         if (null != driver) {
             if (tr.getStatus() == ITestResult.FAILURE) {
                 Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
-                System.out.println("Test " + tr.getMethod().getMethodName() + "has been failed...");
+                System.out.println("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
             driver.quit();
         }

@@ -23,7 +23,6 @@ public class todoAndroid extends TestBase {
         authListPage = new AuthListPage(driver);
 
         authListPage.sign_main_button_click();
-        authListPage.buyShareButtonClick();
         authListPage.setInput_login("7756655544");
         authListPage.setInput_pass("orapas123");
 
