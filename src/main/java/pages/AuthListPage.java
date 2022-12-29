@@ -1,7 +1,6 @@
 package pages;
 
 import base.DriverPool;
-import base.DriverSetup;
 import base.PageBase;
 import base.TestBase;
 import io.appium.java_client.AppiumDriver;

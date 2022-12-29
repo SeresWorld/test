@@ -2,7 +2,7 @@ package config.devices;
 
 
 public class Device {
-    public  String deviceId;
+    public String deviceId;
 
     public String platformName;
 

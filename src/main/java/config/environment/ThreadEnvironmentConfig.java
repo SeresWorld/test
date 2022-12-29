@@ -12,23 +12,22 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import static org.testng.Assert.fail;
 
 public class ThreadEnvironmentConfig {
-    public static List<ThreadEnvironment> getAndroidEnvironments() throws MalformedURLException {
-        List<ThreadEnvironment> environments = new ArrayList<>();
-        try {
-            for (DesiredCapabilities device: DeviceConfig.getCaps("android")) {
 
+    public static Map<String, ThreadEnvironment> getAndroidEnvironments() throws MalformedURLException {
+        Map<String, ThreadEnvironment> environments = new HashMap<>();
+        try {
+            for (Map.Entry<String, DesiredCapabilities> entry: DeviceConfig.getCaps("android").entrySet()) {
                 ThreadEnvironment environment = new ThreadEnvironment();
-                environment.driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), device);
-                environments.add(environment);
+                environment.driver = new AndroidDriver<>(
+                        new URL("http://localhost:4723/wd/hub"), entry.getValue());
+                environments.put(entry.getKey(), environment);
             }
         } catch (NullPointerException ex) {
             ex.fillInStackTrace();
@@ -36,13 +35,17 @@ public class ThreadEnvironmentConfig {
         return environments;
     }
 
-    public static List<ThreadEnvironment> getIOSEnvironments() throws MalformedURLException {
-        List<ThreadEnvironment> environments = new ArrayList<>();
-
-        for (DesiredCapabilities device: Objects.requireNonNull(DeviceConfig.getCaps("ios"))) {
-            ThreadEnvironment environment = new ThreadEnvironment();
-            environment.driver = new IOSDriver<>(new URL("http://localhost:4723/wd/hub"), device);
-            environments.add(environment);
+    public static Map<String, ThreadEnvironment> getIOSEnvironments() throws MalformedURLException {
+        Map<String, ThreadEnvironment> environments = new HashMap<>();
+        try {
+            for (Map.Entry<String, DesiredCapabilities> entry: DeviceConfig.getCaps("ios").entrySet()) {
+                ThreadEnvironment environment = new ThreadEnvironment();
+                environment.driver = new AndroidDriver<>(
+                        new URL("http://localhost:4723/wd/hub"), entry.getValue());
+                environments.put(entry.getKey(), environment);
+            }
+        } catch (NullPointerException ex) {
+            ex.fillInStackTrace();
         }
         return environments;
     }

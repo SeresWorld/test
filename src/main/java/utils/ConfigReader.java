@@ -33,18 +33,16 @@ public class ConfigReader {
                 Element element = (Element) node;
 
                 Device device = new Device();
-
+                device.deviceId = element.getAttribute("id");
                 device.platformName = element.getElementsByTagName("platformName").item(0).getTextContent();
-                System.out.println(device.platformName);
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
                 device.platformVersion = element.getElementsByTagName("platformVersion").item(0).getTextContent();
                 device.appPackage = element.getElementsByTagName("appPackage").item(0).getTextContent();
-                devices.put(device.platformName, device);
+                devices.put(device.deviceId, device);
             }
             return devices;
-
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

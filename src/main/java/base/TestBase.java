@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 public class TestBase extends DriverPool {
 
@@ -30,10 +31,11 @@ public class TestBase extends DriverPool {
     @BeforeMethod (alwaysRun = true)
     public void setUpAndroid() throws MalformedURLException {
 
-        List<ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
-        for (ThreadEnvironment device: environments) {
-            System.out.println("Thread: " + device);
-            environment.set(device);
+        Map<String, ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
+        for (Map.Entry<String, ThreadEnvironment> environment: environments.entrySet()) {
+            System.out.println("Device: " + environment.getKey());
+            ThreadEnvironment envThread = environment.getValue();
+            this.environment.set(envThread);
         }
     }
 
@@ -42,7 +44,6 @@ public class TestBase extends DriverPool {
     }
 
     public AppiumDriver<MobileElement> getAppiumDriver() {
-        System.out.println("Driver: " + getEnvironment().driver);
         return getEnvironment().driver;
     }
 
