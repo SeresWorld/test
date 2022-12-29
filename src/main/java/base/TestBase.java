@@ -39,6 +39,18 @@ public class TestBase extends DriverPool {
         }
     }
 
+    @AfterMethod
+    public void tearDown(ITestResult tr) {
+
+        if (null != getAppiumDriver()) {
+            if (tr.getStatus() == ITestResult.FAILURE) {
+                Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) getAndroidDriverInstance()).getScreenshotAs(OutputType.BYTES)));
+                System.out.println("Test " + tr.getMethod().getMethodName() + " has been failed...");
+            }
+            getAppiumDriver().quit();
+        }
+    }
+
     private ThreadEnvironment getEnvironment() {
         return environment.get();
     }
