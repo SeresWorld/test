@@ -1,0 +1,13 @@
+<devices>
+    <device id="Redmi10">
+        <deviceName>Redmi Note 10S</deviceName>
+        <platformName>Android</platformName>
+        <platformVersion>11</platformVersion>
+        <serverPort>4723</serverPort>
+        <webkitDebuggerPort>27754</webkitDebuggerPort>
+        <jpegServerPort>9104</jpegServerPort>
+        <appActivity>kz.bcc.starbanking.ui.screens.splash.SplashActivity</appActivity>
+        <appPackage>kz.bcc.starbanking.stage</appPackage>
+        <automationName>UiAutomator2</automationName>
+    </device>
+</devices>

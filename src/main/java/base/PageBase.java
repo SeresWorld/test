@@ -20,8 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class PageBase extends TestBase {
-
+public class PageBase {
+    protected AppiumDriver<MobileElement> driver;
     public PageBase(AppiumDriver appiumDriver) {
         driver = appiumDriver;
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
@@ -46,7 +46,7 @@ public class PageBase extends TestBase {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    @Step ()
+    @Step ("Ожидание {timer} секунд элемента {element}")
     public void explicitWaitToClickable(By element, int timer) {
         WebDriverWait wait = new WebDriverWait(driver, timer);
         wait.until(ExpectedConditions.elementToBeClickable(element));

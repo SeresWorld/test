@@ -1,5 +1,6 @@
 package com.test;
 
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
@@ -12,15 +13,12 @@ import java.net.MalformedURLException;
 
 @Epic("Android tests")
 public class todoAndroid extends TestBase {
-
     AuthListPage authListPage;
-
 
     @Story("Авторизация с валидными данными")
     @Test (groups = {"Auth screen"})
-    public void auth_valid() throws MalformedURLException {
-        setUpAndroid();
-        authListPage = new AuthListPage(driver);
+    public void auth_valid() {
+        authListPage = new AuthListPage(getAppiumDriver());
 
         authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");
@@ -29,6 +27,7 @@ public class todoAndroid extends TestBase {
         authListPage.try_button_permission_click();
 
     }
+    /*
     @Story("Авторизация с невалидными данными")
     @Test (groups = {"Auth screen"})
     public void auth_invalid() throws MalformedURLException {
@@ -202,4 +201,6 @@ public class todoAndroid extends TestBase {
         String sumShares = authListPage.getSumShares();
         authListPage.checkSumShares(pricePerShare, "3", sumShares);
     }
+    */
+
 }

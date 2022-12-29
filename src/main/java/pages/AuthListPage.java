@@ -1,6 +1,9 @@
 package pages;
 
+import base.DriverPool;
+import base.DriverSetup;
 import base.PageBase;
+import base.TestBase;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -18,8 +21,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class AuthListPage extends PageBase {
-    public AuthListPage(AppiumDriver appiumDriver) {
-        super(appiumDriver);
+    public AuthListPage(AppiumDriver<MobileElement> driver) {
+        super(driver);
     }
 
     private final By sign_button = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
@@ -62,11 +65,11 @@ public class AuthListPage extends PageBase {
     private final By sharesCount = By.xpath("//android.widget.RelativeLayout/android.widget.EditText[@text=\"0\"]");
     private final By sumShares = By.xpath("//android.widget.ScrollView/android.view.View[13]");
 
-    private By sign_button_ios = By.name("Войти");
-    private By input_login_ios = By.xpath
+    private final By sign_button_ios = By.name("Войти");
+    private final By input_login_ios = By.xpath
             ("//XCUIElementTypeApplication[@name='BCC.KZ']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField");
-    private By input_pass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
-    private By button_permission_ios = By.name("Однократно");
+    private final By input_pass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
+    private final By button_permission_ios = By.name("Однократно");
 
     @Step ("Клик по кнопке Войти на экране сплеша")
     public void  sign_main_button_click() {
@@ -100,10 +103,10 @@ public class AuthListPage extends PageBase {
     }
     @Step ("Попытка клика по кнопке разрешения на получение геолокации")
     public void try_button_permission_click() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(button_permission)).click();
-        } catch (NoSuchElementException noSuchElementException) {
+        } catch (Exception exception) {
             System.out.println("Permission has not found");
         }
 
