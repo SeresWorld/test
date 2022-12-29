@@ -44,7 +44,7 @@ public class TestBase extends DriverPool {
 
         if (null != getAppiumDriver()) {
             if (tr.getStatus() == ITestResult.FAILURE) {
-                Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) getAndroidDriverInstance()).getScreenshotAs(OutputType.BYTES)));
+                Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) getAppiumDriver()).getScreenshotAs(OutputType.BYTES)));
                 System.out.println("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
             getAppiumDriver().quit();
@@ -62,7 +62,7 @@ public class TestBase extends DriverPool {
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
         setUpAndroid();
-        authListPage = new AuthListPage(getAndroidDriverInstance());
+        authListPage = new AuthListPage(getAppiumDriver());
         authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");
         authListPage.setInput_pass("orapas123");

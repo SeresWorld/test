@@ -20,7 +20,7 @@ public class todoAndroid extends TestBase {
     public void auth_valid() {
         authListPage = new AuthListPage(getAppiumDriver());
 
-        authListPage.sign_main_button_click();
+        //authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");
         authListPage.setInput_pass("orapas123");
         authListPage.sign_complete_button_click();
