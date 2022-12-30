@@ -18,95 +18,136 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.TimeoutException;
 
 
+import java.sql.Time;
 import java.time.Duration;
 
 public class PageBase {
     protected AppiumDriver<MobileElement> driver;
+
     public PageBase(AppiumDriver appiumDriver) {
         driver = appiumDriver;
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
     }
+
     public AndroidTouchAction actions;
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     public static final long WAIT = 10;
-    @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
-    public void waitForVisability (By element) {
+
+    @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
+    public void waitForVisability(By element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
             wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-        } catch (Exception ex) {
-            logger.error("Can't see element:" + element);
+        } catch (TimeoutException ex) {
+            logger.error("Can't see element: " + element);
+            throw ex;
         }
     }
 
-    @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
-    public void waitForVisability (By element, long WAIT) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-    }
-    @Step ("Ожидание видимости элемента {element}")
-    public void waitForVisability (MobileElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    @Step ("Ожидание {timer} секунд элемента {element}")
-    public void explicitWaitToClickable(By element, int timer) {
-        WebDriverWait wait = new WebDriverWait(driver, timer);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-    @Step ("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
-    public void containsmessageAssert (By element, String text) {
-        waitForVisability(element);
-        String text_element = driver.findElement(element).getText();
-        text_element.contains(text);
-    }
-
-    public void clear (MobileElement element) {
-        waitForVisability(element);
-        element.clear();
-    }
-    public void click (By element) {
+    @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
+    public void waitForVisability(By element, long WAIT) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
-            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        } catch (TimeoutException ex) {
+            logger.error("Can't see element: " + element);
+            throw ex;
+        }
+    }
+
+    @Step("Ожидание видимости элемента {element}")
+    public void waitForVisability(MobileElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (TimeoutException ex) {
+            logger.error("Can't see element:" + element);
+            throw ex;
+        }
+    }
+
+    @Step("Ожидание {timer} секунд элемента {element}")
+    public void explicitWaitToClickable(By element, int timer) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timer);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception ex) {
-            logger.error("Can't click: " + element);
+            logger.error("Element: " + element + " is not clickable");
             throw ex;
         }
 
     }
 
-    public void click (MobileElement element) {
+    @Step("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
+    public void containsMessageAssert(By element, String text) {
+        try {
+            waitForVisability(element);
+            String text_element = driver.findElement(element).getText();
+            text_element.contains(text);
+        } catch (Exception ex) {
+            logger.error("Can't see text: " + text + " in the element: " + text);
+            throw ex;
+        }
+    }
+
+    public void clear(MobileElement element) {
+        waitForVisability(element);
+        element.clear();
+    }
+
+    public void click(By element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception ex) {
+            logger.error("Can't click element: " + element);
+            throw ex;
+        }
+
+    }
+
+    public void click(MobileElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
-    public String getText (MobileElement element) {
+    public String getText(MobileElement element) {
         waitForVisability(element);
         String element_text = element.getText();
         return element_text;
     }
 
-    public void sendText (MobileElement element, String text) {
+    public void sendText(MobileElement element, String text) {
         waitForVisability(element);
         element.sendKeys(text);
     }
 
-    public void sendText (By element, String text) {
-        explicitWaitToClickable(element, 10);
-        driver.findElement(element).sendKeys(text);
-    }
-    public String getAttribute (MobileElement element, String attribute) {
-        waitForVisability(element);
-        String elem_atr = element.getAttribute(attribute);
-        return elem_atr;
+    public void sendText(By element, String text) {
+        try {
+            explicitWaitToClickable(element, 10);
+            driver.findElement(element).sendKeys(text);
+        } catch (Exception ex) {
+            logger.error("Can't send text to the element: " + element);
+            throw ex;
+        }
     }
 
-    public void scrollDown (int endPoint, int durationSec) {
+    public String getAttribute(By element, String attribute) {
+        try {
+            waitForVisability(element);
+            String elem_atr = driver.findElement(element).getAttribute(attribute);
+            return elem_atr;
+        } catch (Exception ex) {
+            logger.error("Can't get attribute: " + attribute + " of the element: " + element);
+            throw ex;
+        }
+    }
+
+    public void scrollDown(int endPoint, int durationSec) {
         Dimension dimension = driver.manage().window().getSize();
         int startPoint = (int) (dimension.getHeight() * 0.8);
 
@@ -118,7 +159,7 @@ public class PageBase {
                 .perform();
     }
 
-    public void scrollDown_with_start_point (int startPoint, int endPoint, int durationSec) {
+    public void scrollDown_with_start_point(int startPoint, int endPoint, int durationSec) {
 
         actions = new AndroidTouchAction(driver)
                 .press(PointOption.point(0, startPoint))
@@ -146,7 +187,7 @@ public class PageBase {
             throw new IllegalArgumentException("swipeElementIOS(): элемент вне экрана");
         }
 
-        // Инициирование краев прилоежния как переменных
+        // Инициирование краев приложения как переменных
         int leftBorder, rightBorder, upBorder, downBorder;
         leftBorder = 0;
         rightBorder = 0;
@@ -198,7 +239,7 @@ public class PageBase {
 
         // Выполнение свайпа с помощью TouchAction
         try {
-            new TouchAction(driver)
+            new TouchAction<>(driver)
                     .press(pointOptionStart)
                     // Ожидание выполнения свайпа
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
@@ -216,11 +257,12 @@ public class PageBase {
             // ignore
         }
     }
+
     public void swipeToRefreshAndroid(By elem) {
         MobileElement el = (MobileElement) driver.findElement(elem);
         final int ANIMATION_TIME = 200;
         int edgeBorder;
-        PointOption pointOptionStart, pointOptionEnd;
+        PointOption<?> pointOptionStart, pointOptionEnd;
         final int PRESS_TIME = 800;
         // init screen variables
         Rectangle rect = el.getRect();
@@ -234,7 +276,7 @@ public class PageBase {
                 (rect.y + rect.height - edgeBorder) + 500);
 
         try {
-            new TouchAction(driver)
+            new TouchAction<>(driver)
                     .press(pointOptionStart)
                     // a bit more reliable when we add small wait
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
@@ -251,9 +293,10 @@ public class PageBase {
             // игнорирование
         }
     }
+
     public void swipeElementAndroid(By elem, Direction dir) {
-        MobileElement el = (MobileElement) driver.findElement(elem);
-        System.out.println("swipeElementAndroid(): dir: '" + dir + "'"); // always log your actions
+        MobileElement el = driver.findElement(elem);
+        logger.info("swipeElementAndroid(): dir: '" + dir + "'"); // always log your actions
 
         // Animation default time:
         //  - Android: 300 ms
@@ -264,7 +307,7 @@ public class PageBase {
         final int PRESS_TIME = 200; // ms
 
         int edgeBorder;
-        PointOption pointOptionStart, pointOptionEnd;
+        PointOption<?> pointOptionStart, pointOptionEnd;
 
         // init screen variables
         Rectangle rect = el.getRect();
@@ -279,7 +322,7 @@ public class PageBase {
                 int y = rect.y + edgeBorder;
                 int x_2 = rect.x + rect.width / 2;
                 int y_2 = (rect.y + rect.height - edgeBorder) + 300;
-                System.out.println("x_start = " + x + ", y_start = " + y + ", x_end = " + x_2 + ", y_end = " + y_2);
+                logger.info("x_start = " + x + ", y_start = " + y + ", x_end = " + x_2 + ", y_end = " + y_2);
                 pointOptionStart = PointOption.point(rect.x + rect.width / 2,
                         rect.y + edgeBorder);
                 pointOptionEnd = PointOption.point(rect.x + rect.width / 2,
@@ -309,22 +352,20 @@ public class PageBase {
 
         // execute swipe using TouchAction
         try {
-            new TouchAction(driver)
+            new TouchAction<>(driver)
                     .press(pointOptionStart)
                     // a bit more reliable when we add small wait
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
                     .moveTo(pointOptionEnd)
                     .release().perform();
         } catch (Exception e) {
-            System.err.println("swipeElementAndroid(): TouchAction FAILED\n" + e.getMessage());
+            logger.error("swipeElementAndroid(): TouchAction FAILED\n" + e.getMessage());
             return;
         }
-
-        // always allow swipe action to complete
         try {
             Thread.sleep(ANIMATION_TIME);
         } catch (InterruptedException e) {
-            // игнорирование
+
         }
     }
 

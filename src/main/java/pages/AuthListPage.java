@@ -9,6 +9,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
@@ -20,6 +22,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class AuthListPage extends PageBase {
+
+    private static final Logger logger = LogManager.getLogger(TestBase.class);
     public AuthListPage(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
@@ -106,7 +110,7 @@ public class AuthListPage extends PageBase {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(button_permission)).click();
         } catch (Exception exception) {
-            System.out.println("Permission has not found");
+            logger.info("Permission has not found");
         }
 
     }
@@ -117,13 +121,12 @@ public class AuthListPage extends PageBase {
 
     @Step ("Проверка наличия текста '{text}' на модалке")
     public void check_text_android_message(String text) {
-        containsmessageAssert(android_message, text);
+        containsMessageAssert(android_message, text);
     }
     @Step ("Проверка неактивности кнопки Войти на экране авторизации")
     public void check_active_sign_button_is_not_clickable() {
-        String button_login_atr = getAttribute((MobileElement) driver.findElement(button_login), "enabled");
+        String button_login_atr = getAttribute(button_login, "enabled");
         Assert.assertEquals("Object is clickable", "false", button_login_atr);
-
     }
 
     @Step ("Ввод четырехзначного кода")
@@ -149,16 +152,7 @@ public class AuthListPage extends PageBase {
     }
     @Step ("Ожидание прогрузки страницы инвестиций")
     public void waitforloadInvest() {
-        boolean is_clicked = false;
-        while (!is_clicked) {
-            try {
-                WebDriverWait wait = new WebDriverWait(driver, 5);
-                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(investInstructionSkipButton)));
-                is_clicked = true;
-            } catch (Exception e) {
-                System.out.println("Не получилось нажать");
-            }
-        }
+        explicitWaitToClickable(investInstructionSkipButton, 30);
     }
 
     @Step ("Получение текущего количества средств на счету в тенге")
@@ -272,14 +266,15 @@ public class AuthListPage extends PageBase {
         List<MobileElement> info = driver.findElements(currentBillFrom);
         for (MobileElement el : info) {
             String elText = el.getText();
-            if (elText.contains("Visa")) {
+            if (elText.contains("Visa") || elText.contains("MasterCard")) {
                 String currentMoney = elText.replaceAll("[^-0-9,]+", "");
                 String currentMoney2 = currentMoney.replace(",", ".");
                 double currentMoneyInt = Double.parseDouble(currentMoney2);
                 return currentMoneyInt;
             }
         }
-        return null;
+        logger.error("Personal Bill is not found.");
+        throw new RuntimeException("Personal Bill is not found.");
     }
 
     @Step ("Сравнение текущей суммы счета с ожидаемой")

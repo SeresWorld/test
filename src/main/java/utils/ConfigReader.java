@@ -1,6 +1,9 @@
 package utils;
 
+import base.TestBase;
 import config.devices.Device;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -13,7 +16,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ConfigReader {
-
+    private static final Logger logger = LogManager.getLogger(TestBase.class);
     public static Map<String, Device> xmlReader(String xmlPath) {
         Map<String, Device> devices = new HashMap<>();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -36,16 +39,20 @@ public class ConfigReader {
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
                 device.platformVersion = element.getElementsByTagName("platformVersion").item(0).getTextContent();
+
                 if (device.deviceId.contains("Emu")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                 } else {
                     device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();
                     device.appPackage = element.getElementsByTagName("appPackage").item(0).getTextContent();
                 }
+
                 devices.put(device.deviceId, device);
             }
+            logger.info("Devices are collected: " + devices.size());
             return devices;
         } catch (ParserConfigurationException | SAXException | IOException e) {
+            logger.error("Error during collecting capabilities");
             e.printStackTrace();
         }
         return null;
