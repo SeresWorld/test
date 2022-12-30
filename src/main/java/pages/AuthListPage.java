@@ -124,7 +124,7 @@ public class AuthListPage extends PageBase {
     @Step ("Проверка неактивности кнопки Войти на экране авторизации")
     public void check_active_sign_button_is_not_clickable() {
         String button_login_atr = getAttribute(button_login, "enabled");
-        Assert.assertEquals("Object is clickable", "false", button_login_atr);
+        Assert.assertEquals(button_login_atr, "false", "Object is clickable");
     }
 
     @Step ("Ввод четырехзначного кода")

@@ -23,21 +23,31 @@ public class TestBase extends DriverPool {
 
     AuthListPage authListPage;
 
+    private final String device = "Redmi10S"; // ЗДЕСЬ УКАЗЫВАЕТСЯ ID УСТРОЙСТВА ИЗ androidDevices.xml ДЛЯ ТЕСТА
+
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     private final ThreadLocal<ThreadEnvironment> environment = new ThreadLocal<>();
+
+    @BeforeSuite
+    public void beforeSuite() throws MalformedURLException {
+
+
+        logger.info("---------------------------------------------------------------------------------------------");
+        logger.info("Device: " + device);
+
+    }
     @BeforeMethod (alwaysRun = true)
     public void setUpAndroid(Method method) throws MalformedURLException {
 
-        String device = "Redmi10S";
-
         logger.info("Start method: " + method.getName());
-        logger.info("Device: " + device);
 
         Map<String, ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
         ThreadEnvironment envThread = environments.get(device);
-
         this.environment.set(envThread);
+
+
+
     }
 
     @AfterMethod
