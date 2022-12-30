@@ -1,6 +1,5 @@
 package pages;
 
-import base.DriverPool;
 import base.PageBase;
 import base.TestBase;
 import io.appium.java_client.AppiumDriver;
@@ -12,7 +11,6 @@ import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

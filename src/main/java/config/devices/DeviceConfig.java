@@ -6,13 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.ConfigReader;
 
-import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.testng.Assert.fail;
 
 public class DeviceConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
