@@ -296,7 +296,7 @@ public class PageBase {
 
     public void swipeElementAndroid(By elem, Direction dir) {
         MobileElement el = driver.findElement(elem);
-        logger.info("swipeElementAndroid(): dir: '" + dir + "'"); // always log your actions
+        logger.info("swipeElementAndroid(): dir: '" + dir + "'");
 
         // Animation default time:
         //  - Android: 300 ms
@@ -312,21 +312,19 @@ public class PageBase {
         // init screen variables
         Rectangle rect = el.getRect();
         // sometimes it is needed to configure edgeBorders
-        // you can also improve borders to have vertical/horizontal
-        // or left/right/up/down border variables
         edgeBorder = 0;
 
         switch (dir) {
             case DOWN: // from up to down
                 int x = rect.x + rect.width / 2;
                 int y = rect.y + edgeBorder;
-                int x_2 = rect.x + rect.width / 2;
-                int y_2 = (rect.y + rect.height - edgeBorder) + 300;
-                logger.info("x_start = " + x + ", y_start = " + y + ", x_end = " + x_2 + ", y_end = " + y_2);
-                pointOptionStart = PointOption.point(rect.x + rect.width / 2,
-                        rect.y + edgeBorder);
-                pointOptionEnd = PointOption.point(rect.x + rect.width / 2,
-                        (rect.y + rect.height - edgeBorder) + 300);
+                int x2 = rect.x + rect.width / 2;
+                int y2 = (rect.y + rect.height - edgeBorder) + 300;
+
+                logger.info("x_start = " + x + ", y_start = " + y + ", x_end = " + x2 + ", y_end = " + y2);
+
+                pointOptionStart = PointOption.point(x, y);
+                pointOptionEnd = PointOption.point(x2, y2);
                 break;
             case UP: // from down to up
                 pointOptionStart = PointOption.point(rect.x + rect.width / 2,
@@ -347,6 +345,7 @@ public class PageBase {
                         rect.y + rect.height / 2);
                 break;
             default:
+                logger.error("Error during swiping");
                 throw new IllegalArgumentException("swipeElementAndroid(): dir: '" + dir + "' NOT supported");
         }
 
