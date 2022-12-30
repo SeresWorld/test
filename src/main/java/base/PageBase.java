@@ -9,6 +9,8 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -27,12 +29,17 @@ public class PageBase {
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
     }
     public AndroidTouchAction actions;
+    private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     public static final long WAIT = 10;
     @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
     public void waitForVisability (By element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        } catch (Exception ex) {
+            logger.error("Can't see element:" + element);
+        }
     }
 
     @Step ("Ожидание видимости элемента {element} в течении {WAIT} секунд")
@@ -63,8 +70,14 @@ public class PageBase {
         element.clear();
     }
     public void click (By element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception ex) {
+            logger.error("Can't click: " + element);
+            throw ex;
+        }
+
     }
 
     public void click (MobileElement element) {
