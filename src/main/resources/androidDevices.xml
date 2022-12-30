@@ -10,4 +10,13 @@
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
     </device>
+<!--    <device id="PixelEmu">
+        <deviceName>Android Emulator</deviceName>
+        <platformName>Android</platformName>
+        <platformVersion>13</platformVersion>
+        <serverPort>4724</serverPort>
+        <webkitDebuggerPort>27754</webkitDebuggerPort>
+        <app>System.getProperty("user.dir")+"apps/release-3.4.28-test.apk"</app>
+        <automationName>UiAutomator2</automationName>
+    </device>-->
 </devices>
