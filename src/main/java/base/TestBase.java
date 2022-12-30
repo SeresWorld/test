@@ -29,16 +29,15 @@ public class TestBase extends DriverPool {
     @BeforeMethod (alwaysRun = true)
     public void setUpAndroid(Method method) throws MalformedURLException {
 
+        String device = "Redmi10S";
+
         logger.info("Start method: " + method.getName());
+        logger.info("Device: " + device);
 
         Map<String, ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
-        for (Map.Entry<String, ThreadEnvironment> environment: environments.entrySet()) {
+        ThreadEnvironment envThread = environments.get(device);
 
-            logger.info("Device: " + environment.getKey());
-
-            ThreadEnvironment envThread = environment.getValue();
-            this.environment.set(envThread);
-        }
+        this.environment.set(envThread);
     }
 
     @AfterMethod

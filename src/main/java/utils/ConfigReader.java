@@ -49,7 +49,7 @@ public class ConfigReader {
 
                 devices.put(device.deviceId, device);
             }
-            logger.info("Devices are collected: " + devices.size());
+            //logger.info("Devices are collected: " + devices.size());
             return devices;
         } catch (ParserConfigurationException | SAXException | IOException e) {
             logger.error("Error during collecting capabilities");
