@@ -4,19 +4,17 @@
         <platformName>Android</platformName>
         <platformVersion>11</platformVersion>
         <serverPort>4723</serverPort>
-        <webkitDebuggerPort>27754</webkitDebuggerPort>
-        <jpegServerPort>9104</jpegServerPort>
         <appActivity>kz.bcc.starbanking.ui.screens.splash.SplashActivity</appActivity>
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
     </device>
-<!--    <device id="PixelEmu">
+    <device id="PixelEmu">
         <deviceName>Android Emulator</deviceName>
         <platformName>Android</platformName>
         <platformVersion>13</platformVersion>
-        <serverPort>4724</serverPort>
-        <webkitDebuggerPort>27754</webkitDebuggerPort>
-        <app>System.getProperty("user.dir")+"apps/release-3.4.28-test.apk"</app>
+        <serverPort>4723</serverPort>
+        <app>/apps/release-3.4.28-test.apk</app>
         <automationName>UiAutomator2</automationName>
-    </device>-->
+        <udid>emulator-5556</udid>>
+    </device>
 </devices>

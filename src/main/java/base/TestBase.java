@@ -1,15 +1,18 @@
 package base;
 
 
-import config.environment.ThreadEnvironment;
-import config.environment.ThreadEnvironmentConfig;
+import config.AppiumServer;
+import config.devices.DeviceConfig;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.AuthListPage;
@@ -17,6 +20,7 @@ import pages.AuthListPage;
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 
 public class TestBase extends DriverPool {
@@ -25,20 +29,15 @@ public class TestBase extends DriverPool {
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
-    private final ThreadLocal<ThreadEnvironment> environment = new ThreadLocal<>();
+    private final ThreadLocal<AppiumDriver> environment = new ThreadLocal<>();
+    private static String[] list = new String[]{"5555", "6666"};
     @BeforeMethod (alwaysRun = true)
-    public void setUpAndroid(Method method) throws MalformedURLException {
+    public void setUpAndroid(Method method, String localPort) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
-
-        Map<String, ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
-        for (Map.Entry<String, ThreadEnvironment> environment: environments.entrySet()) {
-
-            logger.info("Device: " + environment.getKey());
-
-            ThreadEnvironment envThread = environment.getValue();
-            this.environment.set(envThread);
-        }
+        startAppiumService(localPort);
+        Map<String, DesiredCapabilities> caps =
+        setDriver(new AndroidDriver(new URL("127.0.0.1")));
     }
 
     @AfterMethod
@@ -54,14 +53,24 @@ public class TestBase extends DriverPool {
         }
     }
 
-    private ThreadEnvironment getEnvironment() {
-        return environment.get();
+    public void startAppiumService(String localPort) {
+        AppiumDriverLocalService service;
+        AppiumServiceBuilder builder = new AppiumServiceBuilder();
+        builder.withIPAddress("127.0.0.1");
+        builder.usingPort(Integer.parseInt(localPort));
+        service = AppiumDriverLocalService.buildService(builder);
+        service.start();
+        logger.info("Service has been started with port: " + localPort);
     }
 
-    public AppiumDriver<MobileElement> getAppiumDriver() {
-        return getEnvironment().driver;
+
+    public AppiumDriver getAppiumDriver() {
+        return this.environment.get();
     }
 
+    public void setDriver(AppiumDriver driver) {
+        this.environment.set(driver);
+    }
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
 

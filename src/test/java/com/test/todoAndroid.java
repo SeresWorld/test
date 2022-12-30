@@ -14,7 +14,21 @@ import java.net.MalformedURLException;
 @Epic("Android tests")
 public class todoAndroid extends TestBase {
     AuthListPage authListPage;
+    @Test(groups = {"Auth screen"})
+    public void clickSign() {
+        authListPage = new AuthListPage(getAppiumDriver());
 
+        authListPage.sign_main_button_click();
+    }
+
+    @Test(groups = {"Auth screen"})
+    public void setInput() {
+        authListPage = new AuthListPage(getAppiumDriver());
+
+        authListPage.sign_main_button_click();
+        authListPage.setInput_login("7756655544");
+    }
+    /*
     @Story("Авторизация с валидными данными")
     @Test(groups = {"Auth screen"})
     public void auth_valid() {
@@ -203,6 +217,6 @@ public class todoAndroid extends TestBase {
 
         authListPage.checkSumShares(pricePerShare, "3", sumShares);
 
-    }
+    }*/
 
 }

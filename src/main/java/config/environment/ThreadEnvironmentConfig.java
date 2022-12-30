@@ -9,19 +9,21 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ThreadEnvironmentConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
+
     public static Map<String, ThreadEnvironment> getAndroidEnvironments() throws MalformedURLException {
         Map<String, ThreadEnvironment> environments = new HashMap<>();
+
         try {
             for (Map.Entry<String, DesiredCapabilities> entry: DeviceConfig.getCaps("android").entrySet()) {
                 ThreadEnvironment environment = new ThreadEnvironment();
-                environment.driver = new AndroidDriver<>(
-                        new URL("http://localhost:4723/wd/hub"), entry.getValue());
-                environments.put(entry.getKey(), environment);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+
             }
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");

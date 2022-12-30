@@ -15,6 +15,9 @@ public class Device {
     public String appPackage;
 
     public String automationName;
+
     public String app;
+
+    public String localPort;
 
 }

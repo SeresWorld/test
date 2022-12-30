@@ -26,11 +26,15 @@ public class DeviceConfig {
                         capabilities.setCapability("deviceName", entry.getValue().deviceName);
                         capabilities.setCapability("platformName", entry.getValue().platformName);
                         capabilities.setCapability("platformVersion", entry.getValue().platformVersion);
-                        capabilities.setCapability("appActivity", entry.getValue().appActivity);
-                        capabilities.setCapability("appPackage", entry.getValue().appPackage);
-                        capabilities.setCapability("automationName", entry.getValue().automationName);
                         capabilities.setCapability("clearSystemFiles", "true");
                         capabilities.setCapability("autoGrantPermissions", "true");
+                        capabilities.setCapability("automationName", entry.getValue().automationName);
+                        if (entry.getValue().deviceId.contains("Emu")) {
+                            capabilities.setCapability("app", System.getProperty("user.dir") + entry.getValue().app);
+                        } else {
+                            capabilities.setCapability("appActivity", entry.getValue().appActivity);
+                            capabilities.setCapability("appPackage", entry.getValue().appPackage);
+                        }
                         capabilitiesList.put(entry.getKey(), capabilities);
                     }
                 } else {
