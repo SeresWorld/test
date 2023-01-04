@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-public class TestBase extends DriverPool {
+public class TestBase {
 
     AuthListPage authListPage;
 
@@ -37,16 +37,19 @@ public class TestBase extends DriverPool {
         logger.info("Device: " + device);
 
     }
-    @BeforeMethod (alwaysRun = true)
+
+    @BeforeMethod(alwaysRun = true)
     public void setUpAndroid(Method method) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
 
-        Map<String, ThreadEnvironment> environments = ThreadEnvironmentConfig.getAndroidEnvironments();
-        ThreadEnvironment envThread = environments.get(device);
-        this.environment.set(envThread);
-
-
+        ThreadEnvironment envThread = ThreadEnvironmentConfig.getAndroidEnvironment(device);
+        if (envThread != null) {
+            this.environment.set(envThread);
+        } else {
+            logger.info("Device is not found");
+            throw new RuntimeException("Device is not found");
+        }
 
     }
 
@@ -73,7 +76,6 @@ public class TestBase extends DriverPool {
 
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
-
         authListPage = new AuthListPage(getAppiumDriver());
         authListPage.sign_main_button_click();
         authListPage.setInput_login("7756655544");

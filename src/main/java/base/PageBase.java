@@ -1,5 +1,6 @@
 package base;
 
+import config.environment.ThreadEnvironment;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -21,10 +22,9 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class PageBase {
-    protected AppiumDriver<MobileElement> driver;
+public class PageBase extends ThreadEnvironment {
 
-    public PageBase(AppiumDriver appiumDriver) {
+    public PageBase(AppiumDriver<MobileElement> appiumDriver) {
         driver = appiumDriver;
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
     }
