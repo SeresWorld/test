@@ -4,20 +4,20 @@ import base.PageBase;
 import base.TestBase;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.List;
+
+/**
+ * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
+ * Описание каждого действия завернуто в аннотации @Step.
+ */
 
 public class AuthListPage extends PageBase {
 
@@ -139,7 +139,7 @@ public class AuthListPage extends PageBase {
         waitForVisability(bannerInvest, 30);
     }
 
-    @Step
+    @Step ("Свайп горизонтального списка на главной странице")
     public void main_screen_swipe_horizontal_list() {
         swipeElementAndroid(paidButton, Direction.LEFT);
     }
@@ -208,7 +208,7 @@ public class AuthListPage extends PageBase {
         swipeElementAndroid(billBlock, Direction.DOWN);
     }
 
-    @Step
+    @Step ("Свайп экрана вверх")
     public void swipeScreenUp() {
         swipeElementAndroid(billBlock, Direction.UP);
     }
@@ -259,7 +259,7 @@ public class AuthListPage extends PageBase {
         }
     }
 
-    @Step
+    @Step ("Получение текущего счета")
     public Double getCurrentPersonalBill() {
         List<MobileElement> info = driver.findElements(currentBillFrom);
         for (MobileElement el : info) {
@@ -290,105 +290,67 @@ public class AuthListPage extends PageBase {
                 "Actual: " + status + "; Expected: " + "Перевод успешно принят");
     }
 
-    @Step
+    @Step ("Нажатие на значок вопроса на странице инвестиций")
     public void questionButtonClick() {
         click(questionOpenButton);
     }
 
-    @Step
+    @Step ("Ожидание ошибки превышения доступной суммы")
     public void checkErrorSumBiggerThanBill() {
         waitForVisability(errorSumBiggerThanBill);
     }
 
-    @Step
+    @Step ("Клик на первую популярную акцию")
     public void firstPopularShareClick() {
         click(firstPopularShare);
     }
 
-    @Step
+    @Step ("Клик на кнопку покупки акции")
     public void buyShareButtonClick() {
         click(buyShareButton);
     }
 
-    @Step
-    public void longPress() throws InterruptedException {
 
-        final int ANIMATION_TIME = 200;
-        PointOption pointOptionStart, pointOptionEnd;
-        int edgeBorder;
-        final int PRESS_TIME = 2000;
-        Thread.sleep(2000);
-        MobileElement el = (MobileElement) driver.findElement(By.xpath(""));
-        el.click();
-        Rectangle rect = el.getRect();
-        edgeBorder = 0;
-        pointOptionStart = PointOption.point(rect.x,
-                rect.y);
-        pointOptionEnd = PointOption.point(rect.x,
-                rect.y+ 100);
-
-        try {
-            new TouchAction(driver)
-                    .press(pointOptionStart)
-                    // a bit more reliable when we add small wait
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
-                    .moveTo(pointOptionEnd)
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
-                    .release().perform();
-        } catch (Exception e) {
-            System.err.println("swipeElement(): TouchAction FAILED\n" + e.getMessage());
-            return;
-        }
-        try {
-            Thread.sleep(ANIMATION_TIME);
-        } catch (InterruptedException e) {
-            // игнорирование
-        }
-    }
-    @Step
+    @Step ("Свайп и закрытие подсказки в разделе инвестиций")
     public void questionCloseButtonClick() {swipeElementAndroid(questionBanner, Direction.DOWN);}
 
-    @Step
+    @Step ("Смена валюты на доллар")
     public void investSwitchToggleDollar() throws InterruptedException {
-        MobileElement obj = (MobileElement) driver.findElement(investToggleCurrencyDollar);
-        click(obj);
-        Thread.sleep(1000);
+        click(investToggleCurrencyDollar);
     }
 
-    @Step
+    @Step ("Смена валюты на тенге")
     public void investSwitchToggleTenge() {
-        MobileElement obj = (MobileElement) driver.findElement(investToggleCurrencyTenge);
-        click(obj);
+        click(investToggleCurrencyTenge);
     }
 
-    @Step
+    @Step ("Раскрытие описания акции")
     public void maximizeShareDescribeTextClick() {
-        MobileElement obj = (MobileElement) driver.findElement(maximizeShareDescribeText);
-        click(obj);
+        click(maximizeShareDescribeText);
     }
-    @Step
+    @Step ("Получение количества символов в описании")
     public int getCountCharsDescribeText() {
         int textCount = driver.findElement(shareDescribeText).getText().length();
         return textCount;
     }
-    @Step
+    @Step ("Получение цены за одну акцию")
     public String getPricePerShare() {
         String textPrice = driver.findElement(pricePerShare).getText();
         return textPrice;
     }
 
-    @Step
+    @Step ("Установление количества покупаемых акций")
     public void setSharesCount (String count) {
         sendText(sharesCount, count);
     }
 
-    @Step
+    @Step ("Получение общей стоимости акций за указанное количество")
     public String getSumShares () {
         String sum = driver.findElement(sumShares).getText();
         return sum.replaceAll("[^-0-9,]+", "");
     }
 
-    @Step
+    @Step ("Проверка расчета суммы за указанное количество покупаемых акций")
     public void checkSumShares(String pricePer, String shareCount, String sum) {
         double expectedPrice = Double.parseDouble(pricePer) * Double.parseDouble(shareCount);
         Assert.assertEquals(
@@ -396,29 +358,25 @@ public class AuthListPage extends PageBase {
                 expectedPrice, "Actual: " + Integer.parseInt(sum) + ", Expected: " + expectedPrice);
     }
 
-    @Step
+    @Step ("Сравнение количества символов до раскрытия описания ({beforeMax}) и после ({afterMax})")
     public void comparsionCharsShareDescribeText(int beforeMax, int afterMax) {
-        Assert.assertNotEquals(
-                beforeMax,
-                afterMax,
-                "Число символов до расширения описания и после одинаковое: " + beforeMax + " == " + afterMax);
+        numbersComparsion(afterMax, beforeMax, "Число символов до расширения описания и после одинаковое: ");
     }
 
-    @Step
+    @Step ("Проверка текущей установленной валюты")
     public void checkInvestCurrency(String currency) {
         switch (currency) {
             case "dollar":
-                MobileElement obj = (MobileElement) driver.findElement(myBriefcaseDollar);
-                String objText = obj.getText();
+                String objText = getText(myBriefcaseDollar);
                 Assert.assertTrue(objText.contains("$"), "Currency is not in " + currency);
                 break;
             case "tenge":
-                MobileElement obj1 = (MobileElement) driver.findElement(myBriefcaseTenge);
-                String objText1 = obj1.getText();
+                String objText1 = getText(myBriefcaseTenge);
                 Assert.assertTrue(objText1.contains("₸"), "Currency is not in " + currency);;
                 break;
             default:
-                Assert.assertEquals(0 , 1, "Currency is unknown!");
+                logger.error("Currency is unknown!");
+                throw new RuntimeException("Currency is unknown!");
         }
     }
 

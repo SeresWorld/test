@@ -17,5 +17,6 @@ public class Device {
     public String automationName;
 
     public String app;
+    public String isEmulator;
 
 }

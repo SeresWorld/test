@@ -22,6 +22,13 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
+/**
+ * Класс PageBase используется для хранения стандартных действий (свайпы, клики, получение аттрибута элемента и т.д.).
+ * Методы класса PageBase используются в шагах для каждой платформы каждого теста (toDoAndroid, toDoIOS).
+ * Описание каждого стандартного действия завернуто в аннотации <b>@Step</b>. Стандартное ожидание - 10 секунд,
+ * которое содержится в переменной <b>WAIT</b>.
+ */
+
 public class PageBase extends ThreadEnvironment {
 
     public PageBase(AppiumDriver<MobileElement> appiumDriver) {
@@ -32,8 +39,12 @@ public class PageBase extends ThreadEnvironment {
     public AndroidTouchAction actions;
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
-    public static final long WAIT = 10;
+    public static final long WAIT = 10; // Стандартное ожидание
 
+    /**
+     * Ожидание видимости элемента в течение 10 секунд.
+     * @param element локатор элемента
+     */
     @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
     public void waitForVisability(By element) {
         try {
@@ -44,7 +55,11 @@ public class PageBase extends ThreadEnvironment {
             throw ex;
         }
     }
-
+    /**
+     * Ожидание видимости элемента в течение указанного времени.
+     * @param element локатор элемента
+     * @param WAIT время ожидания элемента
+     */
     @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
     public void waitForVisability(By element, long WAIT) {
         try {
@@ -55,7 +70,10 @@ public class PageBase extends ThreadEnvironment {
             throw ex;
         }
     }
-
+    /**
+     * Ожидание видимости элемента в течение 10 секунд.
+     * @param element элемент MobileElement
+     */
     @Step("Ожидание видимости элемента {element}")
     public void waitForVisability(MobileElement element) {
         try {
@@ -67,6 +85,11 @@ public class PageBase extends ThreadEnvironment {
         }
     }
 
+    /**
+     * Ожидание кликабельности элемента в течение указанного времени.
+     * @param element локатор элемента
+     * @param timer время ожидания кликабельности
+     */
     @Step("Ожидание {timer} секунд элемента {element}")
     public void explicitWaitToClickable(By element, int timer) {
         try {
@@ -79,6 +102,11 @@ public class PageBase extends ThreadEnvironment {
 
     }
 
+    /**
+     * Поиск текста в указанном элементе
+     * @param element локатор элемента
+     * @param text текст, который необходимо найти в элементе
+     */
     @Step("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
     public void containsMessageAssert(By element, String text) {
         try {
@@ -91,11 +119,26 @@ public class PageBase extends ThreadEnvironment {
         }
     }
 
+    /**
+     * Очистка поля указываемого элемента.
+     * @param element локатор элемента
+     */
+    @Step("Очистка поля '{element}'")
     public void clear(MobileElement element) {
-        waitForVisability(element);
-        element.clear();
+        try {
+            waitForVisability(element);
+            element.clear();
+        } catch(Exception ex) {
+            logger.error("Can't clear element: " + element);
+            throw ex;
+        }
     }
 
+    /**
+     * Клик по указанному элементу.
+     * @param element локатор элемента
+     */
+    @Step("Клик по элементу '{element}'")
     public void click(By element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
@@ -107,22 +150,78 @@ public class PageBase extends ThreadEnvironment {
 
     }
 
+    /**
+     * Клик по указанному элементу.
+     * @param element элемент MobileElement
+     */
+    @Step("Клик по элементу '{element}'")
     public void click(MobileElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception ex) {
+            logger.error("Can't click element: " + element);
+            throw ex;
+        }
     }
 
+    /**
+     * Получение текста указанного элемента.
+     * @param element элемент MobileElement
+     * @return возвращает текст элемента в виде строки
+     */
+    @Step("Получение текста элемента '{element}'")
     public String getText(MobileElement element) {
-        waitForVisability(element);
-        String element_text = element.getText();
-        return element_text;
+        try {
+            waitForVisability(element);
+            String element_text = element.getText();
+            return element_text;
+        } catch (Exception ex) {
+            logger.error("Can't get text from element: " + element);
+            throw ex;
+        }
+    }
+    /**
+     * Возвращает текст указанного элемента.
+     * @param element локатор элемента
+     * @return возвращает текст элемента в виде строки
+     */
+    @Step("Получение текста элемента '{element}'")
+    public String getText(By element) {
+        try {
+            waitForVisability(element);
+
+            String element_text = driver.findElement(element).getText();
+            return element_text;
+        } catch (Exception ex) {
+            logger.error("Can't get text from element: " + element);
+            throw ex;
+        }
     }
 
+    /**
+     * Ввод указанного текста в поле элемента.
+     * @param element элемент MobileElement
+     * @param text текст для ввода
+     */
+    @Step("Ввод текста '{text}' в элемент '{element}'")
     public void sendText(MobileElement element, String text) {
-        waitForVisability(element);
-        element.sendKeys(text);
+        try {
+            waitForVisability(element);
+            element.sendKeys(text);
+        } catch (Exception ex) {
+            logger.error("Can't send text to element: " + element);
+            throw ex;
+        }
+
     }
 
+    /**
+     * Ввод указанного текста в поле элемента.
+     * @param element локатор элемента
+     * @param text текст для ввода
+     */
+    @Step("Ввод текста '{text}' в элемент '{element}'")
     public void sendText(By element, String text) {
         try {
             explicitWaitToClickable(element, 10);
@@ -132,18 +231,27 @@ public class PageBase extends ThreadEnvironment {
             throw ex;
         }
     }
-
+    /**
+     * Возвращает указанный аттрибут элемента.
+     * @param element локатор элемента
+     * @param attribute аттрибут, который нужно получить
+     */
+    @Step("Получение аттрибута у элемента '{element}'")
     public String getAttribute(By element, String attribute) {
         try {
             waitForVisability(element);
-            String elem_atr = driver.findElement(element).getAttribute(attribute);
-            return elem_atr;
+            return driver.findElement(element).getAttribute(attribute);
         } catch (Exception ex) {
             logger.error("Can't get attribute: " + attribute + " of the element: " + element);
             throw ex;
         }
     }
-
+    /**
+     * Скролл экрана вниз в течении указанного времени. Точка окончания указывается выше стартовой.
+     * @param endPoint конечная точка для перемещения по экрану
+     * @param durationSec длительность перемещения (в секундах)
+     */
+    @Step("Скролл вниз")
     public void scrollDown(int endPoint, int durationSec) {
         Dimension dimension = driver.manage().window().getSize();
         int startPoint = (int) (dimension.getHeight() * 0.8);
@@ -155,7 +263,14 @@ public class PageBase extends ThreadEnvironment {
                 .release()
                 .perform();
     }
-
+    /**
+     * Скролл экрана вниз от стартовой точки до конечной в течении указанного времени.
+     * Точка окончания указывается выше стартовой.
+     * @param startPoint стартовая точка
+     * @param endPoint конечная точка для перемещения по экрану
+     * @param durationSec длительность перемещения (в секундах)
+     */
+    @Step("Скролл вниз с точки {startPoint} до точки {endPoint}")
     public void scrollDown_with_start_point(int startPoint, int endPoint, int durationSec) {
 
         actions = new AndroidTouchAction(driver)
@@ -165,11 +280,20 @@ public class PageBase extends ThreadEnvironment {
                 .release()
                 .perform();
     }
-
+    /**
+     * Скролл экрана вниз от стартовой точки в виде элемента до конечной в указанном направлении.
+     * Точка окончания указывается выше стартовой.
+     * @param el элемент MobileElement
+     * @param dir направление для свайпа
+     * Доступные варианты: UP (от низа к верху), DOWN (от верха к низу), LEFT (справа налево), RIGHT (слева направо).
+     * @see PageBase#swipeElementAndroid(By, Direction)
+     * @see PageBase#swipeToRefreshAndroid(By)
+     */
+    @Step("Свайп элемента '{el}' в направлении {dir}")
     public void swipeElementIOS(MobileElement el, Direction dir) {
-        System.out.println("swipeElementIOS(): dir: '" + dir + "'"); // always log your actions
-
-        // Длительность анимации и нажатия
+        logger.info("swipeElementIOS(): dir: '" + dir + "'");
+        // Стандартное ожидание анимации для IOS: 200 мс
+        // Инициирование длительности анимации и нажатия
         final int ANIMATION_TIME = 200; // ms
 
         final int PRESS_TIME = 500; // ms
@@ -251,21 +375,25 @@ public class PageBase extends ThreadEnvironment {
         try {
             Thread.sleep(ANIMATION_TIME);
         } catch (InterruptedException e) {
-            // ignore
+            // игнорирование
         }
     }
-
+    /**
+     * Скролл экрана вниз от стартовой точки в виде элемента до конечной.
+     * @param elem локатор элемента
+     * @see PageBase#swipeElementAndroid(By, Direction)
+     * @see PageBase#swipeElementIOS(MobileElement, Direction)
+     */
+    @Step("Длинный свайп для обновления экрана")
     public void swipeToRefreshAndroid(By elem) {
-        MobileElement el = (MobileElement) driver.findElement(elem);
+        MobileElement el = driver.findElement(elem);
         final int ANIMATION_TIME = 200;
         int edgeBorder;
         PointOption<?> pointOptionStart, pointOptionEnd;
         final int PRESS_TIME = 800;
-        // init screen variables
+        // Инициирование переменных экрана
         Rectangle rect = el.getRect();
-        // sometimes it is needed to configure edgeBorders
-        // you can also improve borders to have vertical/horizontal
-        // or left/right/up/down border variables
+        // Иногда необходимо указать edgeBorders
         edgeBorder = 0;
         pointOptionStart = PointOption.point(rect.x + rect.width / 2,
                 rect.y + edgeBorder);
@@ -275,7 +403,7 @@ public class PageBase extends ThreadEnvironment {
         try {
             new TouchAction<>(driver)
                     .press(pointOptionStart)
-                    // a bit more reliable when we add small wait
+                    // добавляем ожидание окончания нажатия, перемещения указателя и снова ожидание
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
                     .moveTo(pointOptionEnd)
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
@@ -291,14 +419,22 @@ public class PageBase extends ThreadEnvironment {
         }
     }
 
+    /**
+     * Скролл экрана вниз от стартовой точки в виде элемента до конечной в указанном направлении.
+     * Точка окончания указывается выше стартовой.
+     * @param elem локатор элемента
+     * @param dir направление для свайпа
+     * Доступные варианты: UP (от низа к верху), DOWN (от верха к низу), LEFT (справа налево), RIGHT (слева направо).
+     * @see PageBase#swipeElementIOS(MobileElement, Direction)
+     * @see PageBase#swipeToRefreshAndroid(By)
+     */
+    @Step("Свайп элемента '{elem}' в направлении {dir}")
     public void swipeElementAndroid(By elem, Direction dir) {
         MobileElement el = driver.findElement(elem);
         logger.info("swipeElementAndroid(): dir: '" + dir + "'");
 
-        // Animation default time:
-        //  - Android: 300 ms
-        //  - iOS: 200 ms
-        // final value depends on your app and could be greater
+        // Стандартное ожидание анимации для Android: 300 мс
+        // Инициирование длительности анимации и нажатия
         final int ANIMATION_TIME = 200; // ms
 
         final int PRESS_TIME = 200; // ms
@@ -306,13 +442,13 @@ public class PageBase extends ThreadEnvironment {
         int edgeBorder;
         PointOption<?> pointOptionStart, pointOptionEnd;
 
-        // init screen variables
+        // Инициирование переменных экрана
         Rectangle rect = el.getRect();
-        // sometimes it is needed to configure edgeBorders
+
         edgeBorder = 0;
 
         switch (dir) {
-            case DOWN: // from up to down
+            case DOWN: // от верха к низу
                 int x = rect.x + rect.width / 2;
                 int y = rect.y + edgeBorder;
                 int x2 = rect.x + rect.width / 2;
@@ -323,34 +459,34 @@ public class PageBase extends ThreadEnvironment {
                 pointOptionStart = PointOption.point(x, y);
                 pointOptionEnd = PointOption.point(x2, y2);
                 break;
-            case UP: // from down to up
+            case UP: // от низа к верху
                 pointOptionStart = PointOption.point(rect.x + rect.width / 2,
                         rect.y + rect.height - edgeBorder);
                 pointOptionEnd = PointOption.point(rect.x + rect.width / 2,
                         rect.y + edgeBorder);
                 break;
-            case LEFT: // from right to left
+            case LEFT: // справа налево
                 pointOptionStart = PointOption.point(rect.x + rect.width - edgeBorder,
                         rect.y + rect.height / 2);
                 pointOptionEnd = PointOption.point(rect.x + edgeBorder,
                         rect.y + rect.height / 2);
                 break;
-            case RIGHT: // from left to right
+            case RIGHT: // слева направо
                 pointOptionStart = PointOption.point(rect.x + edgeBorder,
                         rect.y + rect.height / 2);
                 pointOptionEnd = PointOption.point(rect.x + rect.width - edgeBorder,
                         rect.y + rect.height / 2);
                 break;
             default:
-                logger.error("Error during swiping");
-                throw new IllegalArgumentException("swipeElementAndroid(): dir: '" + dir + "' NOT supported");
+                logger.error("Configure invalid direction. Stop executing...");
+                throw new IllegalArgumentException("swipeElementAndroid(): direction: '" + dir + "' NOT supported");
         }
 
-        // execute swipe using TouchAction
+        // Выполнение свайпа с помощью TouchAction
         try {
             new TouchAction<>(driver)
                     .press(pointOptionStart)
-                    // a bit more reliable when we add small wait
+                    // ожидание выполнение свайпа
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
                     .moveTo(pointOptionEnd)
                     .release().perform();
@@ -361,10 +497,51 @@ public class PageBase extends ThreadEnvironment {
         try {
             Thread.sleep(ANIMATION_TIME);
         } catch (InterruptedException e) {
-
+            //игнорирование
         }
     }
+    /**
+     * Скролл экрана вниз от стартовой точки до конечной в течении указанного времени.
+     * Точка окончания указывается выше стартовой.
+     * @param element локатор элемента
+     * @param duration время зажатия элемента
+     * @see PageBase#click(By)
+     */
+    @Step ("Долгое нажатие на элемент {element} в течении {duration} миллисекунд")
+    public void longPress(By element, int duration) throws InterruptedException {
 
+        final int ANIMATION_TIME = 200;
+        PointOption pointOptionStart, pointOptionEnd;
+        int edgeBorder;
+
+        Thread.sleep(2000);
+        MobileElement el = driver.findElement(element);
+        el.click();
+        Rectangle rect = el.getRect();
+        edgeBorder = 0;
+        pointOptionStart = PointOption.point(rect.x,
+                rect.y);
+        pointOptionEnd = PointOption.point(rect.x,
+                rect.y+ 100); // Опциональная точка для перемещения зажатого объекта
+
+        try {
+            new TouchAction<>(driver)
+                    .press(pointOptionStart)
+                    // Ожидание нажатия
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(duration)))
+                    .moveTo(pointOptionEnd)
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(duration)))
+                    .release().perform();
+        } catch (Exception e) {
+            System.err.println("swipeElement(): TouchAction FAILED\n" + e.getMessage());
+            return;
+        }
+        try {
+            Thread.sleep(ANIMATION_TIME);
+        } catch (InterruptedException e) {
+            // игнорирование
+        }
+    }
 
     public enum Direction {
         UP,
@@ -373,10 +550,26 @@ public class PageBase extends ThreadEnvironment {
         RIGHT;
     }
 
-    public void numbersComparsion(int a, int b, String message) {
-        Assert.assertEquals(a, b, message);
+    /**
+     * Сравнение чисел, отправка сообщения в случае ошибки.
+     * @param actual действительное число
+     * @param expected ожидаемое число
+     * @param message текст в случае ошибки
+     * @see PageBase#textsComparsion(String, String, String)
+     */
+    @Step("Ожидание равенства числа '{a}' и числа '{b}'")
+    public void numbersComparsion(int actual, int expected, String message) {
+        Assert.assertEquals (actual, expected, message);
     }
 
+    /**
+     * Сравнение двух строк, отправка сообщения в случае ошибки.
+     * @param actual действительный текст
+     * @param expected ожидаемый текст
+     * @param message текст в случае ошибки
+     * @see PageBase#numbersComparsion(int, int, String)
+     */
+    @Step("Ожидание равенства действительного текста '{actual}' и ожидаемого текста '{expected}'")
     public void textsComparsion(String actual, String expected, String message) {
         Assert.assertEquals(actual, expected, message);
     }

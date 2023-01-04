@@ -1,6 +1,7 @@
 <devices>
     <device id="Redmi10S">
         <deviceName>Redmi Note 10S</deviceName>
+        <isEmulator>no</isEmulator>
         <platformName>Android</platformName>
         <platformVersion>11</platformVersion>
         <appActivity>kz.bcc.starbanking.ui.screens.splash.SplashActivity</appActivity>
@@ -9,6 +10,7 @@
     </device>
     <device id="PixelEmu">
         <deviceName>Android Emulator</deviceName>
+        <isEmulator>yes</isEmulator>
         <platformName>Android</platformName>
         <platformVersion>13</platformVersion>
         <webkitDebuggerPort>27754</webkitDebuggerPort>

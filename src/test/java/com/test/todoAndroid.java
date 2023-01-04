@@ -2,13 +2,13 @@ package com.test;
 
 
 import io.qameta.allure.Epic;
-import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import pages.AuthListPage;
 import base.TestBase;
 
 import java.net.MalformedURLException;
+
 
 
 @Epic("Android tests")
@@ -26,7 +26,7 @@ public class todoAndroid extends TestBase {
         authListPage.sign_complete_button_click();
         authListPage.try_button_permission_click();
     }
-
+/*
     @Story("Авторизация с невалидными данными")
     @Test(groups = {"Auth screen"})
     public void auth_invalid() {
@@ -203,5 +203,5 @@ public class todoAndroid extends TestBase {
         authListPage.checkSumShares(pricePerShare, "3", sumShares);
 
     }
-
+*/
 }

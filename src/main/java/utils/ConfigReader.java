@@ -15,8 +15,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+
+/**
+ * Класс ConfigReader содержит в себе метод для считывания данных конфигурации об устройстве из файла .xml.
+ */
 public class ConfigReader {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
+
+    /**
+     * В зависимости
+     * @param xmlPath путь до файла конфигурации формата .xml
+     * @return возвращает маппер вида "НазваниеУстройства: ПараметрыУстройства" с capabilities для всех найденных
+     * устройств.
+     */
     public static Map<String, Device> xmlReader(String xmlPath) {
         Map<String, Device> devices = new HashMap<>();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -35,11 +46,12 @@ public class ConfigReader {
 
                 Device device = new Device();
                 device.deviceId = element.getAttribute("id");
+                device.isEmulator = element.getElementsByTagName("isEmulator").item(0).getTextContent();
                 device.platformName = element.getElementsByTagName("platformName").item(0).getTextContent();
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
                 device.platformVersion = element.getElementsByTagName("platformVersion").item(0).getTextContent();
-                if (device.deviceId.contains("Emu")) {
+                if (device.isEmulator.equals("yes")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                 } else {
                     device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();

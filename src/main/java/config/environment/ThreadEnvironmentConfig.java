@@ -13,6 +13,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс ThreadEnvironmentConfig содержит методы для сборки необходимого окружения с установленными capabilities.
+ */
+
 public class ThreadEnvironmentConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     public static ThreadEnvironment getAndroidEnvironment(String device) throws MalformedURLException {

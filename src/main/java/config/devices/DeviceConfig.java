@@ -6,8 +6,13 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.ConfigReader;
 
-import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * Класс DeviceConfig собирает capabilities из файла конфигурации с помощью XMLReader (пакет utils)
+ * и возвращает список готовых наборов capabilities для каждого устройства из файла.
+ * @see ConfigReader#xmlReader(String)
+ */
 
 public class DeviceConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);

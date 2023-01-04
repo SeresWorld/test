@@ -17,7 +17,14 @@ import pages.AuthListPage;
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.util.Map;
+
+
+/**
+ * Класс TestBase содержит набор фикстур для начала тест сьюта, метода и их окончания. В методе с аннотацией
+ * BeforeMethod активируется собранное окружение под указанное устройство. Желаемое устройство указывается в переменную
+ * Device, ее название должно совпадать с id из файла androidDevices.xml. В teardown методе делается скриншот, если
+ * тест был закончен с ошибкой.
+ */
 
 public class TestBase {
 
@@ -32,8 +39,6 @@ public class TestBase {
     @BeforeSuite
     public void beforeSuite() {
 
-
-        logger.info("---------------------------------------------------------------------------------------------");
         logger.info("Device: " + device);
 
     }
@@ -58,7 +63,8 @@ public class TestBase {
 
         if (null != getAppiumDriver()) {
             if (tr.getStatus() == ITestResult.FAILURE) {
-                Allure.addAttachment("Error", new ByteArrayInputStream(((TakesScreenshot) getAppiumDriver()).getScreenshotAs(OutputType.BYTES)));
+                Allure.addAttachment("Error", new ByteArrayInputStream(
+                        ((TakesScreenshot) getAppiumDriver()).getScreenshotAs(OutputType.BYTES)));
                 logger.error("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
             logger.info("Teardown " + tr.getMethod() + "\n");

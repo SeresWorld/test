@@ -6,6 +6,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
+/**
+ * Класс ThreadEnvironment содержит все драйверы для дальнейшего использования.
+ */
+
 public class ThreadEnvironment {
 
     public AppiumDriver<MobileElement> driver;
