@@ -39,7 +39,6 @@ public class ConfigReader {
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
                 device.platformVersion = element.getElementsByTagName("platformVersion").item(0).getTextContent();
-
                 if (device.deviceId.contains("Emu")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                 } else {

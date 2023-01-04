@@ -26,7 +26,7 @@ public class DeviceConfig {
                     capabilities.setCapability("clearSystemFiles", "true");
                     capabilities.setCapability("autoGrantPermissions", "true");
                     if (deviceName.contains("Emu")) {
-                        capabilities.setCapability("app", System.getProperty("user.dir")+device.app);
+                        capabilities.setCapability("app", System.getProperty("user.dir") + device.app);
                     } else {
                         capabilities.setCapability("appActivity", device.appActivity);
                         capabilities.setCapability("appPackage", device.appPackage);

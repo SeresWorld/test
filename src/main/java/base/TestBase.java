@@ -23,14 +23,14 @@ public class TestBase {
 
     AuthListPage authListPage;
 
-    private final String device = "Redmi10S"; // ЗДЕСЬ УКАЗЫВАЕТСЯ ID УСТРОЙСТВА ИЗ androidDevices.xml ДЛЯ ТЕСТА
+    private final String device = "PixelEmu"; // ЗДЕСЬ УКАЗЫВАЕТСЯ ID УСТРОЙСТВА ИЗ androidDevices.xml ДЛЯ ТЕСТА
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     private final ThreadLocal<ThreadEnvironment> environment = new ThreadLocal<>();
 
     @BeforeSuite
-    public void beforeSuite() throws MalformedURLException {
+    public void beforeSuite() {
 
 
         logger.info("---------------------------------------------------------------------------------------------");

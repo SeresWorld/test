@@ -25,7 +25,6 @@ public class todoAndroid extends TestBase {
         authListPage.setInput_pass("orapas123");
         authListPage.sign_complete_button_click();
         authListPage.try_button_permission_click();
-
     }
 
     @Story("Авторизация с невалидными данными")
