@@ -14,7 +14,7 @@
         <platformName>Android</platformName>
         <platformVersion>10</platformVersion>
         <webkitDebuggerPort>27754</webkitDebuggerPort>
-        <app>/apps/release.apk</app>
+        <app>/apps/release-3.4.28-test.apk</app>
         <automationName>UiAutomator2</automationName>
     </device>
 </devices>
