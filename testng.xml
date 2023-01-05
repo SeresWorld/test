@@ -3,7 +3,7 @@
 <suite name="Testing Google Apps">
     <test name="Regression">
         <classes>
-            <class name="todoIOS"/>
+            <class name="com.test.todoAndroid"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
