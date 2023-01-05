@@ -1,5 +1,4 @@
 /target/
-*.apk
 .DS_Store
 apps/.DS_Store
 apps/.DS_Store
