@@ -12,7 +12,7 @@
         <deviceName>Android Emulator</deviceName>
         <isEmulator>yes</isEmulator>
         <platformName>Android</platformName>
-        <platformVersion>13</platformVersion>
+        <platformVersion>10</platformVersion>
         <webkitDebuggerPort>27754</webkitDebuggerPort>
         <app>/apps/release.apk</app>
         <automationName>UiAutomator2</automationName>
