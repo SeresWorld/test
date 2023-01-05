@@ -16,9 +16,11 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
+    strategy:
+      matrix:
+        api-level: [30]  
+        target: [default]
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -34,8 +36,13 @@ jobs:
             npm install -g appium@v1.20.2
             appium -v
             appium &>/dev/null &
-    - name: Run Appium Tests
-      run: mvn -Dtest=todoAndroid#auth_valid clean test 
+    - uses: reactivecircus/android-emulator-runner@v1
+      with:
+        api-level: ${{ matrix.api-level }}
+        target: ${{ matrix.target }}
+        arch: x86_64
+        profile: Pixel 6
+        script: mvn -Dtest=todoAndroid#auth_valid clean test 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
