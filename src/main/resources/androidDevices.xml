@@ -8,7 +8,7 @@
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
     </device>
-    <device id="PixelEmu">
+    <device id="Nexus 6">
         <deviceName>Android Emulator</deviceName>
         <isEmulator>yes</isEmulator>
         <platformName>Android</platformName>
