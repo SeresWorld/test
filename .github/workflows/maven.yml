@@ -19,7 +19,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [33]  
+        api-level: [29]  
         target: [default]
     steps:
     - name: checkout
@@ -40,7 +40,7 @@ jobs:
         api-level: ${{ matrix.api-level }}
         target: ${{ matrix.target }}
         arch: x86_64
-        profile: Pixel 6
+        profile: Nexus 6
         script: mvn -Dtest=todoAndroid#auth_valid clean test 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
