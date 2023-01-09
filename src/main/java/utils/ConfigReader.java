@@ -23,7 +23,9 @@ public class ConfigReader {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     /**
-     * В зависимости
+     * В зависимости от переданного пути до файла конфигурации, метод считывает в нем все доступные capabilities
+     * для каждого устройства. Если для capabilities устройства существует признак isEmulator = yes, считывается
+     * альтернативный набор capabilities.
      * @param xmlPath путь до файла конфигурации формата .xml
      * @return возвращает маппер вида "НазваниеУстройства: ПараметрыУстройства" с capabilities для всех найденных
      * устройств.

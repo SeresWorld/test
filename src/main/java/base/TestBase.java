@@ -30,7 +30,7 @@ public class TestBase {
 
     AuthListPage authListPage;
 
-    private final String device = "Nexus 6"; // ЗДЕСЬ УКАЗЫВАЕТСЯ ID УСТРОЙСТВА ИЗ androidDevices.xml ДЛЯ ТЕСТА
+    private final String device = "Redmi10S"; // ЗДЕСЬ УКАЗЫВАЕТСЯ ID УСТРОЙСТВА ИЗ androidDevices.xml ДЛЯ ТЕСТА
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
