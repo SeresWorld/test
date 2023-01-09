@@ -26,15 +26,15 @@ public class AuthListPage extends PageBase {
         super(driver);
     }
 
-    private final By sign_button = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
-    private final By input_login = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
-    private final By input_pass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
-    private final By button_login = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
-    private final By button_permission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+    private final By signButton = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
+    private final By inputLogin = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
+    private final By inputPass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
+    private final By buttonLogin = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
+    private final By buttonPermission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
     private final By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
     private final By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
     private final By codeFirstRepeat = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
-    private final By android_message = By.id("android:id/message");
+    private final By androidMessage = By.id("android:id/message");
     private final By paidButton = By.xpath("//android.view.ViewGroup[@bounds='[521,1833][982,1965]']");
     private final By transitBetweenButton = By.xpath("//android.view.View[@text='Перевести']");
     private final By transitBetweenToBill = By.xpath("//android.widget.TextView[@text='Выберите']");
@@ -66,65 +66,65 @@ public class AuthListPage extends PageBase {
     private final By sharesCount = By.xpath("//android.widget.RelativeLayout/android.widget.EditText[@text=\"0\"]");
     private final By sumShares = By.xpath("//android.widget.ScrollView/android.view.View[13]");
 
-    private final By sign_button_ios = By.name("Войти");
-    private final By input_login_ios = By.xpath
+    private final By signButton_ios = By.name("Войти");
+    private final By inputLogin_ios = By.xpath
             ("//XCUIElementTypeApplication[@name='BCC.KZ']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField");
-    private final By input_pass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
-    private final By button_permission_ios = By.name("Однократно");
+    private final By inputPass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
+    private final By buttonPermission_ios = By.name("Однократно");
 
     @Step ("Клик по кнопке Войти на экране сплеша")
-    public void  sign_main_button_click() {
-        click(sign_button);
+    public void  signMainButtonClick() {
+        click(signButton);
     }
 
-    public void sign_main_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
+    public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
     @Step ("Ввод телефона {login} в поле телефона")
-    public void setInput_login(String login) {
-        explicitWaitToClickable(input_login, 10);
-        sendText(input_login, login);
+    public void setInputLogin(String login) {
+        explicitWaitToClickable(inputLogin, 10);
+        sendText(inputLogin, login);
     }
     @Step
-    public void setInput_login_ios(String login) {
-        MobileElement input = (MobileElement) driver.findElement(input_login_ios);
+    public void setinputLogin_ios(String login) {
+        MobileElement input = (MobileElement) driver.findElement(inputLogin_ios);
         sendText(input, login);
     }
     @Step ("Клик по кнопке 'Войти' на экране авторизации")
-    public void sign_complete_button_click() {click(button_login);}
+    public void sign_complete_button_click() {click(buttonLogin);}
     @Step
-    public void sign_complete_button_click_ios() {click((MobileElement) driver.findElement(sign_button_ios));}
+    public void sign_complete_button_click_ios() {click((MobileElement) driver.findElement(signButton_ios));}
 
     @Step ("Ввод пароля '{pass}' в поле пароля")
-    public void setInput_pass(String pass) {
-        sendText(input_pass, pass);
+    public void setinputPass(String pass) {
+        sendText(inputPass, pass);
     }
     @Step
-    public void setInput_pass_ios(String pass) {
-        MobileElement input = (MobileElement) driver.findElement(input_pass_ios);
+    public void setinputPass_ios(String pass) {
+        MobileElement input = (MobileElement) driver.findElement(inputPass_ios);
         sendText(input, pass);
     }
     @Step ("Попытка клика по кнопке разрешения на получение геолокации")
-    public void try_button_permission_click() {
+    public void try_buttonPermission_click() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(button_permission)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(buttonPermission)).click();
         } catch (Exception exception) {
             logger.info("Permission has not found");
         }
 
     }
     @Step
-    public void try_button_permission_click_ios() {
-        click(button_permission_ios);
+    public void try_buttonPermission_click_ios() {
+        click(buttonPermission_ios);
     }
 
     @Step ("Проверка наличия текста '{text}' на модалке")
-    public void check_text_android_message(String text) {
-        containsMessageAssert(android_message, text);
+    public void check_text_androidMessage(String text) {
+        containsMessageAssert(androidMessage, text);
     }
     @Step ("Проверка неактивности кнопки Войти на экране авторизации")
-    public void check_active_sign_button_is_not_clickable() {
-        String button_login_atr = getAttribute(button_login, "enabled");
-        Assert.assertEquals(button_login_atr, "false", "Object is clickable");
+    public void check_active_signButton_is_not_clickable() {
+        String buttonLogin_atr = getAttribute(buttonLogin, "enabled");
+        Assert.assertEquals(buttonLogin_atr, "false", "Object is clickable");
     }
 
     @Step ("Ввод четырехзначного кода")

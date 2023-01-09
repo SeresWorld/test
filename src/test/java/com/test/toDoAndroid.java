@@ -2,6 +2,7 @@ package com.test;
 
 
 import io.qameta.allure.Epic;
+import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import pages.AuthListPage;
@@ -12,7 +13,7 @@ import java.net.MalformedURLException;
 
 
 @Epic("Android tests")
-public class todoAndroid extends TestBase {
+public class toDoAndroid extends TestBase {
     AuthListPage authListPage;
 
     @Story("Авторизация с валидными данными")
@@ -20,24 +21,24 @@ public class todoAndroid extends TestBase {
     public void auth_valid() {
         authListPage = new AuthListPage(getAppiumDriver());
 
-        authListPage.sign_main_button_click();
-        authListPage.setInput_login("7756655544");
-        authListPage.setInput_pass("orapas123");
+        authListPage.signMainButtonClick();
+        authListPage.setInputLogin("7756655544");
+        authListPage.setinputPass("orapas123");
         authListPage.sign_complete_button_click();
-        authListPage.try_button_permission_click();
+        authListPage.try_buttonPermission_click();
     }
-/*
+
     @Story("Авторизация с невалидными данными")
     @Test(groups = {"Auth screen"})
     public void auth_invalid() {
 
         authListPage = new AuthListPage(getAppiumDriver());
-        authListPage.sign_main_button_click();
-        authListPage.setInput_login("0123456789");
-        authListPage.setInput_pass("123");
+        authListPage.signMainButtonClick();
+        authListPage.setInputLogin("0123456789");
+        authListPage.setinputPass("123");
         authListPage.sign_complete_button_click();
-        authListPage.try_button_permission_click();
-        authListPage.check_text_android_message("Не верный логин или пароль");
+        authListPage.try_buttonPermission_click();
+        authListPage.check_text_androidMessage("Не верный логин или пароль");
     }
 
     @Story("Проверка некликабельности кнопки авторизации при незаполненном логине")
@@ -45,9 +46,9 @@ public class todoAndroid extends TestBase {
     public void auth_not_filled_login() {
 
         authListPage = new AuthListPage(getAppiumDriver());
-        authListPage.sign_main_button_click();
-        authListPage.setInput_pass("123");
-        authListPage.check_active_sign_button_is_not_clickable();
+        authListPage.signMainButtonClick();
+        authListPage.setinputPass("123");
+        authListPage.check_active_signButton_is_not_clickable();
     }
 
     @Story("Проверка некликабельности кнопки авторизации при незаполненном пароле")
@@ -55,9 +56,9 @@ public class todoAndroid extends TestBase {
     public void auth_not_filled_pass() {
 
         authListPage = new AuthListPage(getAppiumDriver());
-        authListPage.sign_main_button_click();
-        authListPage.setInput_login("0123456789");
-        authListPage.check_active_sign_button_is_not_clickable();
+        authListPage.signMainButtonClick();
+        authListPage.setInputLogin("0123456789");
+        authListPage.check_active_signButton_is_not_clickable();
     }
 
     @Story("Проверка горизонтального свайпа")
@@ -203,5 +204,5 @@ public class todoAndroid extends TestBase {
         authListPage.checkSumShares(pricePerShare, "3", sumShares);
 
     }
-*/
+
 }

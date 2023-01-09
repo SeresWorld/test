@@ -83,11 +83,11 @@ public class TestBase {
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
         authListPage = new AuthListPage(getAppiumDriver());
-        authListPage.sign_main_button_click();
-        authListPage.setInput_login("7756655544");
-        authListPage.setInput_pass("orapas123");
+        authListPage.signMainButtonClick();
+        authListPage.setInputLogin("7756655544");
+        authListPage.setinputPass("orapas123");
         authListPage.sign_complete_button_click();
-        authListPage.try_button_permission_click();
+        authListPage.try_buttonPermission_click();
         authListPage.setButtonsCode();
         authListPage.waitforloadaccountList();
     }

@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.sql.Time;
 import java.time.Duration;
 
 /**
@@ -95,7 +96,7 @@ public class PageBase extends ThreadEnvironment {
         try {
             WebDriverWait wait = new WebDriverWait(driver, timer);
             wait.until(ExpectedConditions.elementToBeClickable(element));
-        } catch (Exception ex) {
+        } catch (TimeoutException ex) {
             logger.error("Element: " + element + " is not clickable");
             throw ex;
         }
@@ -143,7 +144,7 @@ public class PageBase extends ThreadEnvironment {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
             wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        } catch (Exception ex) {
+        } catch (TimeoutException ex) {
             logger.error("Can't click element: " + element);
             throw ex;
         }
@@ -159,7 +160,7 @@ public class PageBase extends ThreadEnvironment {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
             wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        } catch (Exception ex) {
+        } catch (TimeoutException ex) {
             logger.error("Can't click element: " + element);
             throw ex;
         }
