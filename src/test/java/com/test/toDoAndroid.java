@@ -18,7 +18,7 @@ public class toDoAndroid extends TestBase {
 
     @Story("Авторизация с валидными данными")
     @Test(groups = {"Auth screen"})
-    public void auth_valid() {
+    public void authValid() {
         authListPage = new AuthListPage(getAppiumDriver());
 
         authListPage.signMainButtonClick();
@@ -30,7 +30,7 @@ public class toDoAndroid extends TestBase {
 
     @Story("Авторизация с невалидными данными")
     @Test(groups = {"Auth screen"})
-    public void auth_invalid() {
+    public void authInvalid() {
 
         authListPage = new AuthListPage(getAppiumDriver());
         authListPage.signMainButtonClick();
@@ -43,7 +43,7 @@ public class toDoAndroid extends TestBase {
 
     @Story("Проверка некликабельности кнопки авторизации при незаполненном логине")
     @Test(groups = {"Auth screen"})
-    public void auth_not_filled_login() {
+    public void authNotFilledLogin() {
 
         authListPage = new AuthListPage(getAppiumDriver());
         authListPage.signMainButtonClick();
@@ -53,7 +53,7 @@ public class toDoAndroid extends TestBase {
 
     @Story("Проверка некликабельности кнопки авторизации при незаполненном пароле")
     @Test(groups = {"Auth screen"})
-    public void auth_not_filled_pass() {
+    public void authNotFilledPass() {
 
         authListPage = new AuthListPage(getAppiumDriver());
         authListPage.signMainButtonClick();
@@ -63,7 +63,7 @@ public class toDoAndroid extends TestBase {
 
     @Story("Проверка горизонтального свайпа")
     @Test(groups = {"Main page"})
-    public void horizontal_swipe() throws MalformedURLException, InterruptedException {
+    public void horizontalSwipe() throws MalformedURLException, InterruptedException {
         auth_complete();
         authListPage = new AuthListPage(getAppiumDriver());
         authListPage.main_screen_swipe_horizontal_list();
