@@ -12,10 +12,12 @@ import io.appium.java_client.ios.IOSDriver;
 
 public class ThreadEnvironment {
 
-    public AppiumDriver<MobileElement> driver;
+    private static AppiumDriver<MobileElement> driver;
     private static AndroidDriver<MobileElement> androidDriverInstance;
     private static IOSDriver<MobileElement> iosDriverInstance;
-
+    public static AppiumDriver<MobileElement> getAppiumDriverInstance() {
+        return driver;
+    }
     public static AndroidDriver<MobileElement> getAndroidDriverInstance() {
         return ThreadEnvironment.androidDriverInstance;
     }

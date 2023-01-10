@@ -20,11 +20,10 @@ import java.util.List;
  */
 
 public class AuthListPage extends PageBase {
-
-    private static final Logger logger = LogManager.getLogger(TestBase.class);
     public AuthListPage(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
+    private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     private final By signButton = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
     private final By inputLogin = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
@@ -71,6 +70,9 @@ public class AuthListPage extends PageBase {
             ("//XCUIElementTypeApplication[@name='BCC.KZ']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField");
     private final By inputPass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
     private final By buttonPermission_ios = By.name("Однократно");
+
+
+
 
     @Step ("Клик по кнопке Войти на экране сплеша")
     public void  signMainButtonClick() {

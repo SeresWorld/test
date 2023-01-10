@@ -53,6 +53,9 @@ public class ConfigReader {
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
                 device.platformVersion = element.getElementsByTagName("platformVersion").item(0).getTextContent();
+                device.udid = element.getElementsByTagName("udid").item(0).getTextContent();
+                device.serverPort = element.getElementsByTagName("serverPort").item(0).getTextContent();
+
                 if (device.isEmulator.equals("yes")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                 } else {

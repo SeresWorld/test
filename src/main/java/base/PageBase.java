@@ -30,17 +30,15 @@ import java.time.Duration;
  * которое содержится в переменной <b>WAIT</b>.
  */
 
-public class PageBase extends ThreadEnvironment {
-
-    public PageBase(AppiumDriver<MobileElement> appiumDriver) {
-        driver = appiumDriver;
-        PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
-    }
+public class PageBase extends TestBase {
 
     public AndroidTouchAction actions;
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     public static final long WAIT = 10; // Стандартное ожидание
+    public PageBase(AppiumDriver<MobileElement> driver) {
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     /**
      * Ожидание видимости элемента в течение 10 секунд.

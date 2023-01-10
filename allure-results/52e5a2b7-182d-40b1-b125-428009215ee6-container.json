@@ -1,1 +1,0 @@
-{"uuid":"52e5a2b7-182d-40b1-b125-428009215ee6","name":"Surefire test","start":1669866698382,"stop":1669866706784,"befores":[{"name":"setUpAndroid","status":"passed","stage":"finished","description":"","start":1669866698387,"stop":1669866706477}],"afters":[{"name":"tearDown","status":"passed","stage":"finished","description":"","start":1669866706480,"stop":1669866706763}]}

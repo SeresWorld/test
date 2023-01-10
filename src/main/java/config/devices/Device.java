@@ -18,5 +18,7 @@ public class Device {
 
     public String app;
     public String isEmulator;
+    public String udid;
+    public String serverPort;
 
 }

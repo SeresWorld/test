@@ -1,19 +1,22 @@
 <devices>
-    <device id="Redmi10S">
+    <device id="Redmi Note 10S">
         <deviceName>Redmi Note 10S</deviceName>
         <isEmulator>no</isEmulator>
         <platformName>Android</platformName>
         <platformVersion>11</platformVersion>
+        <udid>8XROHY8LJBEA7LVS</udid>
+        <serverPort>4723</serverPort>
         <appActivity>kz.bcc.starbanking.ui.screens.splash.SplashActivity</appActivity>
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
     </device>
-    <device id="Nexus 6">
+    <device id="Android Emulator">
         <deviceName>Android Emulator</deviceName>
         <isEmulator>yes</isEmulator>
         <platformName>Android</platformName>
-        <platformVersion>10</platformVersion>
-        <webkitDebuggerPort>27754</webkitDebuggerPort>
+        <platformVersion>13</platformVersion>
+        <udid>emulator-5554</udid>
+        <serverPort>4724</serverPort>
         <app>/apps/release-3.4.28-test.apk</app>
         <automationName>UiAutomator2</automationName>
     </device>

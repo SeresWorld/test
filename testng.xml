@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Testing Google Apps">
-    <test name="Regression">
+    <test name="Real device">
+        <parameter name="deviceName_" value="Redmi Note 10S"/>
+        <parameter name="URL_" value="http://localhost:4723/wd/hub"/>
         <classes>
-            <class name="com.test.todoAndroid"/>
+            <class name="com.test.toDoAndroid">
+                <methods>
+                    <include name="authValid"/>
+                </methods>
+            </class>
         </classes>
     </test> <!-- Test -->
+    <test name="Emulator">
+        <parameter name="deviceName_" value="Android Emulator"/>
+        <parameter name="URL_" value="http://localhost:4724/wd/hub"/>
+        <classes>
+            <class name="com.test.toDoAndroid">
+                <methods>
+                    <include name="authValid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite> <!-- Suite -->

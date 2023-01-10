@@ -1,6 +1,7 @@
 package config.devices;
 
 import base.TestBase;
+import io.cucumber.java.hu.De;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,9 +31,11 @@ public class DeviceConfig {
                     capabilities.setCapability("automationName", device.automationName);
                     capabilities.setCapability("clearSystemFiles", "true");
                     capabilities.setCapability("autoGrantPermissions", "true");
+                    capabilities.setCapability("udid", device.udid);
                     if (device.isEmulator.contains("yes")) {
                         capabilities.setCapability("app", System.getProperty("user.dir") + device.app);
-                    } else {
+                    }
+                    else {
                         capabilities.setCapability("appActivity", device.appActivity);
                         capabilities.setCapability("appPackage", device.appPackage);
                     }
