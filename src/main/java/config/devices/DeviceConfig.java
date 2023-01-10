@@ -34,6 +34,8 @@ public class DeviceConfig {
                     capabilities.setCapability("udid", device.udid);
                     if (device.isEmulator.contains("yes")) {
                         capabilities.setCapability("app", System.getProperty("user.dir") + device.app);
+                        capabilities.setCapability("waitAppPackage", device.waitAppPackage);
+                        capabilities.setCapability("appWaitActivity", device.appWaitActivity);
                     }
                     else {
                         capabilities.setCapability("appActivity", device.appActivity);

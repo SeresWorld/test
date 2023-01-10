@@ -58,6 +58,8 @@ public class ConfigReader {
 
                 if (device.isEmulator.equals("yes")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
+                    device.waitAppPackage = element.getElementsByTagName("waitAppPackage").item(0).getTextContent();
+                    device.appWaitActivity = element.getElementsByTagName("appWaitActivity").item(0).getTextContent();
                 } else {
                     device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();
                     device.appPackage = element.getElementsByTagName("appPackage").item(0).getTextContent();

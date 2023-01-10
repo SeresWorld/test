@@ -12,6 +12,7 @@ import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
@@ -48,24 +49,6 @@ public class TestBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
 
-    public void getDesiredCaps() {
-        try {
-            this.device = (String) devices.keySet().toArray()[counter];
-            counter++;
-        } catch (NullPointerException ex) {
-            logger.error("NullPointerException");
-            ex.fillInStackTrace();
-        }
-    }
-
-    public String getServerPort(String deviceName) {
-        for (Map.Entry<String, Device> device: devices.entrySet()) {
-            if (Objects.equals(device.getKey(), deviceName)) {
-                return device.getValue().serverPort;
-            }
-        }
-        return null;
-    }
     @BeforeSuite
     public void beforeSuite() throws MalformedURLException {
 
@@ -76,14 +59,19 @@ public class TestBase {
     public void setUpAndroid(Method method, String deviceName_, String URL_) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
+        DesiredCapabilities desiredCapabilities = null;
         try {
             logger.info("Device: " + deviceName_);
-            DesiredCapabilities desiredCapabilities = DeviceConfig.getCaps("android", deviceName_);
+            desiredCapabilities = DeviceConfig.getCaps("android", deviceName_);
             driver = new AndroidDriver<>(new URL(URL_), desiredCapabilities);
-            Thread.sleep(10000);
+            Thread.sleep(5000);
+            logger.info(desiredCapabilities.toJson());
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
+        } catch (SessionNotCreatedException sessionNotCreatedException) {
+            logger.info(desiredCapabilities.toJson());
+            throw sessionNotCreatedException;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

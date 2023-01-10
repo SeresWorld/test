@@ -1,17 +1,11 @@
 package com.test;
 
 
-import base.PageBase;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import base.TestBase;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Flaky;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import pages.AuthListPage;
-import base.TestBase;
-
-import java.net.MalformedURLException;
 
 
 

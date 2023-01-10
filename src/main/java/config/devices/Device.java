@@ -20,5 +20,7 @@ public class Device {
     public String isEmulator;
     public String udid;
     public String serverPort;
+    public String waitAppPackage;
+    public String appWaitActivity;
 
 }
