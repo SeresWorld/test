@@ -1,13 +1,11 @@
 package base;
 
 
-import config.devices.Device;
 import config.devices.DeviceConfig;
 import config.environment.ThreadEnvironment;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.cucumber.java.hu.De;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,17 +13,17 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.AuthListPage;
-import utils.ConfigReader;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
-import java.util.Objects;
+
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 
 /**
@@ -40,18 +38,13 @@ public class TestBase {
     AuthListPage authListPage;
 
     public static AppiumDriver<MobileElement> driver;
-    public static AppiumDriver<MobileElement> driver2;
-
-    private String device = null;
-
-    int counter = 0;
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
-    Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
 
     @BeforeSuite
-    public void beforeSuite() throws MalformedURLException {
-
+    public void beforeSuite(ITestContext ctx) {
+        String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
+        logger.info("Start suite: " + suiteName);
 
     }
     @Parameters({"deviceName_", "URL_"})
@@ -59,25 +52,22 @@ public class TestBase {
     public void setUpAndroid(Method method, String deviceName_, String URL_) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
-        DesiredCapabilities desiredCapabilities = null;
+
         try {
             logger.info("Device: " + deviceName_);
-            desiredCapabilities = DeviceConfig.getCaps("android", deviceName_);
+            DesiredCapabilities desiredCapabilities = DeviceConfig.getCaps(ANDROID, deviceName_);
             driver = new AndroidDriver<>(new URL(URL_), desiredCapabilities);
             Thread.sleep(5000);
-            logger.info(desiredCapabilities.toJson());
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
         } catch (SessionNotCreatedException sessionNotCreatedException) {
-            logger.info(desiredCapabilities.toJson());
+            logger.error("Session has not been created");
             throw sessionNotCreatedException;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 
     @AfterMethod
     public void tearDown(ITestResult tr) {
@@ -87,15 +77,16 @@ public class TestBase {
                         ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
                 logger.error("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
-            logger.info("Teardown " + tr.getMethod() + "\n");
+            logger.info("Teardown method:" + tr.getMethod() + "\n");
             driver.quit();
         }
 
     }
 
     @AfterSuite
-    public void tearDownSuite() throws MalformedURLException {
-
+    public void tearDownSuite(ITestContext ctx) {
+        String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
+        logger.info("Teardown suite: " + suiteName);
     }
 
     public AppiumDriver<MobileElement> getAppiumDriver() {

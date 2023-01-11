@@ -113,7 +113,7 @@ public class PageBase extends TestBase {
             String text_element = driver.findElement(element).getText();
             text_element.contains(text);
         } catch (Exception ex) {
-            logger.error("Can't see text: " + text + " in the element: " + text);
+            logger.error("Can't see text: " + text + " in the element: " + element);
             throw ex;
         }
     }

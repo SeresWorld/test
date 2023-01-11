@@ -14,7 +14,7 @@
     </test> <!-- Test -->
     <test name="Emulator">
         <parameter name="deviceName_" value="Android Emulator"/>
-        <parameter name="URL_" value="http://localhost:4724/wd/hub"/>
+        <parameter name="URL_" value="http://localhost:4723/wd/hub"/>
         <classes>
             <class name="com.test.toDoAndroid">
                 <!--<methods>

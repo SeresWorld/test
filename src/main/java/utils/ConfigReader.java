@@ -56,7 +56,7 @@ public class ConfigReader {
                 device.udid = element.getElementsByTagName("udid").item(0).getTextContent();
                 device.serverPort = element.getElementsByTagName("serverPort").item(0).getTextContent();
 
-                if (device.isEmulator.equals("yes")) {
+                if (device.isEmulator.equals("true")) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                     device.waitAppPackage = element.getElementsByTagName("waitAppPackage").item(0).getTextContent();
                     device.appWaitActivity = element.getElementsByTagName("appWaitActivity").item(0).getTextContent();
