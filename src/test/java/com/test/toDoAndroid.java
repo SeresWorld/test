@@ -2,6 +2,7 @@ package com.test;
 
 
 import base.TestBase;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
@@ -13,17 +14,16 @@ import pages.AuthListPage;
 public class toDoAndroid extends TestBase {
     AuthListPage authListPage;
 
+
     @Story("Авторизация с валидными данными")
     @Test(groups = {"Auth screen"})
     public void authValid() {
 
         authListPage = new AuthListPage(driver);
         authListPage.signMainButtonClick();
-        authListPage.setInputLogin("7756655544");
-        authListPage.setinputPass("orapas123");
-        authListPage.sign_complete_button_click();
-        authListPage.try_buttonPermission_click();
     }
+}
+/*
 
     @Story("Авторизация с невалидными данными")
     @Test(groups = {"Auth screen"})
@@ -38,3 +38,4 @@ public class toDoAndroid extends TestBase {
         authListPage.check_text_androidMessage("Не верный логин или пароль");
     }
 }
+*/

@@ -4,8 +4,6 @@ package base;
 import config.devices.DeviceConfig;
 import config.environment.ThreadEnvironment;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,9 +35,11 @@ public class TestBase {
 
     AuthListPage authListPage;
 
-    public static AppiumDriver<MobileElement> driver;
+    public static AppiumDriver driver;
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
+
+
 
     @BeforeSuite
     public void beforeSuite(ITestContext ctx) {
@@ -56,7 +56,7 @@ public class TestBase {
         try {
             logger.info("Device: " + deviceName_);
             DesiredCapabilities desiredCapabilities = DeviceConfig.getCaps(ANDROID, deviceName_);
-            driver = new AndroidDriver<>(new URL(URL_), desiredCapabilities);
+            driver = new AppiumDriver(new URL(URL_), desiredCapabilities);
             Thread.sleep(5000);
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
@@ -89,20 +89,11 @@ public class TestBase {
         logger.info("Teardown suite: " + suiteName);
     }
 
-    public AppiumDriver<MobileElement> getAppiumDriver() {
-        return ThreadEnvironment.getAppiumDriverInstance();
-    }
 
 
     public void auth_complete() throws MalformedURLException, InterruptedException {
         authListPage = new AuthListPage(driver);
         authListPage.signMainButtonClick();
-        authListPage.setInputLogin("7756655544");
-        authListPage.setinputPass("orapas123");
-        authListPage.sign_complete_button_click();
-        authListPage.try_buttonPermission_click();
-        authListPage.setButtonsCode();
-        authListPage.waitforloadaccountList();
     }
 
 }

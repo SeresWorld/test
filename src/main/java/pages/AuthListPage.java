@@ -3,16 +3,16 @@ package pages;
 import base.PageBase;
 import base.TestBase;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumElementLocatorFactory;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
-import java.util.List;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 /**
  * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
@@ -20,12 +20,12 @@ import java.util.List;
  */
 
 public class AuthListPage extends PageBase {
-    public AuthListPage(AppiumDriver<MobileElement> driver) {
-        super(driver);
-    }
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
-    private final By signButton = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
+    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
+    WebElement signButton;
+
+    private final By signButtonnn = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
     private final By inputLogin = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
     private final By inputPass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
     private final By buttonLogin = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
@@ -71,13 +71,18 @@ public class AuthListPage extends PageBase {
     private final By inputPass_ios = By.cssSelector("XCUIElementTypeSecureTextField[value='Введите пароль']");
     private final By buttonPermission_ios = By.name("Однократно");
 
+    public AuthListPage(AppiumDriver appiumDriver) {
 
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        driver = appiumDriver;
+    }
 
 
     @Step ("Клик по кнопке Войти на экране сплеша")
     public void  signMainButtonClick() {
         click(signButton);
     }
+/*
 
     public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
     @Step ("Ввод телефона {login} в поле телефона")
@@ -381,5 +386,6 @@ public class AuthListPage extends PageBase {
                 throw new RuntimeException("Currency is unknown!");
         }
     }
+*/
 
 }

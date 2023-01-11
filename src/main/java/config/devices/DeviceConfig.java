@@ -30,21 +30,21 @@ public class DeviceConfig {
                 Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
                 if (devices != null && devices.size() != 0) {
                     Device device = devices.get(deviceName);
-                    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device.deviceName);
+                    capabilities.setCapability("appium:deviceName", device.deviceName);
                     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, device.platformName);
-                    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, device.platformVersion);
-                    capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, device.automationName);
-                    capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
-                    capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
-                    capabilities.setCapability(MobileCapabilityType.UDID, device.udid);
+                    capabilities.setCapability("appium:platformVersion", device.platformVersion);
+                    capabilities.setCapability("appium:automationName", device.automationName);
+                    capabilities.setCapability("appium:clearSystemFiles", true);
+                    capabilities.setCapability("appium:autoGrantPermissions", true);
+                    capabilities.setCapability("appium:udid", device.udid);
                     if (device.isEmulator.contains("true")) {
-                        capabilities.setCapability(MobileCapabilityType.APP, System.getProperty("user.dir") + device.app);
-                        capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_PACKAGE, device.waitAppPackage);
-                        capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, device.appWaitActivity);
+                        capabilities.setCapability("appium:app", System.getProperty("user.dir") + device.app);
+                        capabilities.setCapability("appium:waitAppPackage", device.waitAppPackage);
+                        capabilities.setCapability("appium:waitAppActivity", device.appWaitActivity);
                     }
                     else {
-                        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, device.appActivity);
-                        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, device.appPackage);
+                        capabilities.setCapability("appium:appActivity", device.appActivity);
+                        capabilities.setCapability("appium:appPackage", device.appPackage);
                     }
                     return capabilities;
                 } else {

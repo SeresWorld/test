@@ -6,9 +6,6 @@
         <parameter name="URL_" value="http://localhost:4723/wd/hub"/>
         <classes>
             <class name="com.test.toDoAndroid">
-                <!--<methods>
-                    <include name="authValid"/>
-                </methods>-->
             </class>
         </classes>
     </test> <!-- Test -->
@@ -17,9 +14,6 @@
         <parameter name="URL_" value="http://localhost:4723/wd/hub"/>
         <classes>
             <class name="com.test.toDoAndroid">
-                <!--<methods>
-                    <include name="authValid"/>
-                </methods>-->
             </class>
         </classes>
     </test>
