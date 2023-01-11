@@ -42,7 +42,7 @@ public class PageBase extends TestBase {
 
     /**
      * Ожидание видимости элемента в течение 10 секунд.
-     * @param element локатор элемента
+     * @param element элемент By
      */
     @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
     public void waitForVisability(By element) {
@@ -56,7 +56,7 @@ public class PageBase extends TestBase {
     }
     /**
      * Ожидание видимости элемента в течение указанного времени.
-     * @param element локатор элемента
+     * @param element элемент By
      * @param WAIT время ожидания элемента
      */
     @Step("Ожидание видимости элемента {element} в течении {WAIT} секунд")
@@ -86,7 +86,7 @@ public class PageBase extends TestBase {
 
     /**
      * Ожидание кликабельности элемента в течение указанного времени.
-     * @param element локатор элемента
+     * @param element элемент By
      * @param timer время ожидания кликабельности
      */
     @Step("Ожидание {timer} секунд элемента {element}")
@@ -103,7 +103,7 @@ public class PageBase extends TestBase {
 
     /**
      * Поиск текста в указанном элементе
-     * @param element локатор элемента
+     * @param element элемент By
      * @param text текст, который необходимо найти в элементе
      */
     @Step("Проверка совпадения текста элемента '{text_element}' и текста '{text}'")
@@ -120,7 +120,7 @@ public class PageBase extends TestBase {
 
     /**
      * Очистка поля указываемого элемента.
-     * @param element локатор элемента
+     * @param element элемент By
      */
     @Step("Очистка поля '{element}'")
     public void clear(MobileElement element) {
@@ -135,7 +135,7 @@ public class PageBase extends TestBase {
 
     /**
      * Клик по указанному элементу.
-     * @param element локатор элемента
+     * @param element элемент By
      */
     @Step("Клик по элементу '{element}'")
     public void click(By element) {
@@ -182,7 +182,7 @@ public class PageBase extends TestBase {
     }
     /**
      * Возвращает текст указанного элемента.
-     * @param element локатор элемента
+     * @param element элемент By
      * @return возвращает текст элемента в виде строки
      */
     @Step("Получение текста элемента '{element}'")
@@ -217,7 +217,7 @@ public class PageBase extends TestBase {
 
     /**
      * Ввод указанного текста в поле элемента.
-     * @param element локатор элемента
+     * @param element элемент By
      * @param text текст для ввода
      */
     @Step("Ввод текста '{text}' в элемент '{element}'")
@@ -232,7 +232,7 @@ public class PageBase extends TestBase {
     }
     /**
      * Возвращает указанный аттрибут элемента.
-     * @param element локатор элемента
+     * @param element элемент By
      * @param attribute аттрибут, который нужно получить
      */
     @Step("Получение аттрибута у элемента '{element}'")
@@ -379,7 +379,7 @@ public class PageBase extends TestBase {
     }
     /**
      * Скролл экрана вниз от стартовой точки в виде элемента до конечной.
-     * @param elem локатор элемента
+     * @param elem элемент By
      * @see PageBase#swipeElementAndroid(By, Direction)
      * @see PageBase#swipeElementIOS(MobileElement, Direction)
      */
@@ -421,7 +421,7 @@ public class PageBase extends TestBase {
     /**
      * Скролл экрана вниз от стартовой точки в виде элемента до конечной в указанном направлении.
      * Точка окончания указывается выше стартовой.
-     * @param elem локатор элемента
+     * @param elem элемент By
      * @param dir направление для свайпа
      * Доступные варианты: UP (от низа к верху), DOWN (от верха к низу), LEFT (справа налево), RIGHT (слева направо).
      * @see PageBase#swipeElementIOS(MobileElement, Direction)
@@ -502,7 +502,7 @@ public class PageBase extends TestBase {
     /**
      * Скролл экрана вниз от стартовой точки до конечной в течении указанного времени.
      * Точка окончания указывается выше стартовой.
-     * @param element локатор элемента
+     * @param element элемент By
      * @param duration время зажатия элемента
      * @see PageBase#click(By)
      */
