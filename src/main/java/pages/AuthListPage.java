@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 /**
@@ -21,9 +23,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AuthListPage extends PageBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
-
-    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
-    WebElement signButton;
+    @FindAll(
+            {
+            @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login"),
+            @FindBy(name = "Войти")
+            }
+    ) WebElement signButton;
 
     private final By signButtonnn = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
     private final By inputLogin = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
