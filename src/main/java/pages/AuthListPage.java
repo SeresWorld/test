@@ -20,9 +20,9 @@ import org.openqa.selenium.support.*;
 
 public class AuthListPage extends PageBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
-    @FindAll( //перебор работает только с одинаковыми типами локаторов
+    @FindAll(
             {
-                    @FindBy(xpath = "//android.widget.Button[@text=\"Войти\"]"),
+                    @FindBy(xpath = "//android.widget.Button[@text=\"блаблабла\"]"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
             }
     ) WebElement signButton;
