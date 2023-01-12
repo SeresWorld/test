@@ -22,7 +22,7 @@ public class AuthListPage extends PageBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     @FindAll( //перебор работает только с одинаковыми типами локаторов
             {
-                    @FindBy(id = "Войти"),
+                    @FindBy(xpath = "//android.widget.Button[@text=\"Войти\"]"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
             }
     ) WebElement signButton;
@@ -84,6 +84,7 @@ public class AuthListPage extends PageBase {
     public void  signMainButtonClick() {
         click(signButton);
     }
+
 /*
 
     public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
