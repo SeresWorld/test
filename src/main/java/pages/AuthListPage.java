@@ -73,7 +73,7 @@ public class AuthListPage extends PageBase {
 
     public AuthListPage(AppiumDriver appiumDriver) {
 
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        PageFactory.initElements(driver, this);
         driver = appiumDriver;
     }
 
