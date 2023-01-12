@@ -56,5 +56,13 @@ public class DeviceConfig {
         }
         return options;
     }
+
+    public static String getSystemPort(String deviceName) {
+
+        Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
+        Device device = devices.get(deviceName);
+
+        return device.serverPort;
+    }
 }
 

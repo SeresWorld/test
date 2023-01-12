@@ -48,16 +48,17 @@ public class TestBase {
         logger.info("Start suite: " + suiteName);
 
     }
-    @Parameters({"deviceName_", "URL_"})
+    @Parameters("deviceName_")
     @BeforeMethod(alwaysRun = true)
-    public void setUpAndroid(Method method, String deviceName_, String URL_) throws MalformedURLException {
+    public void setUpAndroid(Method method, String deviceName_) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
 
         try {
             logger.info("Device: " + deviceName_);
             UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
-            driver = new AppiumDriver(new URL(URL_), options);
+            String systemPort = DeviceConfig.getSystemPort(deviceName_);
+            driver = new AppiumDriver(new URL("http://localhost:" + systemPort +"/wd/hub"), options);
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
