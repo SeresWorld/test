@@ -11,10 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 
 /**
  * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
@@ -23,10 +20,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AuthListPage extends PageBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
-    @FindAll(
+    @FindAll( //перебор работает только с одинаковыми типами локаторов
             {
-            @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login"),
-            @FindBy(name = "Войти")
+                    @FindBy(id = "Войти"),
+                    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
             }
     ) WebElement signButton;
 
