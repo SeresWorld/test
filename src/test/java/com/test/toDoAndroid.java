@@ -17,8 +17,9 @@ public class toDoAndroid extends TestBase {
     @Story("Авторизация с валидными данными")
     @Test(groups = {"Auth screen"})
     public void authValid() {
-
         authListPage = new AuthListPage(driver);
         authListPage.signMainButtonClick();
+        authListPage.setInputLogin("");
+        authListPage.setInputPass("");
     }
 }

@@ -27,10 +27,24 @@ public class AuthListPage extends PageBase {
             }
     ) WebElement signButton;
 
-    private final By signButtonnn = By.id("kz.bcc.starbanking.stage:id/fragment_welcome_login");
-    private final By inputLogin = By.id("kz.bcc.starbanking.stage:id/view_anketa_edit_input");
-    private final By inputPass = By.xpath("//android.widget.EditText[@text='Введите пароль']");
-    private final By buttonLogin = By.id("kz.bcc.starbanking.stage:id/fragment_login_enter");
+    @FindAll(
+            {
+                    @FindBy(id = "\"kz.bcc.starbanking.stage:id/view_anketa_edit_input\"")
+            }
+    ) WebElement inputLogin;
+
+    @FindAll(
+            {
+                    @FindBy(xpath = "//android.widget.EditText[@text='Введите пароль']")
+            }
+    ) WebElement inputPass;
+
+    @FindAll(
+            {
+                    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_login_enter")
+            }
+    ) WebElement buttonLogin;
+
     private final By buttonPermission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
     private final By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
     private final By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
@@ -85,16 +99,25 @@ public class AuthListPage extends PageBase {
         click(signButton);
     }
 
-/*
+    @Step ("Ввод пароля '{pass}' в поле пароля")
+    public void setInputPass(String pass) {
+        sendText(inputPass, pass);
+    }
 
-    public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
+    @Step ("Клик по кнопке 'Войти' на экране авторизации")
+    public void signCompleteButtonClick() {click(buttonLogin);}
+
     @Step ("Ввод телефона {login} в поле телефона")
     public void setInputLogin(String login) {
         explicitWaitToClickable(inputLogin, 10);
         sendText(inputLogin, login);
     }
+/*
+
+    public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
+
     @Step
-    public void setinputLogin_ios(String login) {
+    public void setInputLogin_ios(String login) {
         MobileElement input = (MobileElement) driver.findElement(inputLogin_ios);
         sendText(input, login);
     }
@@ -104,7 +127,7 @@ public class AuthListPage extends PageBase {
     public void sign_complete_button_click_ios() {click((MobileElement) driver.findElement(signButton_ios));}
 
     @Step ("Ввод пароля '{pass}' в поле пароля")
-    public void setinputPass(String pass) {
+    public void setInputPass(String pass) {
         sendText(inputPass, pass);
     }
     @Step
@@ -245,7 +268,7 @@ public class AuthListPage extends PageBase {
     public void checkCurrentInvestBillIsNotEmpty () {
         List<MobileElement> info = driver.findElements(currentBillFrom);
         for (MobileElement el : info) {
-            String elText = el.getText();
+            String elText = el.>getText();
             if (elText.contains("Текущий счет для инвестиционной деятельности")) {
                 String currentMoney = elText.replaceAll("[^-0-9.]+", "");
                 Assert.assertTrue(

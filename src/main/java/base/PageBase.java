@@ -65,6 +65,16 @@ public class PageBase extends TestBase {
     }
 
     @Step
+    public void explicitWaitToClickable(WebElement element, long seconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        } catch (TimeoutException ex) {
+            logger.error("Not found element: " + element);
+        }
+    }
+
+    @Step
     public String getText(WebElement element) {
         waitForVisability(element);
 
