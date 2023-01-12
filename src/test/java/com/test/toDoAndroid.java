@@ -19,7 +19,9 @@ public class toDoAndroid extends TestBase {
     public void authValid() {
         authListPage = new AuthListPage(driver);
         authListPage.signMainButtonClick();
-        authListPage.setInputLogin("");
-        authListPage.setInputPass("");
+        authListPage.setInputLogin("7756655544");
+        authListPage.setInputPass("orapas123");
+        authListPage.signCompleteButtonClick();
+        authListPage.tryButtonPermissionClick();
     }
 }

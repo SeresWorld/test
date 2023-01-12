@@ -29,7 +29,7 @@ public class AuthListPage extends PageBase {
 
     @FindAll(
             {
-                    @FindBy(id = "\"kz.bcc.starbanking.stage:id/view_anketa_edit_input\"")
+                    @FindBy(id = "kz.bcc.starbanking.stage:id/view_anketa_edit_input")
             }
     ) WebElement inputLogin;
 
@@ -45,7 +45,12 @@ public class AuthListPage extends PageBase {
             }
     ) WebElement buttonLogin;
 
-    private final By buttonPermission = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+    @FindAll(
+    {
+        @FindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+    }
+    ) WebElement buttonPermission;
+
     private final By codeText = By.id("kz.bcc.starbanking.stage:id/passcode_fragment_subtitle");
     private final By codeFirst = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
     private final By codeFirstRepeat = By.xpath("//android.widget.LinearLayout[@bounds='[94,1035][324,1332]']");
@@ -112,6 +117,16 @@ public class AuthListPage extends PageBase {
         explicitWaitToClickable(inputLogin, 10);
         sendText(inputLogin, login);
     }
+
+    @Step ("Попытка клика по кнопке разрешения на получение геолокации")
+    public void tryButtonPermissionClick() {
+        try {
+            click(buttonPermission);
+        } catch (Exception exception) {
+            logger.info("Permission has not found");
+        }
+
+    }
 /*
 
     public void signMainButtonClick_ios() {click((MobileElement) driver.findElement(signButton_ios));}
@@ -136,7 +151,7 @@ public class AuthListPage extends PageBase {
         sendText(input, pass);
     }
     @Step ("Попытка клика по кнопке разрешения на получение геолокации")
-    public void try_buttonPermission_click() {
+    public void tryButtonPermissionClick() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(buttonPermission)).click();
