@@ -32,7 +32,7 @@ public class DeviceConfig {
                     Device device = devices.get(deviceName);
                     capabilities.setCapability("appium:deviceName", device.deviceName);
                     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, device.platformName);
-                    capabilities.setCapability("appium:platformVersion", device.platformVersion);
+                    capabilities.setCapability("appium:platformVersion", device.platformVersion); //"appium:platformVersion"
                     capabilities.setCapability("appium:automationName", device.automationName);
                     capabilities.setCapability("appium:clearSystemFiles", true);
                     capabilities.setCapability("appium:autoGrantPermissions", true);

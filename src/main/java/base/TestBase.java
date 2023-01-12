@@ -57,15 +57,12 @@ public class TestBase {
             logger.info("Device: " + deviceName_);
             DesiredCapabilities desiredCapabilities = DeviceConfig.getCaps(ANDROID, deviceName_);
             driver = new AppiumDriver(new URL(URL_), desiredCapabilities);
-            Thread.sleep(5000);
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
         } catch (SessionNotCreatedException sessionNotCreatedException) {
             logger.error("Session has not been created");
             throw sessionNotCreatedException;
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
