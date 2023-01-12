@@ -22,7 +22,7 @@ public class PageBase extends TestBase {
     /**
      * Клик по указанному элементу.
      *
-     * @param element элемент MobileElement
+     * @param element элемент WebElement
      */
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
