@@ -3,5 +3,5 @@
 apps/.DS_Store
 apps/.DS_Store
 *.log
-
+/allure-results
 *.json
