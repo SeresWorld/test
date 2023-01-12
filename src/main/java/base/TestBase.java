@@ -4,6 +4,7 @@ package base;
 import config.devices.DeviceConfig;
 import config.environment.ThreadEnvironment;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,8 +56,8 @@ public class TestBase {
 
         try {
             logger.info("Device: " + deviceName_);
-            DesiredCapabilities desiredCapabilities = DeviceConfig.getCaps(ANDROID, deviceName_);
-            driver = new AppiumDriver(new URL(URL_), desiredCapabilities);
+            UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
+            driver = new AppiumDriver(new URL(URL_), options);
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();

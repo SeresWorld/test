@@ -48,7 +48,7 @@ public class ConfigReader {
 
                 Device device = new Device();
                 device.deviceId = element.getAttribute("id");
-                device.isEmulator = element.getElementsByTagName("isEmulator").item(0).getTextContent();
+                device.isEmulator = Boolean.parseBoolean(element.getElementsByTagName("isEmulator").item(0).getTextContent());
                 device.platformName = element.getElementsByTagName("platformName").item(0).getTextContent();
                 device.deviceName = element.getElementsByTagName("deviceName").item(0).getTextContent();
                 device.automationName = element.getElementsByTagName("automationName").item(0).getTextContent();
@@ -56,7 +56,7 @@ public class ConfigReader {
                 device.udid = element.getElementsByTagName("udid").item(0).getTextContent();
                 device.serverPort = element.getElementsByTagName("serverPort").item(0).getTextContent();
 
-                if (device.isEmulator.equals("true")) {
+                if (device.isEmulator) {
                     device.app = element.getElementsByTagName("app").item(0).getTextContent();
                     device.waitAppPackage = element.getElementsByTagName("waitAppPackage").item(0).getTextContent();
                     device.appWaitActivity = element.getElementsByTagName("appWaitActivity").item(0).getTextContent();

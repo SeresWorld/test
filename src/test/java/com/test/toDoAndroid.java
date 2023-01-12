@@ -2,7 +2,6 @@ package com.test;
 
 
 import base.TestBase;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
@@ -23,19 +22,3 @@ public class toDoAndroid extends TestBase {
         authListPage.signMainButtonClick();
     }
 }
-/*
-
-    @Story("Авторизация с невалидными данными")
-    @Test(groups = {"Auth screen"})
-    public void authInvalid() {
-
-        authListPage = new AuthListPage(driver);
-        authListPage.signMainButtonClick();
-        authListPage.setInputLogin("0123456789");
-        authListPage.setinputPass("123");
-        authListPage.sign_complete_button_click();
-        authListPage.try_buttonPermission_click();
-        authListPage.check_text_androidMessage("Не верный логин или пароль");
-    }
-}
-*/

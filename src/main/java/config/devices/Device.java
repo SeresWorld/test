@@ -17,7 +17,7 @@ public class Device {
     public String automationName;
 
     public String app;
-    public String isEmulator;
+    public boolean isEmulator;
     public String udid;
     public String serverPort;
     public String waitAppPackage;

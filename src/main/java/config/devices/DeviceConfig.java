@@ -1,6 +1,7 @@
 package config.devices;
 
 import base.TestBase;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.hu.De;
@@ -23,30 +24,29 @@ import static io.appium.java_client.remote.MobilePlatform.IOS;
 public class DeviceConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
-    public static DesiredCapabilities getCaps(String platform, String deviceName) {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+    public static UiAutomator2Options getCaps(String platform, String deviceName) {
+        UiAutomator2Options options = new UiAutomator2Options();
         switch (platform) {
             case ANDROID:
                 Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
                 if (devices != null && devices.size() != 0) {
                     Device device = devices.get(deviceName);
-                    capabilities.setCapability("appium:deviceName", device.deviceName);
-                    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, device.platformName);
-                    capabilities.setCapability("appium:platformVersion", device.platformVersion); //"appium:platformVersion"
-                    capabilities.setCapability("appium:automationName", device.automationName);
-                    capabilities.setCapability("appium:clearSystemFiles", true);
-                    capabilities.setCapability("appium:autoGrantPermissions", true);
-                    capabilities.setCapability("appium:udid", device.udid);
-                    if (device.isEmulator.contains("true")) {
-                        capabilities.setCapability("appium:app", System.getProperty("user.dir") + device.app);
-                        capabilities.setCapability("appium:waitAppPackage", device.waitAppPackage);
-                        capabilities.setCapability("appium:waitAppActivity", device.appWaitActivity);
+                    options.setDeviceName(device.deviceName)
+                            .setPlatformName(device.platformName)
+                            .setPlatformVersion(device.platformVersion)
+                            .setAutomationName(device.automationName)
+                            .setClearSystemFiles(true)
+                            .setUdid(device.udid);
+                    if (device.isEmulator) {
+                        options.setApp(System.getProperty("user.dir") + device.app)
+                                .setAppWaitPackage(device.waitAppPackage)
+                                .setAppWaitActivity(device.appWaitActivity);
                     }
                     else {
-                        capabilities.setCapability("appium:appActivity", device.appActivity);
-                        capabilities.setCapability("appium:appPackage", device.appPackage);
+                        options.setAppActivity(device.appActivity)
+                                .setAppPackage(device.appPackage);
                     }
-                    return capabilities;
+                    return options;
                 } else {
                     logger.error("Devices list is empty");
                     throw new RuntimeException("Список устройств пуст");
@@ -54,7 +54,7 @@ public class DeviceConfig {
             case IOS:
                 return null; //для доработки
         }
-        return capabilities;
+        return options;
     }
 }
 
