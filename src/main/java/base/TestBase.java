@@ -40,13 +40,16 @@ public class TestBase {
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
+    int threadCount;
+
 
 
     @BeforeSuite
     public void beforeSuite(ITestContext ctx) {
+
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Start suite: " + suiteName);
-
+        threadCount = ctx.getCurrentXmlTest().getSuite().getThreadCount();
     }
     @Parameters("deviceName_")
     @BeforeMethod(alwaysRun = true)
@@ -59,6 +62,7 @@ public class TestBase {
             UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
             String systemPort = DeviceConfig.getSystemPort(deviceName_);
             driver = new AppiumDriver(new URL("http://localhost:" + systemPort +"/wd/hub"), options);
+
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
@@ -77,13 +81,11 @@ public class TestBase {
                 logger.error("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
             logger.info("Teardown method:" + tr.getMethod() + "\n");
-            driver.quit();
         }
-
     }
 
     @AfterSuite
-    public void tearDownSuite(ITestContext ctx) {
+    public void tearDownSuite(ITestContext ctx) throws InterruptedException {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Teardown suite: " + suiteName);
     }

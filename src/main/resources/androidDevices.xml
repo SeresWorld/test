@@ -17,7 +17,7 @@
         <platformName>ANDROID</platformName>
         <platformVersion>13</platformVersion>
         <udid>emulator-5554</udid>
-        <serverPort>4723</serverPort>
+        <serverPort>4724</serverPort>
         <app>/apps/release-3.4.28-test.apk</app>
         <waitAppPackage>kz.bcc.starbanking.stage</waitAppPackage>
         <appWaitActivity>kz.bcc.starbanking.ui.screens.auth.AuthActivity</appWaitActivity>>
