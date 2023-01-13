@@ -13,7 +13,6 @@ import pages.AuthListPage;
 public class toDoAndroid extends TestBase {
     AuthListPage authListPage;
 
-
     @Story("Авторизация с валидными данными")
     @Test(groups = {"Auth screen"})
     public void authValid() {
@@ -25,9 +24,4 @@ public class toDoAndroid extends TestBase {
         authListPage.tryButtonPermissionClick();
     }
 
-    @Test(groups = {"Auth screen"})
-    public void longPressTest() {
-        authListPage = new AuthListPage(driver);
-        authListPage.longPressSign();
-    }
 }

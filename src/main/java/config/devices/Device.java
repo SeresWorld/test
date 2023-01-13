@@ -1,5 +1,8 @@
 package config.devices;
 
+/**
+ * В этом классе объявляются все переменные для объекта Device
+ */
 
 public class Device {
     public String deviceId;

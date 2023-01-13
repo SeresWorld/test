@@ -2,12 +2,8 @@ package config.devices;
 
 import base.TestBase;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.cucumber.java.hu.De;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.ConfigReader;
 
 import java.util.Map;
@@ -17,7 +13,7 @@ import static io.appium.java_client.remote.MobilePlatform.IOS;
 
 /**
  * Класс DeviceConfig собирает capabilities из файла конфигурации с помощью XMLReader (пакет utils)
- * и возвращает список готовых наборов capabilities для каждого устройства из файла.
+ * и возвращает список готовых наборов capabilities для передаваемого названия устройства.
  * @see ConfigReader#xmlReader(String)
  */
 
@@ -52,17 +48,29 @@ public class DeviceConfig {
                     throw new RuntimeException("Список устройств пуст");
                 }
             case IOS:
-                return null; //для доработки
+                return null; // TODO
         }
         return options;
     }
 
+    /**
+     * Получение порта устройства из файла xml
+     * @param deviceName название устройства
+     * @return порт устройства в виде строки
+     */
     public static String getSystemPort(String deviceName) {
 
         Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/androidDevices.xml");
-        Device device = devices.get(deviceName);
+        String devicePort;
+        try {
+            Device device = devices.get(deviceName);
+            devicePort = device.serverPort;
+        } catch (NullPointerException ex) {
+            logger.error("Device" + deviceName + "is not found");
+            throw ex;
+        }
 
-        return device.serverPort;
+        return devicePort;
     }
 }
 

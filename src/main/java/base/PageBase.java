@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -25,8 +24,8 @@ import java.util.Collections;
 public class PageBase extends TestBase {
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
-
-    Duration WAIT = Duration.ofSeconds(10);
+    // статическая переменная ожидания
+    private final Duration WAIT = Duration.ofSeconds(10);
 
     /**
      * Простой тап по указанному элементу.
@@ -64,7 +63,8 @@ public class PageBase extends TestBase {
      * @param element элемент типа WebElement.
      * @param seconds время ожидания кликабельности в секундах.
      */
-    @Step
+
+    @Step ("Ожидание кликабельности элемента {element} в течении {seconds} секунд")
     public void waitForClickable(WebElement element, long seconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -78,7 +78,7 @@ public class PageBase extends TestBase {
      * Ожидание видимости элемента в течение 10 секунд.
      * @param element элемент типа WebElement.
      */
-    @Step
+    @Step ("Ожидание видимости элемента {element}")
     public void waitForVisability(WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT);
@@ -93,7 +93,7 @@ public class PageBase extends TestBase {
      * @param element элемент типа WebElement.
      * @param seconds время ожидания видимости в секундах.
      */
-    @Step
+    @Step ("Ожидание видимости элемента {element}")
     public void waitForVisability(WebElement element, long seconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -109,7 +109,7 @@ public class PageBase extends TestBase {
      * @return строку String.
      * @see PageBase#sendText(WebElement, String) 
      */
-    @Step
+    @Step ("Получение текста элемента {element}")
     public String getText(WebElement element) {
         waitForVisability(element);
 
@@ -121,7 +121,7 @@ public class PageBase extends TestBase {
      * @param text строка для ввода в элемент.
      * @see PageBase#getText(WebElement) 
      */
-    @Step
+    @Step ("Отправка текста '{text}' в элемент {element}")
     public void sendText(WebElement element, String text) {
         waitForVisability(element);
         element.sendKeys(text);
@@ -133,7 +133,7 @@ public class PageBase extends TestBase {
      * @param attribute название аттрибута, значение которого нужно получить.
      * @return строку String со значением аттрибута.
      */
-    @Step
+    @Step ("Получение аттрибута '{attribute}' элемента {element}")
     public String getAttribute(WebElement element, String attribute) {
         waitForVisability(element);
         return element.getAttribute(attribute);
@@ -145,29 +145,40 @@ public class PageBase extends TestBase {
      *             Область должна иметь признак scrollable = true.
      * @see PageBase#horizontalScroll(WebElement) 
      */
-    @Step
+    @Step ("Вертикальный скролл элемента {element}")
     public void verticalScroll(WebElement area) {
+        // создаем точки центра экрана по оси Y, центра экрана по оси X начала, центра экрана по оси X конца
+
         int centerX = area.getRect().x + (area.getSize().width/2);
 
         double startY = area.getRect().y + (area.getSize().height * 0.9);
 
         double endY = area.getRect().y + (area.getSize().height * 0.1);
 
+        // создаем объект PointerInput в виде нажатия на экран
+
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-
+        // создаем объект последовательности действий
         Sequence swipe = new Sequence(finger, 1);
-
+        // наводим палец на объект
         swipe.addAction(finger.createPointerMove(Duration.ofSeconds(0),PointerInput.Origin.viewport(),centerX,(int)startY));
-        //Finger comes down into contact with screen
+        // опускаем палец на экран
         swipe.addAction(finger.createPointerDown(0));
-        //Finger moves to end position
+        // двигаем палец в течении 700 мс в конечную точку
         swipe.addAction(finger.createPointerMove(Duration.ofMillis(700),
                 PointerInput.Origin.viewport(),centerX, (int)endY));
-        //Get up Finger from Srceen
+        // поднимаем палец с экрана
         swipe.addAction(finger.createPointerUp(0));
 
-        //Perform the actions
+        // выполняем последовательность действий
         driver.perform(Collections.singletonList(swipe));
+
+        try{
+            Thread.sleep(3000);
+        }catch (Exception ex){
+            logger.error("Can't scroll element: " + area);
+            ex.printStackTrace();
+        }
 
     }
     /**
@@ -176,6 +187,7 @@ public class PageBase extends TestBase {
      *             Область должна иметь признак scrollable = true.
      * @see PageBase#verticalScroll(WebElement) 
      */
+    @Step ("Горизонтальный скролл элемента {element}")
     public void horizontalScroll(WebElement area){
 
         // создаем точки центра экрана по оси Y, центра экрана по оси X начала, центра экрана по оси X конца
@@ -208,6 +220,7 @@ public class PageBase extends TestBase {
         try{
             Thread.sleep(3000);
         }catch (Exception ex){
+            logger.error("Can't scroll element: " + area);
             ex.printStackTrace();
         }
 
@@ -218,6 +231,7 @@ public class PageBase extends TestBase {
      * @param element элемент типа WebElement.
      * @param milliseconds время удержания пальца на элементе (в миллисекундах).
      */
+    @Step ("Нажатие элемента {element} в течении {milliseconds} миллисекунд")
     public void longPressElement(WebElement element, int milliseconds) {
         // создаем объект локации элемента
         Point location = element.getLocation();
