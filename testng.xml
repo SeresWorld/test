@@ -8,11 +8,11 @@
             </class>
         </classes>
     </test> <!-- Test -->
-    <!--<test name="Emulator">
+    <test name="Emulator">
         <parameter name="deviceName_" value="Android Emulator"/>
         <classes>
             <class name="com.test.toDoAndroid">
             </class>
         </classes>
-    </test>-->
+    </test>
 </suite> <!-- Suite -->
