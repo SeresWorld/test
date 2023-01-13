@@ -24,4 +24,10 @@ public class toDoAndroid extends TestBase {
         authListPage.signCompleteButtonClick();
         authListPage.tryButtonPermissionClick();
     }
+
+    @Test(groups = {"Auth screen"})
+    public void longPressTest() {
+        authListPage = new AuthListPage(driver);
+        authListPage.longPressSign();
+    }
 }

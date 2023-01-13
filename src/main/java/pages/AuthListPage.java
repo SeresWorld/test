@@ -114,7 +114,7 @@ public class AuthListPage extends PageBase {
 
     @Step ("Ввод телефона {login} в поле телефона")
     public void setInputLogin(String login) {
-        explicitWaitToClickable(inputLogin, 10);
+        waitForClickable(inputLogin, 10);
         sendText(inputLogin, login);
     }
 
@@ -125,7 +125,15 @@ public class AuthListPage extends PageBase {
         } catch (Exception exception) {
             logger.info("Permission has not found");
         }
+    }
 
+    @Step ("....")
+    public void longPressSign() {
+        try {
+            longPressElement(signButton, 2000);
+        } catch (Exception exception) {
+            logger.info("Permission has not found");
+        }
     }
 /*
 

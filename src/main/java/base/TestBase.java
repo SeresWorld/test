@@ -77,7 +77,6 @@ public class TestBase {
                 logger.error("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
             logger.info("Teardown method:" + tr.getMethod() + "\n");
-            driver.quit();
         }
 
     }
@@ -86,6 +85,7 @@ public class TestBase {
     public void tearDownSuite(ITestContext ctx) {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Teardown suite: " + suiteName);
+        driver.quit();
     }
 
 
