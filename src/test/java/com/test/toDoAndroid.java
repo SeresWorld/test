@@ -22,6 +22,7 @@ public class toDoAndroid extends TestBase {
         authListPage.setInputPass("orapas123");
         authListPage.signCompleteButtonClick();
         authListPage.tryButtonPermissionClick();
+        authListPage.setButtonsCode();
     }
 
 }

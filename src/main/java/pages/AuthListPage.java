@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -49,12 +50,21 @@ public class AuthListPage extends PageBase {
     }
     ) WebElement buttonPermission;
 
+    @FindBy(xpath = "//android.widget.TextView[@text=\"1\"]")
+    WebElement codeFirst;
+
+
     public AuthListPage(AppiumDriver appiumDriver) {
 
         PageFactory.initElements(driver, this);
         driver = appiumDriver;
     }
 
+    @Step ("Ввод четырехзначного кода два раза")
+    public void setButtonsCode () {
+        waitForClickable(codeFirst, 30);
+        for (int i = 0; i < 8; i++) {click(codeFirst);}
+    }
 
     @Step ("Клик по кнопке Войти на экране сплеша")
     public void  signMainButtonClick() {
