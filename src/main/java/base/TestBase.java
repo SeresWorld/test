@@ -40,7 +40,7 @@ public class TestBase {
 
     /**
      * Объявление начала выполнения сьюта. Старт Appium сервера.
-     * @param ctx
+     * @param ctx параметр, содержащий данные о тестовой сессии
      */
     @BeforeSuite
     public void beforeSuite(ITestContext ctx) {
@@ -78,7 +78,7 @@ public class TestBase {
 
     /**
      * Окончание метода сопровождается проверкой на статус теста. Если он провален - делается скриншот экрана.
-     * @param tr результат теста.
+     * @param tr параметр, содержащий результат теста.
      */
     @AfterMethod
     public void tearDown(ITestResult tr) {
@@ -90,7 +90,6 @@ public class TestBase {
             }
             logger.info("Teardown method: " + tr.getMethod());
         }
-
     }
 
     /**
@@ -101,7 +100,9 @@ public class TestBase {
     public void tearDownSuite(ITestContext ctx) {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Teardown suite: " + suiteName);
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
         appiumServer.stopAppiumServer();
     }
 
