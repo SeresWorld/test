@@ -4,6 +4,7 @@ import base.TestBase;
 import config.devices.Device;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -12,15 +13,47 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.XMLConstants;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
 
 /**
- * Класс ConfigReader содержит в себе метод для считывания данных конфигурации об устройстве из файла .xml.
+ * Класс ConfigReader содержит в себе методы для считывания конфигураций для глобальных свойств и свойств девайсов.
  */
 public class ConfigReader {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
+
+    public static Properties properties;
+    public static String appiumJSPath;
+    public static String serverIp;
+    public static String logLevel;
+    public static int systemPort;
+
+    // Считывание свойств из config.properties
+
+    static {
+        File globalConfigFile = new File("src/test/java/config.properties");
+
+        Properties globalProperties = new Properties();
+
+        try {
+            globalProperties.load(new FileInputStream(globalConfigFile));
+
+            properties = new Properties();
+            properties.putAll(globalProperties);
+
+        } catch (IOException e) {
+            logger.error("Error during open config file");
+            Assert.fail("Error open config file.\n" + e.getMessage());
+        }
+
+        serverIp = properties.getProperty("SERVER_IP");
+        appiumJSPath = properties.getProperty("APPIUM_JS_PATH");
+        logLevel = properties.getProperty("LOG_LEVEL");
+        systemPort = Integer.parseInt(properties.getProperty("SYSTEM_PORT"));
+
+    }
 
     /**
      * В зависимости от переданного пути до файла конфигурации, метод считывает в нем все доступные capabilities
@@ -74,6 +107,8 @@ public class ConfigReader {
         }
         return null;
     }
+
+
 
 
 }

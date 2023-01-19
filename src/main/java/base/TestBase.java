@@ -1,27 +1,25 @@
 package base;
 
 
+import config.AppiumServerConfig;
 import config.devices.DeviceConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
@@ -33,37 +31,22 @@ import static io.appium.java_client.remote.MobilePlatform.ANDROID;
  */
 
 public class TestBase {
-    private static AppiumDriverLocalService service;
 
     public static AppiumDriver driver;
+    public static AppiumServerConfig appiumServer = new AppiumServerConfig();
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     /**
-     * Объявление начала выполнения сьюта.
+     * Объявление начала выполнения сьюта. Старт Appium сервера.
      * @param ctx
      */
     @BeforeSuite
     public void beforeSuite(ITestContext ctx) {
-        
-        AppiumServiceBuilder builder = new AppiumServiceBuilder().withArgument(() -> "--base-path", "/wd/hub");;
-
-        builder.withIPAddress("0.0.0.0").usingPort(4723);
-
-        // Tell builder where Appium is installed. Or set this path in an environment variable named APPIUM_PATH
-        builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
-
-
-        HashMap<String, String> environment = new HashMap<>();
-        environment.put("PATH", "/usr/local/bin:" + System.getenv("PATH"));
-        builder.withEnvironment(environment);
-
-
-        service = AppiumDriverLocalService.buildService(builder);
-        service.start();
-
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Start suite: " + suiteName);
+        
+        appiumServer.startAppiumServer();
     }
 
     /**
@@ -82,12 +65,12 @@ public class TestBase {
             logger.info("Device: " + deviceName_);
             UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
             String systemPort = DeviceConfig.getSystemPort(deviceName_);
-            driver = new AppiumDriver(new URL("http://localhost:" + systemPort +"/wd/hub"), options);
+            driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), options);
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();
         } catch (SessionNotCreatedException sessionNotCreatedException) {
-            logger.error("Session has not been created");
+            logger.error("Session has not been created\n");
             throw sessionNotCreatedException;
         }
     }
@@ -104,13 +87,13 @@ public class TestBase {
                         ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
                 logger.error("Test " + tr.getMethod().getMethodName() + " has been failed...");
             }
-            logger.info("Teardown method: " + tr.getMethod() + "\n");
+            logger.info("Teardown method: " + tr.getMethod());
         }
 
     }
 
     /**
-     * Окончание сьюта и остановка драйвера
+     * Окончание сьюта: остановка драйвера, Appium сервера.
      * @param ctx
      */
     @AfterSuite
@@ -118,7 +101,7 @@ public class TestBase {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Teardown suite: " + suiteName);
         driver.quit();
-        service.stop();
+        appiumServer.stopAppiumServer();
     }
 
 }
