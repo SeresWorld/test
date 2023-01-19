@@ -14,6 +14,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.io.ByteArrayInputStream;
@@ -45,7 +46,6 @@ public class TestBase {
     public void beforeSuite(ITestContext ctx) {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         logger.info("Start suite: " + suiteName);
-        
         appiumServer.startAppiumServer();
     }
 
@@ -66,6 +66,7 @@ public class TestBase {
             UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
             String systemPort = DeviceConfig.getSystemPort(deviceName_);
             driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), options);
+
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
             ex.fillInStackTrace();

@@ -24,6 +24,8 @@ public class AppiumServerConfig {
     private static final int SYSTEM_PORT = ConfigReader.systemPort;
     private static final String APPIUM_JS_PATH = ConfigReader.appiumJSPath;
     private static final String LOG_LEVEL = ConfigReader.logLevel;
+    private static final int START_SERVER_WAIT = ConfigReader.startServerWait;
+    private static final int POLLING_EVERY_IN_SECONDS = ConfigReader.explicitWait;
 
     public void startAppiumServer() {
         logger.info("Start Appium Server...");
@@ -46,7 +48,7 @@ public class AppiumServerConfig {
         try {
             getWaiter().until(func -> {
                 service.start();
-                return !service.isRunning();
+                return service.isRunning();
             });
             logger.info("Appium Server started successfully!");
 
@@ -64,8 +66,8 @@ public class AppiumServerConfig {
 
     private FluentWait<AppiumDriverLocalService> getWaiter() {
         return new FluentWait<>(service)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(2));
+                .withTimeout(Duration.ofSeconds(START_SERVER_WAIT))
+                .pollingEvery(Duration.ofSeconds(POLLING_EVERY_IN_SECONDS));
     }
 
 }

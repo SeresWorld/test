@@ -29,6 +29,8 @@ public class ConfigReader {
     public static String serverIp;
     public static String logLevel;
     public static int systemPort;
+    public static int startServerWait;
+    public static int explicitWait;
 
     // Считывание свойств из config.properties
 
@@ -52,6 +54,8 @@ public class ConfigReader {
         appiumJSPath = properties.getProperty("APPIUM_JS_PATH");
         logLevel = properties.getProperty("LOG_LEVEL");
         systemPort = Integer.parseInt(properties.getProperty("SYSTEM_PORT"));
+        startServerWait = Integer.parseInt(properties.getProperty("START_SERVER_WAIT"));
+        explicitWait = Integer.parseInt(properties.getProperty("EXPLICITLY_WAIT_IN_SECONDS"));
 
     }
 

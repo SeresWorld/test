@@ -23,6 +23,4 @@ public class toDoAndroid extends TestBase {
         authListPage.signCompleteButtonClick();
         authListPage.tryButtonPermissionClick();
     }
-
-
 }
