@@ -88,6 +88,16 @@ public class PageBase extends TestBase {
         }
     }
 
+    @Step
+    public void waitForNotVisability(WebElement element, long seconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+            wait.until(ExpectedConditions.invisibilityOf(element));
+        } catch (TimeoutException ex) {
+            logger.error("Not found element: " + element);
+        }
+    }
+
     /**
      * Ожидание видимости элемента течение указанного времени.
      * @param element элемент типа WebElement.

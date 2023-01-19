@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.regex.Pattern;
+
 /**
  * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
  * Описание каждого действия завернуто в аннотации @Step.
@@ -50,8 +52,17 @@ public class AuthListPage extends PageBase {
     }
     ) WebElement buttonPermission;
 
+    @FindBy(id = "kz.bcc.starbanking.stage:id/avi")
+    WebElement loaderAccountList;
+
     @FindBy(xpath = "//android.widget.TextView[@text=\"1\"]")
     WebElement codeFirst;
+
+    @FindBy(className = "android.widget.HorizontalScrollView")
+    WebElement horizontalArea;
+
+    @FindBy(id = "kz.bcc.starbanking.stage:id/negative")
+    WebElement signInByFingerTip;
 
 
     public AuthListPage(AppiumDriver appiumDriver) {
@@ -93,5 +104,26 @@ public class AuthListPage extends PageBase {
             logger.info("Permission has not found");
         }
     }
+
+    @Step
+    public void waitForLoadAccountList() {
+        waitForNotVisability(loaderAccountList, 30);
+    }
+
+    @Step
+    public void waitForLoader() {
+        waitForVisability(loaderAccountList);
+    }
+
+    @Step
+    public void authByFingerTip() {
+        click(signInByFingerTip);
+    }
+
+    @Step
+    public void horizontalScroll() {
+        horizontalScroll(horizontalArea);
+    }
+
 
 }

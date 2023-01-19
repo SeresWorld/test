@@ -23,6 +23,10 @@ public class toDoAndroid extends TestBase {
         authListPage.signCompleteButtonClick();
         authListPage.tryButtonPermissionClick();
         authListPage.setButtonsCode();
+        authListPage.authByFingerTip();
+        authListPage.waitForLoader();
+        authListPage.waitForLoadAccountList();
+        authListPage.horizontalScroll();
     }
 
 }
