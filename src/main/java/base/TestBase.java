@@ -35,7 +35,6 @@ public class TestBase {
 
     public static AppiumDriver driver;
     public static AppiumServerConfig appiumServer = new AppiumServerConfig();
-
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
     /**

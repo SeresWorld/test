@@ -46,7 +46,7 @@ public class AppiumServerConfig {
                 // Запуск с отключенными доп. проверками безопасности
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY);
 
-        // Запускаем билдер с заданными параметрами
+        // Указываем для билдера ip, port, путь до аппиума
         builder.withIPAddress(SERVER_IP)
                 .usingPort(SYSTEM_PORT)
                 .withAppiumJS(new File(APPIUM_JS_PATH))
