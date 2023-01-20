@@ -2,7 +2,7 @@
     <device id="Redmi Note 10S">
         <deviceName>Redmi Note 10S</deviceName>
         <isEmulator>false</isEmulator>
-        <platformName>ANDROID</platformName>
+        <platformName>Android</platformName>
         <platformVersion>11</platformVersion>
         <udid>8XROHY8LJBEA7LVS</udid>
         <serverPort>4723</serverPort>
@@ -14,7 +14,7 @@
     <device id="Android Emulator">
         <deviceName>Android Emulator</deviceName>
         <isEmulator>true</isEmulator>
-        <platformName>ANDROID</platformName>
+        <platformName>Android</platformName>
         <platformVersion>13</platformVersion>
         <udid>emulator-5554</udid>
         <serverPort>4723</serverPort>

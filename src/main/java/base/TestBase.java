@@ -11,10 +11,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.TimeoutException;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.io.ByteArrayInputStream;
@@ -62,7 +60,7 @@ public class TestBase {
 
         try {
             logger.info("Device: " + deviceName_);
-            UiAutomator2Options options = DeviceConfig.getCaps(ANDROID, deviceName_);
+            UiAutomator2Options options = DeviceConfig.getCaps(deviceName_);
             String systemPort = DeviceConfig.getSystemPort(deviceName_);
             driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), options);
 
