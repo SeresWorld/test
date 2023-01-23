@@ -25,5 +25,6 @@ public class Device {
     public String serverPort;
     public String waitAppPackage;
     public String appWaitActivity;
+    public String bundleId;
 
 }

@@ -23,25 +23,28 @@ public class AuthListPage extends PageBase {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     @FindAll(
             {
-                    @FindBy(xpath = "//android.widget.Button[@text=\"блаблабла\"]"),
+                    @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Войти\"]"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_welcome_login")
             }
     ) WebElement signButton;
 
     @FindAll(
             {
+                    @FindBy(xpath = "//XCUIElementTypeTextField"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/view_anketa_edit_input")
             }
     ) WebElement inputLogin;
 
     @FindAll(
             {
+                    @FindBy(xpath = "//XCUIElementTypeSecureTextField"),
                     @FindBy(xpath = "//android.widget.EditText[@text='Введите пароль']")
             }
     ) WebElement inputPass;
 
     @FindAll(
             {
+                    @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Войти\"]"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_login_enter")
             }
     ) WebElement buttonLogin;

@@ -17,6 +17,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
+
 
 /**
  * Класс ConfigReader содержит в себе методы для считывания конфигураций для глобальных свойств и свойств девайсов.
@@ -93,15 +96,24 @@ public class ConfigReader {
                 device.udid = element.getElementsByTagName("udid").item(0).getTextContent();
                 device.serverPort = element.getElementsByTagName("serverPort").item(0).getTextContent();
 
-                if (device.isEmulator) {
-                    device.app = element.getElementsByTagName("app").item(0).getTextContent();
-                    device.waitAppPackage = element.getElementsByTagName("waitAppPackage").item(0).getTextContent();
-                    device.appWaitActivity = element.getElementsByTagName("appWaitActivity").item(0).getTextContent();
-                } else {
-                    device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();
-                    device.appPackage = element.getElementsByTagName("appPackage").item(0).getTextContent();
+                switch (device.platformName) {
+                    case ANDROID:
+                        if (device.isEmulator) {
+                            device.app = element.getElementsByTagName("app").item(0).getTextContent();
+                            device.waitAppPackage = element.getElementsByTagName("waitAppPackage").item(0).getTextContent();
+                            device.appWaitActivity = element.getElementsByTagName("appWaitActivity").item(0).getTextContent();
+                        } else {
+                            device.appActivity = element.getElementsByTagName("appActivity").item(0).getTextContent();
+                            device.appPackage = element.getElementsByTagName("appPackage").item(0).getTextContent();
+                        }
+                        break;
+                    case IOS:
+                        if (device.isEmulator) {
+                            device.bundleId = element.getElementsByTagName("bundleId").item(0).getTextContent();
+                        } else {
+                            // TODO
+                        }
                 }
-
                 devices.put(device.deviceId, device);
             }
             return devices;

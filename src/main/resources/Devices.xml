@@ -9,9 +9,8 @@
         <appActivity>kz.bcc.starbanking.ui.screens.splash.SplashActivity</appActivity>
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
-
     </device>
-    <device id="Android Emulator">
+<!--    <device id="Android Emulator">
         <deviceName>Android Emulator</deviceName>
         <isEmulator>true</isEmulator>
         <platformName>Android</platformName>
@@ -20,7 +19,17 @@
         <serverPort>4723</serverPort>
         <app>/apps/release-3.4.28-test.apk</app>
         <waitAppPackage>kz.bcc.starbanking.stage</waitAppPackage>
-        <appWaitActivity>kz.bcc.starbanking.ui.screens.auth.AuthActivity</appWaitActivity>>
+        <appWaitActivity>kz.bcc.starbanking.ui.screens.auth.AuthActivity</appWaitActivity>
         <automationName>UiAutomator2</automationName>
+    </device>-->
+    <device id="iPhone 11">
+        <deviceName>iPhone 11</deviceName>
+        <isEmulator>true</isEmulator>
+        <platformName>iOS</platformName>
+        <platformVersion>15.5</platformVersion>
+        <udid>eA4E4EA5F-E8E7-4869-8E62-7100965B2068</udid>
+        <serverPort>4723</serverPort>
+        <bundleId>kz.bcc.starbankingtest</bundleId>>
+        <automationName>XCUITest</automationName>
     </device>
 </devices>

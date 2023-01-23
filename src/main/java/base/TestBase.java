@@ -5,6 +5,7 @@ import config.AppiumServerConfig;
 import config.devices.DeviceConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
 
 
 /**
@@ -60,9 +62,17 @@ public class TestBase {
 
         try {
             logger.info("Device: " + deviceName_);
-            UiAutomator2Options options = DeviceConfig.getCaps(deviceName_);
+            String platformName = DeviceConfig.getPlatformName(deviceName_);
             String systemPort = DeviceConfig.getSystemPort(deviceName_);
-            driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), options);
+            switch (platformName) {
+                case ANDROID:
+                    UiAutomator2Options options = DeviceConfig.getAndroidCaps(deviceName_);
+                    driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), options);
+                    break;
+                case IOS:
+                    XCUITestOptions optionsIOS = DeviceConfig.getIOSCaps(deviceName_);
+                    driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), optionsIOS);
+            }
 
         } catch (NullPointerException ex) {
             logger.error("NullPointerException");
