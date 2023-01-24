@@ -10,7 +10,7 @@
         <appPackage>kz.bcc.starbanking.stage</appPackage>
         <automationName>UiAutomator2</automationName>
     </device>
-<!--    <device id="Android Emulator">
+    <device id="Android Emulator">
         <deviceName>Android Emulator</deviceName>
         <isEmulator>true</isEmulator>
         <platformName>Android</platformName>
@@ -21,13 +21,13 @@
         <waitAppPackage>kz.bcc.starbanking.stage</waitAppPackage>
         <appWaitActivity>kz.bcc.starbanking.ui.screens.auth.AuthActivity</appWaitActivity>
         <automationName>UiAutomator2</automationName>
-    </device>-->
+    </device>
     <device id="iPhone 11">
         <deviceName>iPhone 11</deviceName>
         <isEmulator>true</isEmulator>
         <platformName>iOS</platformName>
-        <platformVersion>15.5</platformVersion>
-        <udid>eA4E4EA5F-E8E7-4869-8E62-7100965B2068</udid>
+        <platformVersion>16.2</platformVersion>
+        <udid>B808AC3A-AB1A-4A51-8003-F4E1968A2ECB</udid>
         <serverPort>4723</serverPort>
         <bundleId>kz.bcc.starbankingtest</bundleId>>
         <automationName>XCUITest</automationName>

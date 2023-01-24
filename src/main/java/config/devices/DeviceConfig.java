@@ -7,8 +7,6 @@ import io.appium.java_client.ios.options.simulator.Permissions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.ConfigReader;
-
-import java.time.Duration;
 import java.util.Map;
 
 
@@ -36,7 +34,9 @@ public class DeviceConfig {
                     .setUdid(device.udid);
             if (device.isEmulator) {
                 options.setApp(System.getProperty("user.dir") + device.app)
+                        // ожидание наличия пакета приложения
                         .setAppWaitPackage(device.waitAppPackage)
+                        // ожидание наличия активности приложения
                         .setAppWaitActivity(device.appWaitActivity);
             } else {
                 options.setAppActivity(device.appActivity)
@@ -66,8 +66,6 @@ public class DeviceConfig {
                         .setShouldTerminateApp(true)
                         // автоматическое принятие разрешения на геолокацию
                         .setPermissions(new Permissions("{'kz.bcc.starbankingtest':{'location':'always'}}"));
-
-
             } else {
                 // TODO
             }
@@ -90,7 +88,7 @@ public class DeviceConfig {
             Device device = devices.get(deviceName);
             devicePort = device.serverPort;
         } catch (NullPointerException ex) {
-            logger.error("Device" + deviceName + "is not found");
+            logger.error("Device " + deviceName + " is not found");
             throw ex;
         }
 
@@ -104,7 +102,7 @@ public class DeviceConfig {
             Device device = devices.get(deviceName);
             platformName = device.platformName;
         } catch (NullPointerException ex) {
-            logger.error("Device" + deviceName + "is not found");
+            logger.error("Device " + deviceName + " is not found");
             throw ex;
         }
 

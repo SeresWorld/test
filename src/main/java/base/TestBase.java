@@ -72,10 +72,13 @@ public class TestBase {
                 case IOS:
                     XCUITestOptions optionsIOS = DeviceConfig.getIOSCaps(deviceName_);
                     driver = new AppiumDriver(new URL("http://127.0.0.1:" + systemPort +"/wd/hub"), optionsIOS);
+                    break;
+                default:
+                    logger.error("Get caps: Invalid platform name.");
+                    throw new RuntimeException("Get caps: Invalid platform name.");
             }
-
         } catch (NullPointerException ex) {
-            logger.error("NullPointerException");
+            logger.error("SetUp: NullPointerException.");
             ex.fillInStackTrace();
         } catch (SessionNotCreatedException sessionNotCreatedException) {
             logger.error("Session has not been created\n");

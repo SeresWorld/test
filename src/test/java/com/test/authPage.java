@@ -10,7 +10,7 @@ import pages.AuthListPage;
 
 
 @Epic("Android tests")
-public class toDoAndroid extends TestBase {
+public class authPage extends TestBase {
     AuthListPage authListPage;
 
     @Story("Авторизация с валидными данными")
