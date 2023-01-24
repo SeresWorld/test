@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Testing Google Apps">
-<!--    <test name="Real device">
+    <test name="Real device">
         <parameter name="deviceName_" value="Redmi Note 10S"/>
         <classes>
-            <class name="com.test.authPage">
-            </class>
-        </classes>
-    </test>-->
-<!--    <test name="Android Emulator">
-        <parameter name="deviceName_" value="Android Emulator"/>
-        <classes>
-            <class name="com.test.authPage">
-            </class>
-        </classes>
-    </test>-->
-    <test name="IOS Emulator">
-        <parameter name="deviceName_" value="iPhone 11"/>
-        <classes>
-            <class name="com.test.authPage">
+            <class name="tests.AuthPage">
             </class>
         </classes>
     </test>
+<!--    <test name="Android Emulator">
+        <parameter name="deviceName_" value="Android Emulator"/>
+        <classes>
+            <class name="tests.AuthPage">
+            </class>
+        </classes>
+    </test>
+    <test name="IOS Emulator">
+        <parameter name="deviceName_" value="iPhone 11"/>
+        <classes>
+            <class name="tests.AuthPage">
+            </class>
+        </classes>
+    </test>-->
 </suite>

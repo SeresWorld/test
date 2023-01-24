@@ -94,7 +94,12 @@ public class DeviceConfig {
 
         return devicePort;
     }
-
+    /**
+     * Получение платформы устройства из файла xml
+     *
+     * @param deviceName название устройства
+     * @return название платформы в виде строки
+     */
     public static String getPlatformName(String deviceName) {
         Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/Devices.xml");
         String platformName;

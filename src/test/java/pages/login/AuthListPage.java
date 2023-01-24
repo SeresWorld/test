@@ -1,4 +1,4 @@
-package pages;
+package pages.login;
 
 import base.PageBase;
 import base.TestBase;
@@ -6,13 +6,10 @@ import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.regex.Pattern;
 
 /**
  * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
@@ -33,39 +30,39 @@ public class AuthListPage extends PageBase {
                     @FindBy(xpath = "//XCUIElementTypeTextField"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/view_anketa_edit_input")
             }
-    ) WebElement inputLogin;
+    ) protected WebElement inputLogin;
 
     @FindAll(
             {
                     @FindBy(xpath = "//XCUIElementTypeSecureTextField"),
                     @FindBy(xpath = "//android.widget.EditText[@text='Введите пароль']")
             }
-    ) WebElement inputPass;
+    ) protected WebElement inputPass;
 
     @FindAll(
             {
                     @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Войти\"]"),
                     @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_login_enter")
             }
-    ) WebElement buttonLogin;
+    ) protected WebElement buttonLogin;
 
     @FindAll(
     {
         @FindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     }
-    ) WebElement buttonPermission;
+    ) protected WebElement buttonPermission;
 
     @FindBy(id = "kz.bcc.starbanking.stage:id/avi")
-    WebElement loaderAccountList;
+    protected WebElement loaderAccountList;
 
     @FindBy(xpath = "//android.widget.TextView[@text=\"1\"]")
-    WebElement codeFirst;
+    protected WebElement codeFirst;
 
     @FindBy(className = "android.widget.HorizontalScrollView")
-    WebElement horizontalArea;
+    protected WebElement horizontalArea;
 
     @FindBy(id = "kz.bcc.starbanking.stage:id/negative")
-    WebElement signInByFingerTip;
+    protected WebElement signInByFingerTip;
 
 
     public AuthListPage(AppiumDriver appiumDriver) {
@@ -74,58 +71,68 @@ public class AuthListPage extends PageBase {
         driver = appiumDriver;
     }
 
-    @Step ("Ввод четырехзначного кода два раза")
     public void setButtonsCode () {
         waitForClickable(codeFirst, 30);
         for (int i = 0; i < 8; i++) {click(codeFirst);}
     }
 
-    @Step ("Клик по кнопке Войти на экране сплеша")
-    public void  signMainButtonClick() {
+    public AuthListPage signMainButtonClick() {
         click(signButton);
+
+        return this;
     }
 
-    @Step ("Ввод пароля '{pass}' в поле пароля")
-    public void setInputPass(String pass) {
+    public AuthListPage setInputPass(String pass) {
         sendText(inputPass, pass);
+
+        return this;
     }
 
-    @Step ("Клик по кнопке 'Войти' на экране авторизации")
-    public void signCompleteButtonClick() {click(buttonLogin);}
+    public AuthListPage signCompleteButtonClick() {
+        click(buttonLogin);
 
-    @Step ("Ввод телефона {login} в поле телефона")
-    public void setInputLogin(String login) {
+        return this;
+    }
+
+    public AuthListPage setInputLogin(String login) {
         waitForClickable(inputLogin, 10);
         sendText(inputLogin, login);
+
+        return this;
     }
 
-    @Step ("Попытка клика по кнопке разрешения на получение геолокации")
-    public void tryButtonPermissionClick() {
+    public AuthListPage tryButtonPermissionClick() {
         try {
             click(buttonPermission);
         } catch (Exception exception) {
             logger.info("Permission has not found");
         }
+
+        return this;
     }
 
-    @Step
-    public void waitForLoadAccountList() {
+    public AuthListPage waitForLoadAccountList() {
         waitForNotVisability(loaderAccountList, 30);
+
+        return this;
     }
 
-    @Step
-    public void waitForLoader() {
+    public AuthListPage waitForLoader() {
         waitForVisability(loaderAccountList);
+
+        return this;
     }
 
-    @Step
-    public void authByFingerTip() {
+    public AuthListPage authByFingerTip() {
         click(signInByFingerTip);
-    }
 
-    @Step
-    public void horizontalScroll() {
+        return this;
+    }
+    
+    public AuthListPage horizontalScroll() {
         horizontalScroll(horizontalArea);
+
+        return this;
     }
 
 
