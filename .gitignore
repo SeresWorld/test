@@ -3,6 +3,6 @@
 apps/.DS_Store
 apps/.DS_Store
 *.log
-*ajcore*
+*ajcore.*
 *.json
 /allure-results/
