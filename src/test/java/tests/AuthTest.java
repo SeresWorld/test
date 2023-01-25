@@ -9,7 +9,7 @@ import steps.AuthSteps;
 
 
 @Epic("Android tests")
-public class AuthPage extends TestBase {
+public class AuthTest extends TestBase {
     AuthSteps authSteps;
 
     @Story("Авторизация с валидными данными")

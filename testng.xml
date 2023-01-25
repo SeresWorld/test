@@ -4,21 +4,21 @@
     <test name="Real device">
         <parameter name="deviceName_" value="Redmi Note 10S"/>
         <classes>
-            <class name="tests.AuthPage">
+            <class name="tests.AuthTest">
             </class>
         </classes>
     </test>
 <!--    <test name="Android Emulator">
         <parameter name="deviceName_" value="Android Emulator"/>
         <classes>
-            <class name="tests.AuthPage">
+            <class name="tests.AuthTest">
             </class>
         </classes>
     </test>
     <test name="IOS Emulator">
         <parameter name="deviceName_" value="iPhone 11"/>
         <classes>
-            <class name="tests.AuthPage">
+            <class name="tests.AuthTest">
             </class>
         </classes>
     </test>-->

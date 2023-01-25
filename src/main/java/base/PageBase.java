@@ -1,5 +1,6 @@
 package base;
 
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +9,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,6 +24,11 @@ import java.util.Collections;
  */
 
 public class PageBase extends TestBase {
+
+    public PageBase(AppiumDriver appiumDriver) {
+        PageFactory.initElements(driver, this);
+        driver = appiumDriver;
+    }
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     // статическая переменная ожидания

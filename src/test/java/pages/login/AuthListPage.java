@@ -17,6 +17,11 @@ import org.openqa.selenium.support.PageFactory;
  */
 
 public class AuthListPage extends PageBase {
+
+    public AuthListPage(AppiumDriver appiumDriver) {
+        super(appiumDriver);
+    }
+
     private static final Logger logger = LogManager.getLogger(TestBase.class);
     @FindAll(
             {
@@ -65,11 +70,7 @@ public class AuthListPage extends PageBase {
     protected WebElement signInByFingerTip;
 
 
-    public AuthListPage(AppiumDriver appiumDriver) {
 
-        PageFactory.initElements(driver, this);
-        driver = appiumDriver;
-    }
 
     public void setButtonsCode () {
         waitForClickable(codeFirst, 30);
@@ -128,7 +129,7 @@ public class AuthListPage extends PageBase {
 
         return this;
     }
-    
+
     public AuthListPage horizontalScroll() {
         horizontalScroll(horizontalArea);
 

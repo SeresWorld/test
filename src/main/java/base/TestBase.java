@@ -56,7 +56,7 @@ public class TestBase {
      */
     @Parameters("deviceName_")
     @BeforeMethod(alwaysRun = true)
-    public void setUpAndroid(Method method, String deviceName_) throws MalformedURLException {
+    public void setup(Method method, String deviceName_) throws MalformedURLException {
 
         logger.info("Start method: " + method.getName());
 
