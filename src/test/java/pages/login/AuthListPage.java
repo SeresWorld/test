@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -69,12 +70,12 @@ public class AuthListPage extends PageBase {
     @FindBy(id = "kz.bcc.starbanking.stage:id/negative")
     protected WebElement signInByFingerTip;
 
-
-
-
-    public void setButtonsCode () {
+    public AuthListPage setButtonsCode () {
         waitForClickable(codeFirst, 30);
-        for (int i = 0; i < 8; i++) {click(codeFirst);}
+        try {
+            while (codeFirst.isDisplayed() && codeFirst.isEnabled()) {codeFirst.click();}
+        } catch (NoSuchElementException ignored) {}
+        return this;
     }
 
     public AuthListPage signMainButtonClick() {

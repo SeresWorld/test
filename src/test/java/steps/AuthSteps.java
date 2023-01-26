@@ -17,6 +17,8 @@ public class AuthSteps {
         authListPage.signMainButtonClick()
                 .setInputLogin("7756655544")
                 .setInputPass("orapas123")
-                .signCompleteButtonClick();
+                .signCompleteButtonClick()
+                .tryButtonPermissionClick()
+                .setButtonsCode();
     }
 }
