@@ -1,6 +1,7 @@
 /target/
 .DS_Store
 apps/.DS_Store
+*.apk
 *.log
 src/main/resources/localDevices.xml
 *.json
