@@ -7,6 +7,8 @@ import io.appium.java_client.ios.options.simulator.Permissions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.ConfigReader;
+
+import java.io.File;
 import java.util.Map;
 
 
@@ -20,10 +22,30 @@ import java.util.Map;
 public class DeviceConfig {
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
+    private static final String configPath;
+
+    static {
+
+        File globalConfigFile = new File("src/main/resources/Devices.xml");
+        File localConfigFile = new File("src/main/resources/localDevices.xml");
+
+        if (localConfigFile.exists()) {
+            logger.info("Local config exists! Getting devices...");
+            configPath = localConfigFile.getPath();
+        } else if (!localConfigFile.exists() && globalConfigFile.exists()) {
+            logger.info("Local config is not found! Getting global devices...");
+            configPath = globalConfigFile.getPath();
+        } else {
+            throw new RuntimeException("Config file is not found!");
+        }
+    }
+
+
+
     public static UiAutomator2Options getAndroidCaps(String deviceName) {
         var options = new UiAutomator2Options();
 
-        Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/Devices.xml");
+        Map<String, Device> devices = ConfigReader.xmlReader(configPath);
         if (devices != null && devices.size() != 0) {
             Device device = devices.get(deviceName);
             options.setDeviceName(device.deviceName)
@@ -49,7 +71,7 @@ public class DeviceConfig {
 
     public static XCUITestOptions getIOSCaps(String deviceName) {
         var xcuiTestOptions = new XCUITestOptions();
-        Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/Devices.xml");
+        Map<String, Device> devices = ConfigReader.xmlReader(configPath);
 
         if (devices != null && devices.size() != 0) {
             Device device = devices.get(deviceName);
@@ -82,7 +104,7 @@ public class DeviceConfig {
      */
     public static String getSystemPort(String deviceName) {
 
-        Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/Devices.xml");
+        Map<String, Device> devices = ConfigReader.xmlReader(configPath);
         String devicePort;
         try {
             Device device = devices.get(deviceName);
@@ -101,7 +123,7 @@ public class DeviceConfig {
      * @return название платформы в виде строки
      */
     public static String getPlatformName(String deviceName) {
-        Map<String, Device> devices = ConfigReader.xmlReader("src/main/resources/Devices.xml");
+        Map<String, Device> devices = ConfigReader.xmlReader(configPath);
         String platformName;
         try {
             Device device = devices.get(deviceName);
