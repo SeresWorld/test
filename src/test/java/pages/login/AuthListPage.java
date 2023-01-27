@@ -48,7 +48,7 @@ public class AuthListPage extends PageBase {
     @FindAll(
             {
                     @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Войти\"]"),
-                    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_login_enter")dasdasd
+                    @FindBy(id = "kz.bcc.starbanking.stage:id/fragment_login_enter")
             }
     ) protected WebElement buttonLogin;
 
