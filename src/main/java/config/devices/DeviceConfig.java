@@ -30,12 +30,12 @@ public class DeviceConfig {
         File localConfigFile = new File("src/main/resources/localDevices.xml");
 
         if (localConfigFile.exists()) {
-            logger.info("Local config exists! Getting devices...");
             configPath = localConfigFile.getPath();
         } else if (!localConfigFile.exists() && globalConfigFile.exists()) {
             logger.info("Local config is not found! Getting global devices...");
             configPath = globalConfigFile.getPath();
         } else {
+            logger.error("Config file is not found!");
             throw new RuntimeException("Config file is not found!");
         }
     }

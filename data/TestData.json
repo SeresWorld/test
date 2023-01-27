@@ -1,14 +1,10 @@
 {
-  "Users": [
+  "Logins": [
     {
-      "hours": "11",
-      "minutes" : "00",
-      "setting": "PM"
+      "Invalid login": "knfksdsdkf"
     },
     {
-      "hours": "10",
-      "minutes" : "30",
-      "setting": "AM"
+      "Invalid login": ":@#%^&"
     }
   ]
 }

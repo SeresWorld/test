@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 /**
  * Класс AuthListPage используется для хранения всех путей для элементов на странице авторизации и действий над ними.
@@ -99,6 +100,12 @@ public class AuthListPage extends PageBase {
     public AuthListPage setInputLogin(String login) {
         waitForClickable(inputLogin, 10);
         sendText(inputLogin, login);
+
+        return this;
+    }
+
+    public AuthListPage assertLoginIsEmpty() {
+        Assert.assertTrue(inputLogin.getText().equals("+7 "), "Логин заполнен:" + inputLogin.getText());
 
         return this;
     }

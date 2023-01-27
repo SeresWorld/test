@@ -31,6 +31,7 @@ public class ConfigReader {
     public static String appiumJSPath;
     public static String serverIp;
     public static String logLevel;
+    public static String testDataPath;
     public static int systemPort;
     public static int startServerWait;
     public static int explicitWait;
@@ -59,6 +60,7 @@ public class ConfigReader {
         systemPort = Integer.parseInt(properties.getProperty("SYSTEM_PORT"));
         startServerWait = Integer.parseInt(properties.getProperty("START_SERVER_WAIT"));
         explicitWait = Integer.parseInt(properties.getProperty("EXPLICITLY_WAIT_IN_SECONDS"));
+        testDataPath = properties.getProperty("DATA_JSON_PATH");
 
     }
 
