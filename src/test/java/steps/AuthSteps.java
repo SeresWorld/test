@@ -18,11 +18,11 @@ public class AuthSteps {
         driver = appiumDriver;
     }
     @Step("Валидная авторизация")
-    public void login() {
+    public void login(String login, String password) {
         AuthListPage authListPage = new AuthListPage(driver);
         authListPage.signMainButtonClick()
-                .setInputLogin("7756655544")
-                .setInputPass("orapas123")
+                .setInputLogin(login)
+                .setInputPass(password)
                 .signCompleteButtonClick()
                 .tryButtonPermissionClick()
                 .setButtonsCode();

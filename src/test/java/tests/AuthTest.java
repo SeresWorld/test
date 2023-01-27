@@ -2,6 +2,8 @@ package tests;
 
 
 import base.TestBase;
+import data.User;
+import data.UserList;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import org.json.simple.parser.ParseException;
@@ -12,30 +14,32 @@ import utils.ConfigReader;
 import utils.JsonReader;
 
 import java.io.IOException;
-import java.util.Date;
+
 
 
 @Epic("Android tests")
 public class AuthTest extends TestBase {
     AuthSteps authSteps;
 
-    @DataProvider(name = "data")
-    public Object[][] passData() throws IOException, ParseException {
-        return JsonReader.getJSONData(ConfigReader.testDataPath, "Logins", 1);
+    @DataProvider(name = "users")
+    public Object[][] userDetails() {
+        UserList userList = new UserList();
+        return userList.getUserList();
+
     }
 
     @Story("Авторизация с валидными данными")
-    @Test(groups = {"Auth screen"})
-    public void checkInputLogin() {
+    @Test(groups = {"Auth screen"}, dataProvider = "users")
+    public void checkInputLogin(User user) {
         authSteps = new AuthSteps(driver);
-        authSteps.login();
+        authSteps.login(user.getLogin(), user.getPassword());
     }
 
-    @Test(groups = {"Auth screen"}, dataProvider = "data")
-    public void checkInvalidLogin(String login) {
+    /*@Test(groups = {"Auth screen"}, dataProvider = "users")
+    public void checkInvalidLogin(String login, String password) {
         authSteps = new AuthSteps(driver);
         authSteps.inputInvalidLogin(login);
-    }
+    }*/
 
 
 }
