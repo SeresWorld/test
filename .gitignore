@@ -7,3 +7,4 @@ src/main/resources/localDevices.xml
 *.json
 ajcore.*
 allure-results
+allure-results/plugins/behaviors/index.js
