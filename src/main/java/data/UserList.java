@@ -14,7 +14,8 @@ public class UserList {
     public Object[][] getUserList() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         Decoder decoder = new Decoder();
         return new Object[][] {
-                { new User().setLogin("7756655544").setPassword(decoder.getPassword("T5PpK1BdwBh9xawmMSxBmQ==")) },
-                { new User().setLogin("7478488956").setPassword("Orapas#123") }};
+                { new User().setLogin("7756655544").setPassword(
+                        decoder.getPassword("T5PpK1BdwBh9xawmMSxBmQ==")) }
+        };
     }
 }

@@ -1,17 +1,14 @@
 package utils;
 
-import com.google.common.primitives.Bytes;
-
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.*;
-import java.util.Arrays;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class Decoder {
@@ -20,7 +17,7 @@ public class Decoder {
 
         String algorithm = "AES/CBC/PKCS5Padding";
         String plainText = decrypt(algorithm, encodedPassword, getKey(), getIvParameterSpec());
-        System.out.println(plainText);
+
         return plainText;
     }
 
