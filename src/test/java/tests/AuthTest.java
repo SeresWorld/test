@@ -13,8 +13,13 @@ import steps.AuthSteps;
 import utils.ConfigReader;
 import utils.JsonReader;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
-
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 
 @Epic("Android tests")
@@ -22,7 +27,7 @@ public class AuthTest extends TestBase {
     AuthSteps authSteps;
 
     @DataProvider(name = "users")
-    public Object[][] userDetails() {
+    public Object[][] userDetails() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserList userList = new UserList();
         return userList.getUserList();
 
