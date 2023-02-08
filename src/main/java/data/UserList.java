@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class UserList {
 
-    public Object[][] getUserList() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    public Object[][] getUserList()  {
         Decoder decoder = new Decoder();
         return new Object[][] {
                 { new User().setLogin("7756655544").setPassword(

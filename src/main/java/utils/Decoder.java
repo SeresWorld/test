@@ -3,6 +3,8 @@ package utils;
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +15,7 @@ import java.util.Base64;
 
 public class Decoder {
 
-    public String getPassword(String encodedPassword) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public String getPassword(String encodedPassword) {
 
         String algorithm = "AES/CBC/PKCS5Padding";
         String plainText = decrypt(algorithm, encodedPassword, getKey(), getIvParameterSpec());
@@ -45,17 +47,20 @@ public class Decoder {
     }
 
     public static String decrypt(String algorithm, String cipherText, SecretKey key,
-                                 IvParameterSpec iv) throws NoSuchPaddingException, NoSuchAlgorithmException,
-            InvalidAlgorithmParameterException, InvalidKeyException,
-            BadPaddingException, IllegalBlockSizeException {
-        Cipher cipher = Cipher.getInstance(algorithm);
-        cipher.init(Cipher.DECRYPT_MODE, key, iv);
-        byte[] plainText = cipher.doFinal(Base64.getDecoder()
-                .decode(cipherText));
-        return new String(plainText);
+                                 IvParameterSpec iv) {
+        try {
+            Cipher cipher = Cipher.getInstance(algorithm);
+            cipher.init(Cipher.DECRYPT_MODE, key, iv);
+            byte[] plainText = cipher.doFinal(Base64.getDecoder()
+                    .decode(cipherText));
+            return new String(plainText);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
-
-    /*public static void generateKey(int n) throws NoSuchAlgorithmException {
+    /*
+    public static void generateKey(int n) throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(n);
         byte[] iv = new byte[]{-36, -57, -6, -17, 43, 74, -115, -3, 92, 90, -77, 77, 31, -88, 59, -28};
